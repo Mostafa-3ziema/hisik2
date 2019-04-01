@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Notification</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header color="danger">
+          Recommended product
+        </ion-list-header>
+        <!--<timeline endIcon="call">
+            <timeline-item *ngFor="let item of items">
+             <timeline-time [time]="item.time"></timeline-time>-->
+              <button id="recommendnotification"ion-item (click)="openProduct()">
+               <ion-thumbnail item-start>
+                 <img src="">
+               </ion-thumbnail>
+                <h2>My Neighbor Totoro</h2>
+                <p>Hayao Miyazaki • 1988</p>
+                 <button ion-button clear item-end>View</button>
+              </button>
+           <!--</timeline-item>
+        </timeline>-->
+        <ion-list-header id="socialheader" color="danger">
+           Social
+        </ion-list-header>
+        <button ion-item (click)="openNotify()">
+          <ion-avatar item-start>
+              <img src="">
+            </ion-avatar>
+            <h2>Woody</h2>
+            <p>This town ain't big enough for the two of us!</p>
+            <ion-note item-end>3:43 pm</ion-note>
+          </button>
+   </ion-list>
+
+</ion-content>
+<ion-fab right bottom id="fabs">
+    <button ion-fab icon-only>
+      <ion-icon name="camera" color="blue"></ion-icon>
+    </button>
+</ion-fab>
+<!--<page-fab-camera></page-fab-camera>-->

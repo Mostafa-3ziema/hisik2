@@ -1,0 +1,114 @@
+<!--
+  Generated template for the ProductPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header mode="md" >
+    <page-top-bar  Pagetitle="Product Page" Noifictaion="1"></page-top-bar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-avatar id="avatar">
+    <img src="../assets/imgs/IMG_20190118_152815.jpg">
+</ion-avatar>
+<ion-grid>
+  <ion-row>
+    <ion-col col-12 >
+      <div class="scanned">
+        <img src="../assets/imgs/IMG_20190118_152815.jpg">
+      </div>
+    </ion-col>
+    <ion-col class="left">
+      <h3>4.1</h3>
+      <h5 col-7 class="rate">979 Ratings</h5>
+     <div class="stars">
+        <ionic3-star-rating 
+              activeIcon = "ios-star"
+              defaultIcon = "ios-star-outline"
+              activeColor = "#FFDF00" 
+              defaultColor = ""
+              readonly="false"
+              [rating]="4">
+          </ionic3-star-rating>
+     </div>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-card>
+
+    <ion-card-header>
+     Product Info
+    </ion-card-header>
+  
+    <ion-card-content>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quasi sint repellat possimus debitis dolores et non temporibus voluptas! Repellat, veritatis nemo quasi necessitatibus vitae fugiat odit ipsum dolor dolorum.
+    </ion-card-content>
+  
+  </ion-card>
+<ion-grid>
+    <ion-row>
+      <ion-col>
+         <button ion-button block color="danger" (click)="AddReport()">
+           Report
+         </button>
+      </ion-col>
+      <ion-col>
+          <button ion-button  block icon-only color="danger" (click)="AddToFavourite()">
+              <ion-icon name="heart"></ion-icon>
+            </button>
+       </ion-col>
+       <ion-col>
+          <button ion-button block color="danger" (click)="ShowLinks()">
+              Link 
+          </button>
+      </ion-col>
+    </ion-row>
+</ion-grid>
+<h3>Reviews</h3>
+<ion-card>
+
+    <ion-item>
+      <ion-avatar item-start>
+
+        <img src="../assets/imgs/IMG_20190118_152815.jpg">
+      </ion-avatar>
+      <ion-icon name="ios-thumbs-up" ></ion-icon> 20
+      <ion-icon name="ios-text-outline"  (click)="AddReplay()"></ion-icon>15
+          <ionic3-star-rating 
+        activeIcon = "ios-star"
+        defaultIcon = "ios-star-outline"
+        activeColor = "#FFDF00" 
+        defaultColor = ""
+        readonly="false"
+        [rating]="4">
+    </ionic3-star-rating>
+      <p>feb 5, 2019</p>
+    </ion-item>
+  
+  
+    <ion-card-content>
+      
+      <p>Good product</p>
+    </ion-card-content>
+  
+    <ion-row>
+     
+      <ion-col align-self-center text-center>
+        <ion-note>
+          11h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  
+  </ion-card>
+  <ion-list>
+      <ion-item>
+        <ion-icon name="add" item-start (click)="AddReview()"></ion-icon>
+          
+        <ion-icon name="browsers" item-end (click)="ShowReviews()"></ion-icon>
+      </ion-item>
+    </ion-list>
+</ion-content>
+<page-fab-camera ></page-fab-camera>

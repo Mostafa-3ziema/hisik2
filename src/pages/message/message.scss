@@ -1,0 +1,14 @@
+page-message {
+    ion-list ion-item
+    {
+        position: relative;
+        right:10px;
+    }
+    textarea{
+        display: block;
+        width:  109%;
+        border: none;
+        margin:auto;
+        border-radius:10px; 
+        }
+}

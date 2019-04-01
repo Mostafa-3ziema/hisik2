@@ -1,0 +1,22 @@
+<ion-searchbar
+spellcheck="true"
+autocorrect="on"
+autocomplete="on"
+animated="true"
+showCancelButton="true"
+ #q
+(keyup.enter)="search(q.value)"
+[(ngModel)]="myInput"
+[showCancelButton]="shouldShowCancel"
+(ionInput)="getItems($event)"
+(ionCancel)="onCancel($event)">
+</ion-searchbar>
+
+<ion-list>
+    <ion-item *ngFor="let item of items">
+      {{ item }}
+    </ion-item>
+</ion-list>
+
+<page-fab-camera></page-fab-camera>
+

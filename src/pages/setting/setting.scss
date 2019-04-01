@@ -1,0 +1,21 @@
+page-setting {
+ #avatar
+ {
+     position: relative;
+     margin:auto;
+     width: 150px;
+     box-sizing: border-box;
+     height:150px;
+     border-radius:100%; 
+     //border: 2px solid white;
+     border:2px solid color($colors,danger);
+     object-fit:contain;
+     overflow: hidden;
+ }
+
+ ion-list ion-item
+ {
+     position: relative;
+     right:10px;
+ }
+}
