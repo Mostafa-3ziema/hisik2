@@ -43,6 +43,7 @@ import { RecentSearchPage } from '../pages/recent-search/recent-search';
 import { RecommandedPage } from '../pages/recommanded/recommanded';
 import { RecommandedResualtPage } from '../pages/recommanded-resualt/recommanded-resualt';
 import { ScanPage } from '../pages/scan/scan';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { ScanPage } from '../pages/scan/scan';
     StatusBar,
     SplashScreen,
     CameraPreview,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

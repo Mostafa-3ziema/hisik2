@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview';
+import { Camera } from '@ionic-native/camera';
 
 /**
  * Generated class for the ScanPage page.
@@ -15,48 +16,66 @@ import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, Camer
   templateUrl: 'scan.html',
 })
 export class ScanPage {
-  picture: string;
+  imagePath="";
+  constructor(
+               public camera:Camera
+              ,public toastCtrl :ToastController
+              ,private loadCtrl :LoadingController
+              ,public navCtrl   :NavController
+              ,public navParams: NavParams
+               ) {}
+  ionViewDidEnter()
+  {
+    this.Usecamera()
+  }
 
-  cameraOpts: CameraPreviewOptions = {
-    x: 0,
-    y: 0,
-    width: window.innerWidth,
-    height: window.innerHeight,
-    toBack: true
-  };
-
-  cameraPictureOpts: CameraPreviewPictureOptions = {
-    width: window.innerWidth,
-    height: window.innerHeight,
-    quality: 100
-  };
-  constructor(public cameraPreview: CameraPreview,public navCtrl: NavController, public navParams: NavParams) {
+  Usecamera()
+  {
+    this.camera.getPicture({
+      destinationType:this.camera.DestinationType.DATA_URL,
+      sourceType:this.camera.PictureSourceType.CAMERA,
+      encodingType:this.camera.EncodingType.JPEG,
+      correctOrientation:true,
+      cameraDirection:this.camera.Direction.BACK,
+      quality:50,
+      mediaType:this.camera.MediaType.PICTURE,
+      })
+      .then(imagedata=>{
+        this.imagePath= "data:image/jpeg;base64,"+imagedata;
+      })
+      .catch((error)=>{
+        this.toastCtrl.create({
+          message:'Error in Capturing Image : '+error,
+          duration:3000
+        }).present();
+      })
   
   }
-  async startCamera() {
-    this.picture = null;
-    this.cameraPreview.startCamera(this.cameraOpts).then(
-      (res) => {
-        console.log(res)
-      },
-      (err) => {
-        console.log(err)
-      });
-   
-  }
 
-  switchCamera() {
-    this.cameraPreview.switchCamera();
-  }
-
-  async takePicture() {
-    const result = await this.cameraPreview.takePicture(this.cameraPictureOpts);
-    await this.cameraPreview.stopCamera();
-    this.picture = `data:image/jpeg;base64,${result}`;
+  UploadImage()
+  {
+    this.camera.getPicture({
+      destinationType:this.camera.DestinationType.DATA_URL,
+      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
+      encodingType:this.camera.EncodingType.JPEG,
+      correctOrientation:true,
+      cameraDirection:this.camera.Direction.BACK,
+      quality:50,
+      mediaType:this.camera.MediaType.PICTURE,
+      })
+      .then(imagedata=>{
+        this.imagePath= "data:image/jpeg;base64,"+imagedata;
+      })
+      .catch((error)=>{
+        this.toastCtrl.create({
+          message:'Error in Capturing Image : '+error,
+          duration:3000
+        }).present();
+      })
   }
 
   ionViewDidLoad() {
-    this.startCamera();
+    
     console.log('ionViewDidLoad ScanPage');
   }
 

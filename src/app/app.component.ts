@@ -8,6 +8,9 @@ import { FavouritesPage } from '../pages/favourites/favourites';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { LogInPage } from '../pages/log-in/log-in';
 import { HomePage } from '../pages/home/home';
+import firebase from 'firebase';
+
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,7 +22,15 @@ export class MyApp {
   signUpPage = SignUpPage;
   logInPage=LogInPage;
   @ViewChild('nav') nav : NavController;
-  constructor(platform: Platform, public menuCtrl:MenuController,statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform,publibc, public menuCtrl:MenuController,statusBar: StatusBar, splashScreen: SplashScreen) {
+    firebase.initializeApp({
+      apiKey: "AIzaSyC-DLZKGxENWAtBhmMhJNTn2CfNcDfDM58",
+      authDomain: "hisik-7625a.firebaseapp.com",
+      databaseURL: "https://hisik-7625a.firebaseio.com",
+      projectId: "hisik-7625a",
+      storageBucket: "hisik-7625a.appspot.com",
+      messagingSenderId: "918268296551"
+     });
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
