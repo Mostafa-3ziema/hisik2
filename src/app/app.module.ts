@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import { CameraPreview } from '@ionic-native/camera-preview';
 import { SearchTextPage } from './../pages/search-text/search-text';
 import { SearchResualtPage } from './../pages/search-resualt/search-resualt';
@@ -44,6 +45,11 @@ import { RecommandedPage } from '../pages/recommanded/recommanded';
 import { RecommandedResualtPage } from '../pages/recommanded-resualt/recommanded-resualt';
 import { ScanPage } from '../pages/scan/scan';
 import { Camera } from '@ionic-native/camera';
+import { scannedproductServices } from '../services/scannedproduct.services';
+import { ProfileService } from '../services/profile.service';
+import { signUpService } from '../services/signUp.service';
+import { MessageService } from '../services/messages.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -83,6 +89,8 @@ import { Camera } from '@ionic-native/camera';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule,
+    HttpClientModule,
     //ComponentsModule,
     NotificationPageModule,
     StarRatingModule
@@ -127,6 +135,10 @@ import { Camera } from '@ionic-native/camera';
     SplashScreen,
     CameraPreview,
     Camera,
+    MessageService,
+    signUpService,
+    ProfileService,
+    scannedproductServices,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
