@@ -15,11 +15,12 @@ import { Camera } from '@ionic-native/camera';
   selector: 'page-scan',
   templateUrl: 'scan.html',
 })
+
 export class ScanPage {
+  public camera:Camera
   imagePath="";
-  constructor(
-               public camera:Camera
-              ,public toastCtrl :ToastController
+  constructor( 
+              public toastCtrl :ToastController
               ,private loadCtrl :LoadingController
               ,public navCtrl   :NavController
               ,public navParams: NavParams

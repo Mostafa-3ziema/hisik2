@@ -22,7 +22,7 @@ export class MyApp {
   signUpPage = SignUpPage;
   logInPage=LogInPage;
   @ViewChild('nav') nav : NavController;
-  constructor(platform: Platform,publibc, public menuCtrl:MenuController,statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, public menuCtrl:MenuController,statusBar: StatusBar, splashScreen: SplashScreen) {
     firebase.initializeApp({
       apiKey: "AIzaSyC-DLZKGxENWAtBhmMhJNTn2CfNcDfDM58",
       authDomain: "hisik-7625a.firebaseapp.com",
