@@ -1,4 +1,5 @@
-import { ProfileService } from './../../services/profile.service';
+import { ScannedProductsPage } from './../scanned-products/scanned-products';
+import { ProfileService } from '../../services/user/profile.service';
 import { Component } from '@angular/core';
 import { NavController,  } from 'ionic-angular';
 
@@ -45,7 +46,7 @@ import { NavController,  } from 'ionic-angular';
                 <ion-item >
                     <p class="p" >bla bla bla</p>
                     <br>
-                    <button class="pp" ion-button clear >show more</button>
+                    <button class="pp" ion-button clear (click)="more()" >show more</button>
               </ion-item>
             </ion-card>
             </ion-col> 
@@ -63,8 +64,8 @@ export class ProfilePage {
 
   }
 
-  showMore(){
 
-  }
-
+  more(){
+    this.navCtrl.push(ScannedProductsPage);
+}
 }

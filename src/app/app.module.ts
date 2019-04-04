@@ -45,11 +45,11 @@ import { RecommandedPage } from '../pages/recommanded/recommanded';
 import { RecommandedResualtPage } from '../pages/recommanded-resualt/recommanded-resualt';
 import { ScanPage } from '../pages/scan/scan';
 import { Camera } from '@ionic-native/camera';
-import { scannedproductServices } from '../services/scannedproduct.services';
-import { ProfileService } from '../services/profile.service';
-import { signUpService } from '../services/signUp.service';
+import { scannedproductServices } from '../services/user/scannedproduct.services';
+import { ProfileService } from '../services/user/profile.service';
 import { MessageService } from '../services/messages.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AUTHService } from '../services/user/AUTH.service';
 
 @NgModule({
   declarations: [
@@ -136,9 +136,9 @@ import { HttpClientModule } from '@angular/common/http';
     CameraPreview,
     Camera,
     MessageService,
-    signUpService,
     ProfileService,
     scannedproductServices,
+    AUTHService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

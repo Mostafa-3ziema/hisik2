@@ -5,17 +5,20 @@ import { Injectable} from '@angular/core';
 import 'rxjs/Rx';
 import { Observable} from 'rxjs';
 
-const endpoint= 'http://127.0.0.1:8000/api/user/';
+const endpoint= 'http://127.0.0.1:8000/api/scan/?search=';
 @Injectable()
-export class signUpService{
+export class scannedproductServices{
     constructor(private http:HttpClient)
     {
-      
+       
     }
-    register(message)
+
+
+
+    showscannedproduct(userid :number)
     {
         const headers = new HttpHeaders({'Content-Type':'application/json'});
-        return this.http.post(endpoint,message,{headers:headers})
+        return this.http.get(endpoint+userid,{headers:headers})
     }
         
 }

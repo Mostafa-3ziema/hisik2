@@ -14,17 +14,17 @@
 
 <ion-content class="login-content" padding>
     <div class="login-box">
-      <form >
+      <form #form="ngForm" (ngSubmit)="login(form)"> 
         <ion-row>
           <ion-col>
             <ion-list inset>
               
               <ion-item>
-                <ion-input type="text" placeholder="Email" name="email"  required></ion-input>
+                <ion-input type="text" placeholder="Email" ngModel name="email"  required></ion-input>
               </ion-item>
               
               <ion-item>
-                <ion-input type="password" placeholder="Password" name="password"  required></ion-input>
+                <ion-input type="password" placeholder="Password" ngModel name="password"  required></ion-input>
               </ion-item>
               
             </ion-list>
@@ -33,7 +33,7 @@
         
         <ion-row>
           <ion-col class="signup-col">
-            <button ion-button class="submit-btn" full type="submit" >Login</button>
+            <button ion-button class="submit-btn" full type="submit" [disabled]="!form.valid" >Login</button>
             <button ion-button class="register-btn" block clear (click)="Create()">Create New Account</button>
             <button ion-button class="register-btn" block clear (click)="forget()" >forget password</button>
           </ion-col>

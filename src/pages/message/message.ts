@@ -27,6 +27,6 @@ export class MessagePage {
       console.log(data);
     });
     console.log(form.value.text);
-  }
+  } 
 
 }

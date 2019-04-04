@@ -1,3 +1,4 @@
+import { ProductPage } from './../product/product';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -22,6 +23,11 @@ export class ScannedProductsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScannedProductsPage');
+  }
+
+
+  detail(){
+    this.navCtrl.push(ProductPage);
   }
   
 }

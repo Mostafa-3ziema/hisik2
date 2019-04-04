@@ -15,34 +15,47 @@
 <ion-content class="login-content" padding>
     <div class="login-box">
       
-      <form >
+        <form #form="ngForm" (ngSubmit)="Register(form)">
         <ion-row>
           <ion-col>
             <ion-list inset>
 
+
+              <ion-item>
+                <ion-input type="text" placeholder="UserName" ngModel name="FirstName"  required></ion-input>
+              </ion-item>
+
+
+              <ion-item>
+                <ion-input type="text" placeholder="UserName" ngModel name="LastName"  required></ion-input>
+              </ion-item>
+
+
                 <ion-item>
-                    <ion-input type="text" placeholder="UserName" name="UserName"  required></ion-input>
+                    <ion-input type="text" placeholder="UserName" ngModel name="UserName"  required></ion-input>
                   </ion-item>
               
               <ion-item>
-                <ion-input type="text" placeholder="Email" name="email" required></ion-input>
+                <ion-input type="text" placeholder="Email" ngModel name="email" required></ion-input>
               </ion-item>
               
               <ion-item>
-                <ion-input type="password" placeholder="Password" name="password"  required></ion-input>
+                <ion-input type="password" placeholder="Password" ngModel name="password"  required></ion-input>
               </ion-item>
 
               <ion-item>
-                <ion-input type="password" placeholder="repeat password" name="repeat password"  required></ion-input>
+                <ion-input type="password" placeholder="repeat password" ngModel name="repeat password"  required></ion-input>
               </ion-item>
               
             </ion-list>
           </ion-col>
         </ion-row>
-        
+         
         <ion-row>
           <ion-col class="signup-col">
-            <button ion-button class="submit-btn" full type="submit" >Register</button>
+            <button ion-button class="submit-btn" full type="submit" [disabled]="!form.valid" >
+            Register
+            </button>
           </ion-col>
         </ion-row>
         
