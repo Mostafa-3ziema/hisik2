@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { ProductPage } from '../product/product';
 
 /**
  * Generated class for the FavouritesPage page.
@@ -27,4 +28,10 @@ export class FavouritesPage {
   back(){
     this.navCtrl.push(HomePage);
   }
+
+  fav(){
+    this.navCtrl.push(ProductPage);
+
+}
+
 }

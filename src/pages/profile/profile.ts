@@ -1,5 +1,8 @@
+import { ScannedProductsPage } from './../scanned-products/scanned-products';
+import { ProfileService } from '../../services/user/profile.service';
 import { Component } from '@angular/core';
 import { NavController,  } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-profile',
@@ -33,7 +36,7 @@ import { NavController,  } from 'ionic-angular';
       <ion-grid class="g">
          <ion-row  >
             <ion-col class="c" >
-              <ion-card >
+              <ion-card  >
             
                 <ion-item class="r">
                     <ion-avatar  >
@@ -43,36 +46,26 @@ import { NavController,  } from 'ionic-angular';
                 <ion-item >
                     <p class="p" >bla bla bla</p>
                     <br>
-                    <button class="pp" ion-button clear >show more</button>
+                    <button class="pp" ion-button clear (click)="more()" >show more</button>
               </ion-item>
             </ion-card>
             </ion-col> 
-        
-            <ion-col class="c" >
-               <ion-card >
-            
-                <ion-item class="r">
-                    <ion-avatar item-start >
-                        <img src="../assets/IMG_20180627_171310300.jpg">
-                      </ion-avatar>
-                </ion-item>
-
-                <ion-item >
-                    <p class="p" >bla bla bla </p >
-                      <br>
-                    <button class="pp" ion-button clear >show more</button>
-              </ion-item>
-            </ion-card>
-            </ion-col>
            
           </ion-row>
         </ion-grid>
   `
 })
 export class ProfilePage {
+  Showrecent: any;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,private ProfileService:ProfileService) {
+
+    this.Showrecent= this.ProfileService.show_recent_scan();
 
   }
 
+
+  more(){
+    this.navCtrl.push(ScannedProductsPage);
+}
 }
