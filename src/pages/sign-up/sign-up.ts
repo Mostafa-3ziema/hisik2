@@ -1,8 +1,10 @@
+import { HomePage } from './../home/home';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { AUTHService } from '../../services/user/AUTH.service';
+import { Device } from '@ionic-native/device';
 
 
 /**
@@ -20,7 +22,7 @@ import { AUTHService } from '../../services/user/AUTH.service';
 export class SignUpPage {
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private AUTHService:AUTHService) {
+  constructor(public alertCtrl: AlertController,private device: Device,public navCtrl: NavController, public navParams: NavParams,private AUTHService:AUTHService) {
   }
 
   ionViewDidLoad() {
@@ -34,11 +36,36 @@ export class SignUpPage {
      'LastName' : form.value.LastName,
      'UserName' : form.value.UserName,
      'Password' : form.value.Password,
-     'Email'    : form.value.Email,
-     'IP'       : '127.0.5.1',
+     'Email'    : form.value.Email
+     //'DeviceID' : this.device.uuid
     }
-    this.AUTHService.register(body).subscribe((data)=>{
-      console.log(data);
+    this.AUTHService.register(body).subscribe((res)=>{
+      let check=this.AUTHService.store_user(res,true);
+        if(check)
+         {
+          this.navCtrl.push(HomePage);
+         
+         } 
+        else
+         {
+          const alert = this.alertCtrl.create({
+            title: 'error!',
+            subTitle: 'something is wrong! ',
+            buttons: ['OK']
+          });
+          alert.present();
+         }
+    },(err)=>
+    {
+      if(err.status == 400)
+      {
+        const alert = this.alertCtrl.create({
+          title: 'error!',
+          subTitle: 'user name or email is already exixt!',
+          buttons: ['OK']
+        });
+        alert.present();
+      }
     });
     console.log(form.value.text);
   }

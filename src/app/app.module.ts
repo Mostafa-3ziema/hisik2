@@ -1,3 +1,4 @@
+import { Device } from '@ionic-native/device';
 import { HttpModule } from '@angular/http';
 import { CameraPreview } from '@ionic-native/camera-preview';
 import { SearchTextPage } from './../pages/search-text/search-text';
@@ -50,7 +51,8 @@ import { ProfileService } from '../services/user/profile.service';
 import { MessageService } from '../services/messages.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AUTHService } from '../services/user/AUTH.service';
-
+import { Storage, IonicStorageModule } from '@ionic/storage';
+import { EmailComposer } from '@ionic-native/email-composer';
 @NgModule({
   declarations: [
     MyApp,
@@ -92,6 +94,7 @@ import { AUTHService } from '../services/user/AUTH.service';
     HttpModule,
     HttpClientModule,
     //ComponentsModule,
+    IonicStorageModule.forRoot(),
     NotificationPageModule,
     StarRatingModule
   ],
@@ -139,6 +142,8 @@ import { AUTHService } from '../services/user/AUTH.service';
     ProfileService,
     scannedproductServices,
     AUTHService,
+    Device,
+    EmailComposer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
