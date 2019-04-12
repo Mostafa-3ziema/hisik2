@@ -1,3 +1,5 @@
+import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { ScanResultPage } from './../pages/scan-result/scan-result';
 import { HttpModule } from '@angular/http';
 import { CameraPreview } from '@ionic-native/camera-preview';
 import { SearchTextPage } from './../pages/search-text/search-text';
@@ -51,6 +53,7 @@ import { MessageService } from '../services/messages.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AUTHService } from '../services/user/AUTH.service';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -84,7 +87,8 @@ import { AUTHService } from '../services/user/AUTH.service';
     RecommandedPage,
     RecommandedResualtPage,
     TopBarPage,
-    ScanPage
+    ScanPage,
+    ScanResultPage
     ],
   imports: [
     BrowserModule,
@@ -128,7 +132,8 @@ import { AUTHService } from '../services/user/AUTH.service';
     RecommandedPage,
     RecommandedResualtPage,
     TopBarPage,
-    ScanPage
+    ScanPage,
+    ScanResultPage,
     ],
   providers: [
     StatusBar,
@@ -139,6 +144,7 @@ import { AUTHService } from '../services/user/AUTH.service';
     ProfileService,
     scannedproductServices,
     AUTHService,
+    TextToSpeech,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
