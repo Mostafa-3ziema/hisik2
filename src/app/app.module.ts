@@ -1,5 +1,6 @@
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { ScanResultPage } from './../pages/scan-result/scan-result';
+import { Device } from '@ionic-native/device';
 import { HttpModule } from '@angular/http';
 import { CameraPreview } from '@ionic-native/camera-preview';
 import { SearchTextPage } from './../pages/search-text/search-text';
@@ -54,6 +55,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AUTHService } from '../services/user/AUTH.service';
 
 
+import { Storage, IonicStorageModule } from '@ionic/storage';
+import { EmailComposer } from '@ionic-native/email-composer';
 @NgModule({
   declarations: [
     MyApp,
@@ -96,6 +99,7 @@ import { AUTHService } from '../services/user/AUTH.service';
     HttpModule,
     HttpClientModule,
     //ComponentsModule,
+    IonicStorageModule.forRoot(),
     NotificationPageModule,
     StarRatingModule
   ],
@@ -145,6 +149,8 @@ import { AUTHService } from '../services/user/AUTH.service';
     scannedproductServices,
     AUTHService,
     TextToSpeech,
+    Device,
+    EmailComposer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
