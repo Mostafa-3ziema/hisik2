@@ -83,17 +83,13 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-camera-preview" spec="0.10.0" />
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
-<<<<<<< HEAD
     <plugin name="cordova-android-support-gradle-release" spec="^2.1.0">
         <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
     </plugin>
     <allow-navigation href="http://192.168.1.110:8100" />
     <allow-navigation href="http://192.168.1.206:8100" />
     <plugin name="cordova-plugin-tts" spec="0.2.3" />
-    <engine name="android" spec="7.1.4" />
-=======
-    <plugin name="cordova-plugin-firebase" spec="2.0.5" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-email-composer" spec="0.9.2" />
->>>>>>> 4eef53bc0e628a3cc1ba09b950b19ab05194223a
+    <engine name="android" spec="7.1.4" />
 </widget>
