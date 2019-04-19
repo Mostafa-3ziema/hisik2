@@ -19,36 +19,35 @@
                 <img src="{{image}}">
             </ion-thumbnail>
            {{ result.description }}
-          
-        <ion-item-options side="right">
-          <button ion-button color="primary">
-            <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
-          </button>
-        </ion-item-options>
         </ion-item>
+        <ion-item-options side="right">
+            <button ion-button color="primary">
+              <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
+            </button>
+        </ion-item-options>
         <ion-item-divider color="light"><b>Possible brands</b></ion-item-divider>
-        <ion-item  *ngFor= "let result of logo;let i=index" *ngIf="i>0" (click)="SimilarBrandProduct()">
+        <ion-item  *ngFor= "let result of logo;let i=index" (click)="SimilarBrandsProduct(result.description)">
             <ion-thumbnail item-start>
                 <img src="{{image}}">
             </ion-thumbnail>
             {{result.description}}
-        <ion-item-options side="right">
-          <button ion-button color="primary">
-            <ion-icon name="md-volume-up" (click)="speak()"></ion-icon>  
-          </button>
-        </ion-item-options>
         </ion-item>
-        <ion-item  *ngFor= "let result of text" (click)="SimilarBrandProduct()">
+        <ion-item-options side="right">
+            <button ion-button color="primary">
+              <ion-icon name="md-volume-up" (click)="speak()"></ion-icon>  
+            </button>
+        </ion-item-options>
+        <ion-item  *ngFor= "let result of text" (click)="SimilarBrandsProduct(result.description)">
             <ion-thumbnail item-start>
                 <img src="{{image}}">
             </ion-thumbnail>
             {{result.description}}
-        <ion-item-options side="right">
-          <button ion-button color="primary">
-            <ion-icon name="md-volume-up" (click)="speak()"></ion-icon>  
-          </button>
-        </ion-item-options>
         </ion-item>
+        <ion-item-options side="right">
+            <button ion-button color="primary">
+              <ion-icon name="md-volume-up" (click)="speak()"></ion-icon>  
+            </button>
+          </ion-item-options>
    </ion-item-group>
 
 
