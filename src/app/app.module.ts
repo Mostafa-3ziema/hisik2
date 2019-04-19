@@ -60,6 +60,7 @@ import { AUTHService } from '../services/user/AUTH.service';
 
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { SimilarProductsPage } from '../pages/similar-products/similar-products';
 @NgModule({
   declarations: [
     MyApp,
@@ -94,7 +95,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
     RecommandedResualtPage,
     TopBarPage,
     ScanPage,
-    ScanResultPage
+    ScanResultPage,
+    SimilarProductsPage
     ],
   imports: [
     BrowserModule,
@@ -141,6 +143,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
     TopBarPage,
     ScanPage,
     ScanResultPage,
+    SimilarProductsPage
     ],
   providers: [
     StatusBar,

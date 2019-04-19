@@ -156,22 +156,22 @@ export class AUTHService{
 
     IsAuthinticated()
     {
-
+      let isauth :boolean =false;
       this.storage.get('login')
       .then((val)=>
       {
         if (val==true )
         {
-           return true; 
+           isauth= true; 
         }
         else
         {
-           return false; 
+          isauth= false; 
         }
 
       }
       ).catch(()=>{
-
+        isauth= false;
         const alert = this.alertCtrl.create({
           title: 'Warning!',
           subTitle: ' something is wrong!',
@@ -179,7 +179,7 @@ export class AUTHService{
         });
         alert.present(); });
       
-
+      return isauth;
     }
 
     logout()

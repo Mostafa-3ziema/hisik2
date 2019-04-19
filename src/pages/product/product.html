@@ -11,18 +11,18 @@
 
 <ion-content padding>
   <ion-avatar id="avatar">
-    <img src="../assets/imgs/IMG_20190118_152815.jpg">
+    <img src="{{product?.ImageURL}}">
 </ion-avatar>
 <ion-grid>
   <ion-row>
     <ion-col col-12 >
       <div class="scanned">
-        <img src="../assets/imgs/IMG_20190118_152815.jpg">
+        <img src="{{scanimage}}">
       </div>
     </ion-col>
     <ion-col class="left">
-      <h3>4.1</h3>
-      <h5 col-7 class="rate">979 Ratings</h5>
+      <h3>{{productRate}}</h3>
+      <h5 col-7 class="rate">{{productVotes}} Ratings</h5>
      <div class="stars">
         <ionic3-star-rating 
               activeIcon = "ios-star"
@@ -30,7 +30,7 @@
               activeColor = "#FFDF00" 
               defaultColor = ""
               readonly="false"
-              [rating]="4">
+              [rating]="procuctStars">
           </ionic3-star-rating>
      </div>
       </ion-col>
@@ -43,7 +43,7 @@
     </ion-card-header>
   
     <ion-card-content>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quasi sint repellat possimus debitis dolores et non temporibus voluptas! Repellat, veritatis nemo quasi necessitatibus vitae fugiat odit ipsum dolor dolorum.
+      {{product?.Description}}
     </ion-card-content>
   
   </ion-card>
@@ -54,11 +54,22 @@
            Report
          </button>
       </ion-col>
-      <ion-col>
-          <button ion-button  block icon-only color="danger" (click)="AddToFavourite()">
-              <ion-icon name="heart"></ion-icon>
-            </button>
-       </ion-col>
+      <div *ngIf='isFavourite;then liked else dislike'>
+      </div>
+      <ng-template #liked>
+          <ion-col>
+              <button ion-button  block icon-only color="danger" (click)="RemoveFromFavourite()">
+                  <ion-icon name="heart"></ion-icon>
+                </button>
+           </ion-col>
+      </ng-template>
+      <ng-template #dislike>
+          <ion-col>
+              <button ion-button  block icon-only color="danger" (click)="AddToFavourite()">
+                  <ion-icon name="heart"></ion-icon>
+                </button>
+           </ion-col>
+      </ng-template>
        <ion-col>
           <button ion-button block color="danger" (click)="ShowLinks()">
               Link 

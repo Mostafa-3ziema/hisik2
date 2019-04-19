@@ -58,9 +58,9 @@ export class ProfilePage {
   ScannedProducts =[];
   constructor(public navCtrl: NavController,private ProfileService:ProfileService,public AUTHService:AUTHService ,  public scannedproductServices:scannedproductServices) {
 
-    this.Showrecent= this.ProfileService.show_recent_scan();
+    /*this.Showrecent= this.ProfileService.show_recent_scan();
     this.user=this.AUTHService.getUser();
-    this.userScanned(this.user.id);
+    this.userScanned(this.user.id);*/
 
   }
   ionViewDidLoad() {
