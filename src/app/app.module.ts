@@ -1,6 +1,8 @@
 import { FavouriteService } from './../services/favourite.service';
 import { ProductService } from './../services/product.service';
 import { ScanService } from './../services/scan.Service';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { ScanResultPage } from './../pages/scan-result/scan-result';
 import { Device } from '@ionic-native/device';
 import { HttpModule } from '@angular/http';
 import { CameraPreview } from '@ionic-native/camera-preview';
@@ -54,6 +56,8 @@ import { ProfileService } from '../services/user/profile.service';
 import { MessageService } from '../services/messages.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AUTHService } from '../services/user/AUTH.service';
+
+
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
 @NgModule({
@@ -89,7 +93,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
     RecommandedPage,
     RecommandedResualtPage,
     TopBarPage,
-    ScanPage
+    ScanPage,
+    ScanResultPage
     ],
   imports: [
     BrowserModule,
@@ -134,7 +139,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
     RecommandedPage,
     RecommandedResualtPage,
     TopBarPage,
-    ScanPage
+    ScanPage,
+    ScanResultPage,
     ],
   providers: [
     StatusBar,
@@ -145,6 +151,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
     ProfileService,
     scannedproductServices,
     AUTHService,
+    TextToSpeech,
     Device,
     EmailComposer,
     ScanService,
