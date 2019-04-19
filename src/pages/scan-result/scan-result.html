@@ -27,7 +27,7 @@
         </ion-item-options>
         </ion-item>
         <ion-item-divider color="light"><b>Possible brands</b></ion-item-divider>
-        <ion-item  *ngFor= "let result of logo;let i=index" *ngIf="i>0" (click)="SimilarBrandProduct()">
+        <ion-item  *ngFor= "let result of logo;let i=index"  (click)="SimilarBrandProduct()">
             <ion-thumbnail item-start>
                 <img src="{{image}}">
             </ion-thumbnail>
