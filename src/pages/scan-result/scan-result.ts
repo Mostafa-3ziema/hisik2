@@ -87,6 +87,7 @@ export class ScanResultPage {
         }
        }else
        {
+        loading.dismiss();
         this.toastCtrl.create({
           message:'there is no products for this category',
           duration:3000
@@ -118,6 +119,7 @@ export class ScanResultPage {
         }
        }else
        {
+        loading.dismiss();
         this.toastCtrl.create({
           message:'there is no products for this brand',
           duration:3000
