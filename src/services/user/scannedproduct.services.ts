@@ -11,7 +11,7 @@ export class scannedproductServices{
     constructor(private http:HttpClient)
     {
        
-    }
+    } 
 
 
 

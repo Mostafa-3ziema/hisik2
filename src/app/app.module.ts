@@ -1,3 +1,6 @@
+import { FavouriteService } from './../services/favourite.service';
+import { ProductService } from './../services/product.service';
+import { ScanService } from './../services/scan.Service';
 import { Device } from '@ionic-native/device';
 import { HttpModule } from '@angular/http';
 import { CameraPreview } from '@ionic-native/camera-preview';
@@ -144,6 +147,9 @@ import { EmailComposer } from '@ionic-native/email-composer';
     AUTHService,
     Device,
     EmailComposer,
+    ScanService,
+    ProductService,
+    FavouriteService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

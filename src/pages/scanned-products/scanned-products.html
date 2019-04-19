@@ -3,129 +3,30 @@
 </ion-header>
 
 <br><br>
-
+ 
 
 <ion-content>
 
 
 <ion-grid class="g">
-  <ion-row  >
+  <ion-row *ngFor="let Scanned of ScannedProducts" >
      <ion-col class="c" >
        <ion-card >
      
          <ion-item class="r">
              <ion-avatar  >
-                 <img src="../assets/IMG_20180627_171310300.jpg">
-               </ion-avatar>
+                 <img src="{{Scanned.productDetails?.ImageURL}}">
+             </ion-avatar>
          </ion-item>
          <ion-item >
-             <p class="p" >bla bla bla</p>
+             <p >{{Scanned.ProductDetail?.name}}</p>
              <br>
              <button class="pp" ion-button clear (click)="detail()" >details</button>
        </ion-item>
      </ion-card>
      </ion-col> 
  
-     <ion-col class="c" >
-        <ion-card >
-     
-         <ion-item class="r">
-             <ion-avatar item-start >
-                 <img src="../assets/IMG_20180627_171310300.jpg">
-               </ion-avatar>
-         </ion-item>
-
-         <ion-item >
-             <p class="p" >bla bla bla </p >
-               <br>
-             <button class="pp" ion-button clear (click)="detail()" >details</button>
-       </ion-item>
-     </ion-card>
-     </ion-col>
-    
-   </ion-row>
-
-
-
-
-   <ion-row  >
-    <ion-col class="c" >
-      <ion-card >
-    
-        <ion-item class="r">
-            <ion-avatar  >
-                <img src="../assets/IMG_20180627_171310300.jpg">
-              </ion-avatar>
-        </ion-item>
-        <ion-item >
-            <p class="p" >bla bla bla</p>
-            <br>
-            <button class="pp" ion-button clear (click)="detail()" >details</button>
-      </ion-item>
-    </ion-card>
-    </ion-col> 
-
-    <ion-col class="c" >
-       <ion-card >
-    
-        <ion-item class="r">
-            <ion-avatar item-start >
-                <img src="../assets/IMG_20180627_171310300.jpg">
-              </ion-avatar>
-        </ion-item>
-
-        <ion-item >
-            <p class="p" >bla bla bla </p >
-              <br>
-            <button class="pp" ion-button clear (click)="detail()" >details</button>
-      </ion-item>
-    </ion-card>
-    </ion-col>
-   
   </ion-row>
-
-
-
-
-
-
-
-  <ion-row  >
-    <ion-col class="c" >
-      <ion-card >
-    
-        <ion-item class="r">
-            <ion-avatar  >
-                <img src="../assets/IMG_20180627_171310300.jpg">
-              </ion-avatar>
-        </ion-item>
-        <ion-item >
-            <p class="p" >bla bla bla</p>
-            <br>
-            <button class="pp" ion-button clear (click)="detail()" >details</button>
-      </ion-item>
-    </ion-card>
-    </ion-col> 
-
-    <ion-col class="c" >
-       <ion-card >
-    
-        <ion-item class="r">
-            <ion-avatar item-start >
-                <img src="../assets/IMG_20180627_171310300.jpg">
-              </ion-avatar>
-        </ion-item>
-
-        <ion-item >
-            <p class="p" >bla bla bla </p >
-              <br>
-            <button class="pp" ion-button clear (click)="detail()" >details</button>
-      </ion-item>
-    </ion-card> 
-    </ion-col>
-    
-  </ion-row>
-
  </ion-grid>
 
 

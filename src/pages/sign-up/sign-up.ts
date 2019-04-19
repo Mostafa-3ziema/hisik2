@@ -41,7 +41,7 @@ export class SignUpPage {
     }
     this.AUTHService.register(body).subscribe((res)=>{
       let check=this.AUTHService.store_user(res,true);
-        if(check)
+        if(check) 
          {
           this.navCtrl.push(HomePage);
          

@@ -2,6 +2,8 @@ import { ScannedProductsPage } from './../scanned-products/scanned-products';
 import { ProfileService } from '../../services/user/profile.service';
 import { Component } from '@angular/core';
 import { NavController,  } from 'ionic-angular';
+import { AUTHService } from './../../services/user/AUTH.service';
+import { scannedproductServices } from './../../services/user/scannedproduct.services';
 
 
 @Component({
@@ -12,20 +14,13 @@ import { NavController,  } from 'ionic-angular';
     
   <ion-item class="a">
     <ion-avatar item-start >
-      <img src="../assets/IMG_20180627_171310300.jpg">
+      <img src="{{user?.ImageURL}}">
     </ion-avatar>
   </ion-item>
   <ion-item class="aa">
-    <h2>omar ashraf</h2>
-    <p>san francisko</p>
+    <h2>{{user?.UserName}}</h2>
+    <p>{{user?.Email}}</p>
   </ion-item>
-  
-    <ion-card-content>
-      <p>hi !  my name is omar , i'm a creative geek from san francisko , ca contact me at omar@gmail.com</p>
-    </ion-card-content>
-      </ion-card>
-
-
       <br>
 
       
@@ -34,17 +29,17 @@ import { NavController,  } from 'ionic-angular';
       <br>
       
       <ion-grid class="g">
-         <ion-row  >
+         <ion-row  *ngFor="let Scanned of ScannedProducts" >
             <ion-col class="c" >
               <ion-card  >
             
                 <ion-item class="r">
                     <ion-avatar  >
-                        <img src="../assets/IMG_20180627_171310300.jpg">
+                    <img src="{{Scanned.productDetails?.ImageURL}}">
                       </ion-avatar>
                 </ion-item>
                 <ion-item >
-                    <p class="p" >bla bla bla</p>
+                    <p class="p" >{{Scanned.ProductDetail?.name}}</p> 
                     <br>
                     <button class="pp" ion-button clear (click)="more()" >show more</button>
               </ion-item>
@@ -58,14 +53,44 @@ import { NavController,  } from 'ionic-angular';
 export class ProfilePage {
   Showrecent: any;
 
-  constructor(public navCtrl: NavController,private ProfileService:ProfileService) {
+
+  user :any;
+  ScannedProducts =[];
+  constructor(public navCtrl: NavController,private ProfileService:ProfileService,public AUTHService:AUTHService ,  public scannedproductServices:scannedproductServices) {
 
     this.Showrecent= this.ProfileService.show_recent_scan();
+    this.user=this.AUTHService.getUser();
+    this.userScanned(this.user.id);
 
   }
-
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ScannedProductsPage');
+    
+  }
 
   more(){
     this.navCtrl.push(ScannedProductsPage);
 }
+
+userScanned(userid)
+{
+  this.scannedproductServices.showscannedproduct(userid)
+  .subscribe(
+    (data:any[])=>
+    {
+      if(data.length>0)
+      {
+        this.ScannedProducts=data;
+        console.log(this.ScannedProducts);
+      }
+      else
+      {
+        this.ScannedProducts=[];
+      }
+    }
+    );
+
+}
+
+
 }

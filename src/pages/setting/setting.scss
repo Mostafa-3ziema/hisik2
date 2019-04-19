@@ -1,5 +1,5 @@
 page-setting {
- #avatar
+#avatar
  {
      position: relative;
      margin:auto;
@@ -12,7 +12,38 @@ page-setting {
      object-fit:contain;
      overflow: hidden;
  }
-
+ #Photo
+ {
+    position: relative;
+    margin:auto;
+    width: 200px;
+    box-sizing: border-box;
+    height:180px;
+    border-radius:100%; 
+    //border: 2px solid white;
+    border:none;//2px solid color($colors,danger);
+    object-fit:contain;
+    overflow: hidden;
+ }
+ #Photo ion-fab
+ {
+    position: relative;
+    right:-125px;
+    top:-50px;
+    z-index: 1;
+    
+ }
+ #Photo ion-fab button
+ {
+    background-color:red;
+    width:50px;
+    height: 50px;
+    border: 1px solid white;
+ }
+ /*.actionsheat .title
+ {
+     color:red;
+ }*/
  ion-list ion-item
  {
      position: relative;

@@ -13,6 +13,7 @@ const endpoint= 'http://127.0.0.1:8000/api/user/';
 const endpoint2= 'http://127.0.0.1:8000/api/user/?';
 @Injectable()
 export class AUTHService{
+
     constructor(private http:HttpClient ,private emailComposer: EmailComposer,public alertCtrl: AlertController , private storage: Storage)
     {
       
@@ -22,18 +23,68 @@ export class AUTHService{
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.post(endpoint,message,{headers:headers})
     }
-        
+    updateUser(userid,user)
+    {
+        const headers = new HttpHeaders({'Content-Type':'application/json'});
+        return this.http.put(endpoint+userid+"/",user,{headers:headers})
+    }    
 
     forgetpassword(email)
     {
         const headers = new HttpHeaders({'Content-Type':'application/json'});
-        this.http.get(endpoint+"?Email="+email,{headers:headers}).subscribe((data)=>
+        this.http.get(endpoint+"?Email="+email,{headers:headers}).subscribe((data:any[])=>
         {
-           if(data)
+           if(data.length>0)
            {
+            console.log(data); 
             let userID= data[0]['id'];
             data[0]['Password']=Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            this.http.put(endpoint+userID+'/',data[0],{headers:headers}).subscribe((data)=>
+            let body= {
+              'FirstName'     : data[0].FirstName,
+              'LastName'      : data[0].LastName,
+              'UserName'      : data[0].UserName,
+              'Password'      : data[0].Password,
+              'Email'         : data[0].Email,
+              //'DeviceID'      : " ",
+              'Status'        : false,
+              'ImageURL'      : "",
+              'WarningScore'  : 0,
+              'BlockedBy'     : "",
+             }
+            if(data[0]['Status'])
+            {
+              body.Status=data[0]['Status'];
+            }else
+            {
+              body.Status=false;
+            }
+
+            if(data[0]['ImageURL'])
+            {
+              body.Status=data[0]['ImageURL'];
+            }else
+            {
+              body.ImageURL="";
+            }
+
+            if(data[0]['WarningScore'])
+            {
+              body.WarningScore=data[0]['WarningScore'];
+            }else
+            {
+              body.WarningScore=0;
+            }
+
+            if(data[0]['BlockedBy'])
+            {
+              body.Status=data[0]['BlockedBy'];
+            }else
+            {
+              body.BlockedBy="";
+            }
+            
+             console.log(body);
+            this.http.put(endpoint+userID+'/',body,{headers:headers}).subscribe((data)=>
             {
                 this.emailComposer.isAvailable().then((available: boolean) =>{
                     if(available) {
@@ -46,7 +97,9 @@ export class AUTHService{
                           };
                         this.emailComposer.open(emailContent);  
                     }
-                   });  
+                    
+                   }); 
+                   console.log(data);
               this.store_user(data,true);
               const alert = this.alertCtrl.create({
                 title: 'hint!',
@@ -54,7 +107,7 @@ export class AUTHService{
                 buttons: ['OK']
               });
               alert.present();
-            },(err)=>{})
+            },(err)=>{console.log(err)})
            }else
            {
             const alert = this.alertCtrl.create({
@@ -64,20 +117,13 @@ export class AUTHService{
               });
               alert.present();    
            } 
-        },(err)=>
-        {});
-
-       
-        
+        },(err)=>{});
     }
 
     login(email:string,password:string)
     { 
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint2+"Email="+email+"&Password="+password,{headers:headers})
-        /*.map((response: Response) => {
-            return JSON.stringify(response);
-          });*/
     }
 
     store_user(user,loginvalue)
@@ -105,12 +151,35 @@ export class AUTHService{
       this.storage.get('user').then((val) => {
           user = val;  
         });
-       return user; 
+      return user; 
     }
 
     IsAuthinticated()
     {
-        //if()
+
+      this.storage.get('login')
+      .then((val)=>
+      {
+        if (val==true )
+        {
+           return true; 
+        }
+        else
+        {
+           return false; 
+        }
+
+      }
+      ).catch(()=>{
+
+        const alert = this.alertCtrl.create({
+          title: 'Warning!',
+          subTitle: ' something is wrong!',
+          buttons: ['OK']
+        });
+        alert.present(); });
+      
+
     }
 
     logout()

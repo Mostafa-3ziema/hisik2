@@ -1,3 +1,5 @@
+import { AUTHService } from './../../services/user/AUTH.service';
+import { FavouriteService } from './../../services/favourite.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
@@ -16,12 +18,16 @@ import { ProductPage } from '../product/product';
   templateUrl: 'favourites.html',
 })
 export class FavouritesPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  
+   user :any;
+   FavouriteProducts =[];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public favouriteService :FavouriteService,public AUTHService:AUTHService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavouritesPage');
+    this.user=this.AUTHService.getUser();
+    this.userfavourites(this.user.id);
   }
 
 
@@ -29,9 +35,30 @@ export class FavouritesPage {
     this.navCtrl.push(HomePage);
   }
 
-  fav(){
-    this.navCtrl.push(ProductPage);
+  product(ProductDetails){
+    this.navCtrl.push(ProductPage,ProductDetails);
+    console.log(ProductDetails)
+  }
+
+userfavourites(userid)
+{
+  this.favouriteService.MyFavourites(userid)
+  .subscribe(
+    (data:any[])=>
+    {
+      if(data.length>0)
+      {
+        this.FavouriteProducts=data;
+        console.log(this.FavouriteProducts);
+      }
+      else
+      {
+        this.FavouriteProducts=[];
+      }
+    }
+    );
 
 }
+
 
 }

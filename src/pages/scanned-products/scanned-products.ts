@@ -1,3 +1,5 @@
+import { AUTHService } from './../../services/user/AUTH.service';
+import { scannedproductServices } from './../../services/user/scannedproduct.services';
 import { ProductPage } from './../product/product';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -17,17 +19,43 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ScannedProductsPage { 
   title:string="Scannned Product";
-  UnreadNotificationNumber:any=1;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  UnreadNotificationNumber:any=1; 
+
+  user :any;
+  ScannedProducts =[];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public AUTHService:AUTHService ,  public scannedproductServices:scannedproductServices) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScannedProductsPage');
+    //this.user=this.AUTHService.getUser();
+    this.userScanned(1);
   }
 
 
   detail(){
     this.navCtrl.push(ProductPage);
   }
+
+
+  userScanned(userid)
+{
+  this.scannedproductServices.showscannedproduct(userid)
+  .subscribe(
+    (data:any[])=>
+    {
+      if(data.length>0)
+      {
+        this.ScannedProducts=data;
+        console.log(this.ScannedProducts);
+      }
+      else
+      {
+        this.ScannedProducts=[];
+      }
+    }
+    );
+
+}
   
 }

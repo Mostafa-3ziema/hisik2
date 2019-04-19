@@ -1,3 +1,5 @@
+import { FavouriteService } from './../../services/favourite.service';
+import { ProductService } from './../../services/product.service';
 import { ScanPage } from './../scan/scan';
 import { ProductPage } from './../product/product';
 import { Component,ViewChild} from '@angular/core';
@@ -19,13 +21,12 @@ export class HomePage {
    tabs:any=[];
    lastTime:number;
    title:string="";
-
-  constructor(public navCtrl: NavController ,platform: Platform) {
+  constructor(public navCtrl: NavController,public favSerive : FavouriteService,public proService : ProductService ,platform: Platform) {
     this.tabs=["search","person"];
     console.log('Width: ' + platform.width());
     this.screenWidth_px=platform.width();
     this.lastTime=0;
-  } 
+  }
 
  
  //all function bellow for slider pages 

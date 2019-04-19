@@ -22,7 +22,7 @@ export class MessagePage {
    const body= {
       'text' : form.value.text,
       'user' : 1
-    }
+    } 
     this.messageService.SaveMessage(body).subscribe((data)=>{
       console.log(data);
     });

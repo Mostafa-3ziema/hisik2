@@ -5,18 +5,25 @@
 
 
 <ion-content padding>
-        
-  <ion-avatar id="avatar">
-      <img src="../assets/imgs/IMG_20190118_152815.jpg">
-  </ion-avatar>
+  <div id="Photo">     
+    <ion-avatar id="avatar">
+       <img *ngIf="imagePath" src="{{imagePath}}">
+       <img *ngIf="imagePath==''" src="../assets/imgs/download.jpg">
+    </ion-avatar>
+    <ion-fab right bottom id="fabs">
+      <button  ion-fab icon-only (click)="showActionSheet()">
+        <ion-icon name="camera" color="blue"></ion-icon>
+      </button>
+    </ion-fab>
+  </div> 
    
-   <ion-grid>
+  <!-- <ion-grid>
      <ion-row>
        <ion-col text-center>
           <ion-note color="primary" id="note">Update the profile photo</ion-note>
        </ion-col>
      </ion-row>
-    <ion-row>
+<ion-row>
       <ion-col>
         <button ion-button block outline color="danger"  round  type="button" icon-start  (click)="Usecamera()">
           <ion-icon name='camera'></ion-icon>
@@ -30,7 +37,7 @@
           </button>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid>-->
   <form #form="ngForm" (ngSubmit)="SaveChanges(form)">
     <ion-list>
       <ion-list-header color="danger">
@@ -39,27 +46,31 @@
       </ion-list-header>  
       <ion-item>
         <ion-label color="primary" stacked>First Name</ion-label>
-        <ion-input type="text"  name="First Name" placeholder="First Name" Value="" required ngModel clearInput="true"></ion-input>
+        <ion-input type="text"  name="FirstName" placeholder="First Name"  required [ngModel]="user?.FirstName" clearInput="true"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary" stacked>Last Name</ion-label>
-        <ion-input type="text" name="Last Name" placeholder="Last Name" Value="" required ngModel clearInput="true"></ion-input>
+        <ion-input type="text" name="LastName" placeholder="Last Name"  required [ngModel]="user?.LastName" clearInput="true"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary" stacked>User name</ion-label>
-        <ion-input type="text" name="User name" placeholder="Last Name" Value="" required ngModel clearInput="true"></ion-input>
+        <ion-input type="text" name="Username" placeholder="Last Name" required [ngModel]="user?.UserName" clearInput="true"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary" stacked>Email</ion-label>
-        <ion-input type="email" name="Email" placeholder="Email" Value="" required ngModel clearInput="true"></ion-input>
+        <ion-input type="email" name="Email" placeholder="Email"  required [ngModel]="user?.Email" clearInput="true"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary" stacked>Old Password</ion-label>
-        <ion-input type="password" name="Old Password"  placeholder="Old Password" Value="" required ngModel></ion-input>
+        <ion-input type="password" name="OldPassword"  placeholder="Old Password"  required [ngModel]="user?.Password"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary" stacked>New Password</ion-label>
-        <ion-input type="password" name="new Password" placeholder="new Password" Value="" required ngModel></ion-input>
+        <ion-input type="password" name="newPassword" placeholder="new Password"  required [ngModel]="user?.Password" (ngModelChange)="showConfirm()"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="changePassword==true">
+        <ion-label color="primary" stacked>Confirm Password</ion-label>
+        <ion-input type="password" name="ConfirmPassword" placeholder="new Password"  required ngModel></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary">App Start in</ion-label>
