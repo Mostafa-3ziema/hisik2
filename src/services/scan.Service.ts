@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { scan } from 'rxjs/operator/scan';
 @Injectable()
 export class ScanService
 {
@@ -18,6 +19,12 @@ export class ScanService
     AddScan(Scan:any)
     {
       let endpoint='http://127.0.0.1:8000/api/scan/';
+      return this.http.post(endpoint,Scan,{headers : this.headers})
+      .map((response)=>{return response.json();});
+    }
+    UpdateScan(scanid:number,Scan:any)
+    {
+      let endpoint='http://127.0.0.1:8000/api/scan/'+scanid+'/';
       return this.http.post(endpoint,Scan,{headers : this.headers})
       .map((response)=>{return response.json();});
     }

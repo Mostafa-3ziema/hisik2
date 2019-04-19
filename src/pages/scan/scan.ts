@@ -1,3 +1,5 @@
+import { AUTHService } from './../../services/user/AUTH.service';
+import { ScanService } from './../../services/scan.Service';
 import { ScanResultPage } from './../scan-result/scan-result';
 import { HttpClient } from '@angular/common/http';
 import { HomePage } from './../home/home';
@@ -5,6 +7,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview';
 import { Camera } from '@ionic-native/camera';
+import firebase from 'firebase';
 
 /**
  * Generated class for the ScanPage page.
@@ -24,18 +27,36 @@ export class ScanPage {
   public err ;
   imageResult;
   Drow = false;
+
   public result;
   public ROOT_URL = 'https://vision.googleapis.com';
   public API_KEY = 'AIzaSyAdDscyxa7qmSXQjMPRUMU516yD_AI_7xg'; // YOUR CLOUD PLATFORM API KEY
   public visionRequest = {
     "requests": [{
         "image": {
-          "content": ""
+          "content": ''
         },
-        "features": [{
-            "type": "FACE_DETECTION",
-            "maxResults": 10
+        "features": [
+        {
+          "type": "TEXT_DETECTION",
+          "maxResults": 10
         },
+        {
+          "type": "OBJECT_LOCALIZATION",
+          "maxResults": 10
+        },
+        {
+          "type": "LOGO_DETECTION",
+          "maxResults": 5
+        },
+        {
+          "type": "LABEL_DETECTION",
+          "maxResults": 10
+        },       
+        {
+          "type": "SAFE_SEARCH_DETECTION",
+          "maxResults": 10
+        },       
        ]
     }]
   };
@@ -64,9 +85,13 @@ export class ScanPage {
               ,public navParams: NavParams,
               public http: HttpClient,
               public alertCtrl: AlertController,
+              public ScanService:ScanService,
+              public auth:AUTHService,
+              public camera:Camera
                ) {}
   
  ionViewDidLoad() {
+    
     this.startCamera();
   }
 
@@ -82,6 +107,44 @@ export class ScanPage {
   gohome(){
     this.navCtrl.push(HomePage)
   }
+  UploadImage()
+  {
+    this.camera.getPicture({
+      destinationType:this.camera.DestinationType.DATA_URL,
+      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
+      encodingType:this.camera.EncodingType.JPEG,
+      correctOrientation:true,
+      cameraDirection:this.camera.Direction.BACK,
+      quality:50,
+      mediaType:this.camera.MediaType.PICTURE,
+      })
+      .then(imagedata=>{
+        let loader = this.loader.create({
+          content: "Processing..."
+        });
+        loader.present(); 
+        this.picture= "data:image/jpeg;base64,"+imagedata;
+        this.visionRequest.requests[0].image.content=this.picture;
+        this.http.post(`${this.ROOT_URL}/v1/images:annotate?key=${this.API_KEY}`, this.visionRequest)
+        .subscribe((data: any) => {
+          this.visionResult = data;
+          console.log(data,'working');
+          loader.dismiss(); // hide loading component
+         
+        }, (err) => {
+          loader.dismiss(); // hide loading component
+          this.err = err;
+          this.showAlert('');
+          console.log(err);
+        })
+      })
+      .catch((error)=>{
+        this.toastCtrl.create({
+          message:'Error in Capturing Image : '+error,
+          duration:3000
+        }).present();
+      })
+  }
   async takePicture() {
     await this.cameraPreview.takePicture(this.cameraPictureOpts).then(
       (res) => {
@@ -92,36 +155,8 @@ export class ScanPage {
         });
         loader.present(); 
         this.imageResult = 'data:image/jpeg;base64,' + res;
-        const visionRequest = {
-          "requests": [{
-              "image": {
-                "content": res[0]
-              },
-              "features": [
-              {
-                "type": "TEXT_DETECTION",
-                "maxResults": 10
-              },
-              {
-                "type": "OBJECT_LOCALIZATION",
-                "maxResults": 10
-              },
-              {
-                "type": "LOGO_DETECTION",
-                "maxResults": 5
-              },
-              {
-                "type": "LABEL_DETECTION",
-                "maxResults": 10
-              },       
-              {
-                "type": "SAFE_SEARCH_DETECTION",
-                "maxResults": 10
-              },       
-             ]
-          }]
-        };
-        this.http.post(`${this.ROOT_URL}/v1/images:annotate?key=${this.API_KEY}`, visionRequest)
+        this.visionRequest.requests[0].image.content=res[0];
+        this.http.post(`${this.ROOT_URL}/v1/images:annotate?key=${this.API_KEY}`, this.visionRequest)
         .subscribe((data: any) => {
           this.visionResult = data;
           console.log(data,'working');
@@ -149,10 +184,50 @@ export class ScanPage {
     console.log('baaack');
     this.navCtrl.pop();
   }
-  classify(){
-    this.navCtrl.push(ScanResultPage,this.visionResult);
+  classify()
+  {
+    if(this.picture !=null)
+      {
+       if(this.auth.IsAuthinticated())
+       {
+        let user = this.auth.getUser() 
+        const ImageRef=firebase.storage().ref("ScanPictures/image-"+new Date().getMilliseconds()+".jpg");
+        ImageRef.putString(this.picture,firebase.storage.StringFormat.DATA_URL)
+        .then((snapshot)=>{
+        const scan =
+        {
+          user: user.id,
+          product: null,
+          brand: null,
+          Category: null,
+          ImageURL:snapshot.downloadURL,
+        }
+        this.ScanService.AddScan(scan).subscribe((data)=>
+        {
+          if(data)
+          {
+           this.navCtrl.push(ScanResultPage,{'visionresult':this.visionResult,'ScannedImage':this.picture,'scan':data});
+          }
+        },(err)=>
+        {
+         this.toastCtrl.create({
+         message:'problem happened during saving the data'+err,
+         duration:3000
+          }).present();
+        });
+        }).catch(error=>{
+         this.toastCtrl.create({
+           message:'Error in saving Image : '+error,
+           duration:3000
+         }).present();
+       });
+      }
+      else
+      {
+        this.navCtrl.push(ScanResultPage,{'visionresult':this.visionResult,'ScannedImage':this.picture});
+      }    
+    }
   }
-
   showAlert(message) {
     let alert = this.alertCtrl.create({
       title: 'Hisik',

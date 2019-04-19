@@ -89,7 +89,13 @@
     <allow-navigation href="http://192.168.1.110:8100" />
     <allow-navigation href="http://192.168.1.206:8100" />
     <plugin name="cordova-plugin-tts" spec="0.2.3" />
+<<<<<<< HEAD
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-email-composer" spec="0.9.2" />
     <engine name="android" spec="7.1.4" />
+=======
+    <engine name="android" spec="7.1.4" />
+    <plugin name="cordova-plugin-device" spec="2.0.2" />
+    <plugin name="cordova-plugin-email-composer" spec="0.9.2" />
+>>>>>>> c5fef9bbd4e1d439ad2a34ca31146ab41dcdb8af
 </widget>

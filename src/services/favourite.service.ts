@@ -30,24 +30,5 @@ export class FavouriteService
       return this.http.delete(endpoint,{headers : this.headers})
       .map((response)=>{return response.json();});
     }
-    IsFavourite(UserID:number,ProId:number)
-    {
-        let endpoint='http://127.0.0.1:8000/api/favourite/?search='+UserID;
-        return this.http.get(endpoint,{headers : this.headers})
-        .map((response)=> {return response.json();})
-        .subscribe((data)=>
-        {
-            console.log(data);
-            data.forEach(favourite =>
-            {
-                if(favourite.product == ProId)
-                {
-                    this.isFavourite=true;
-                }else
-                {
-                    this.isFavourite=false;
-                }
-            });
-        });
-    }
+   
 }
