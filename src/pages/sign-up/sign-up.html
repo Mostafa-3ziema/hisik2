@@ -36,11 +36,11 @@
                   </ion-item>
               
               <ion-item>
-                <ion-input type="text" placeholder="Email" ngModel name="email" required></ion-input>
+                <ion-input type="email" placeholder="Email" ngModel name="email" required ></ion-input>
               </ion-item>
               
               <ion-item>
-                <ion-input type="password" placeholder="Password" ngModel name="password"  required></ion-input>
+                <ion-input type="password" placeholder="Password" ngModel name="password" [minlength]="6" required></ion-input>
               </ion-item>
 
               <ion-item>

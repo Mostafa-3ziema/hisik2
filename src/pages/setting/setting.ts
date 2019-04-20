@@ -19,7 +19,7 @@ export class SettingPage {
     public toastCtrl:ToastController,
     public alertCtrl :AlertController ,
     public navParams: NavParams,
-    public camera :Camera ,
+    public camera :Camera , 
     public actionSheetCtrl :ActionSheetController
     ,public loadCtrl:LoadingController) {
   }

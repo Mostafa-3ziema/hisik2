@@ -19,7 +19,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ScannedProductsPage { 
   title:string="Scannned Product";
-  UnreadNotificationNumber:any=1; 
+  UnreadNotificationNumber:any=1;  
 
   user :any;
   ScannedProducts =[];
@@ -30,11 +30,12 @@ export class ScannedProductsPage {
     console.log('ionViewDidLoad ScannedProductsPage');
     //this.user=this.AUTHService.getUser();
     this.userScanned(1);
+    
   }
 
 
-  detail(){
-    this.navCtrl.push(ProductPage);
+  detail(product){
+    this.navCtrl.push(ProductPage,{'products':product});
   }
 
 
