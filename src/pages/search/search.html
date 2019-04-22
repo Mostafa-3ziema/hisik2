@@ -1,83 +1,68 @@
 
-    <ion-searchbar
-        [(ngModel)]="myInput"
-        [showCancelButton]="shouldShowCancel"
-        full colur="light"
-        (click)="searchbar()">
-    </ion-searchbar>
 
-    <h1 style="margin-left: 10px">Recommended</h1>
+<ion-searchbar
+    [(ngModel)]="myInput"
+    [showCancelButton]="shouldShowCancel"
+    full colur="light"
+    (click)="searchbar()">
+</ion-searchbar>
 
-    <div style="display: block" >
-        <div style="display: inline-block"> 
-            <ion-item>
-                <ion-thumbnail slot="start">
-                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-                </ion-thumbnail>
-            </ion-item>
-        </div>
-        <div style="display: inline-block"> 
-            <ion-item>
-                <ion-thumbnail slot="start">
-                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-                </ion-thumbnail>
-            </ion-item>
-        </div>
-        <div style="display: inline-block"> 
-                <ion-item>
+<div *ngIf="isauthinticated">
+    <div *ngIf="(recommandeditem?.length>0 || recentsearch?.length>0 || popualeritem?.length>0);">
+        <h1 style="text-align: left">Recommended</h1>
+
+        <div style="display: block" >
+            <div style="display: inline-block"> 
+                <ion-item *ngFor="let m of recommandeditem;">
                     <ion-thumbnail slot="start">
-                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                    <img src="m?.ImageURL">
                     </ion-thumbnail>
                 </ion-item>
             </div>
-    </div> 
-    
-    <div style="text-align: center" >
-         <button 
-            ion-button color="danger" round
-            (click)="Recommended()">
-            Show More
-         </button>
+        </div> 
+        
+        <div style="text-align: center" >
+             <button 
+                ion-button color="danger" round
+                (click)="Recommended()">
+                Show More
+             </button>
+        </div>
+        
+        <h1 style="text-align: left">Recent Search</h1> 
+        
+        <div style="display: block">
+            <ion-item *ngFor="let item of recentsearch; let i=index;">
+                <p *ngIf="i<2"  list-start> {{ item?.timestamp | date }} </p>
+                <h1 *ngIf="i<2" style="text-align: center" item-none > {{ item.text }} </h1>
+                <ion-icon *ngIf="i<2" name="trash" item-end (click)="RemoveSearch(item.id)"></ion-icon>
+            </ion-item>
+        </div>
+        
+        
+        <div style="text-align: center" >
+            <button 
+               ion-button color="danger" round
+               (click)="ShowMore()">
+               Show More
+            </button>
+        </div>
+        
+        
+        
+        <h1 style="text-align: left">Popualer Searches</h1> 
+        
+        
+            <div style="width:80px;height:60px; display: block;" class="ion-text-center">
+                <div style="display: inline-block" >
+                    <ion-item *ngFor="let r of popualeritem;" >
+                        <ion-avatar start>
+                            <img src="r?.ImageURL">
+                        </ion-avatar>
+                        <h4>{{ r?.text }}</h4>
+                    </ion-item>
+                </div>
+            </div>
     </div>
+</div>
 
-    <h1 style="margin-left: 10px">Recent Search</h1> 
-
-    <div style="display: block">
-        <ion-list>
-            <p style="margin-left: 40px">10</p>
-            <p style="margin-left: 40px">Aug</p>
-            <h6 style="margin-left: 100px;">adobe xd</h6>
-            <ion-icon name="trash" style="display: inline-block"></ion-icon>
-        </ion-list>
-    </div>
-
-    <div style="text-align: center">
-        <button 
-            ion-button color="danger" round
-            (click)="RecentSearch()">
-            Show All
-        </button>
-    </div> 
-
-    <h1 style="margin-left: 10px">Popualer Searches</h1> 
-
-    <ion-slides pager="true" (options)="slideOpts()" style="display: block">
-        <ion-slide>
-            <ion-chip>
-                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-            </ion-chip>
-            <p>Name</p>
-        </ion-slide>
-        <ion-slide>
-            <ion-chip>
-                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-            </ion-chip>
-            <p>Name</p>
-        </ion-slide>
-        <ion-slide>
-            <ion-chip>
-                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-            </ion-chip>
-            <p>Name</p>
-        </ion-slide>
-    </ion-slides>

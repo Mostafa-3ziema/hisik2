@@ -1,13 +1,3 @@
-page-search
-{
-    .swiper-pagination-bullet-active //it will change the color of active slider dot
-    {
-        background-color: red;  //write your desired color here 
-    }
-    ion-searchbar
-    {
-        display: block;
-        position: relative;
-        top:20px;
-    }
+ion-content {
+    --overflow: hidden;
 }

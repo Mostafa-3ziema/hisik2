@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { MessageService } from '../../services/messages.service';
+import { MassageService } from '../../services/messages.service';
 import { NgForm } from '@angular/forms';
+import { AUTHService } from '../../services/user/AUTH.service';
 
 @IonicPage()
 @Component({
@@ -9,21 +10,23 @@ import { NgForm } from '@angular/forms';
   templateUrl: 'message.html',
 })
 export class MessagePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,private messageService:MessageService) {
+  user;
+  constructor(public navCtrl: NavController, public navParams: NavParams,private messageService:MassageService
+    ,public auth:AUTHService) {
+      this.user=this.auth.getUser();
   }
    messageList :any;
   ionViewDidLoad() {
     console.log('ionViewDidLoad MessagePage');
-    this.messageList= this.messageService.getMessages();
+    this.messageList= this.messageService.RetriveMassage();
   }
   sendMessage(form:NgForm)
   {
    const body= {
       'text' : form.value.text,
-      'user' : 1
+      'user' : this.user
     } 
-    this.messageService.SaveMessage(body).subscribe((data)=>{
+    this.messageService.SendMassage(body).subscribe((data)=>{
       console.log(data);
     });
     console.log(form.value.text);

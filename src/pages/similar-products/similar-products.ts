@@ -24,9 +24,9 @@ export class SimilarProductsPage {
   products:any[];
   scan;
   finalResult:any=[];
-  productRate:number;
-  productVotes:number;
-  procuctStars:number;
+  productRate:number=0;
+  productVotes:number=0;
+  procuctStars:number=0;
   user;
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -147,7 +147,7 @@ export class SimilarProductsPage {
       subTitle: 'you must be logged in',
       buttons: [
         {
-          text: 'have an account!',
+          text: 'make an account!',
           handler: () => {
             this.navCtrl.push(SignUpPage)
           }

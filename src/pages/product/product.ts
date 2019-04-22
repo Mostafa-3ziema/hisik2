@@ -42,10 +42,11 @@ export class ProductPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductPage');
     this.product=this.navParams.get('product');
+    console.log(this.product)
     this.scanimage=this.navParams.get('scanimage');
-    this.user=this.auth.getUser();
+    //this.user=this.auth.getUser();
     this.CalculateRate();
-    this.ISFavourite()
+    //this.ISFavourite()
   }
   CalculateRate()
   {

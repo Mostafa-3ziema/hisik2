@@ -6,19 +6,20 @@ import { Observable } from 'rxjs';
 
 const endpoint = '';
 @Injectable()
-export class MassageService {
+export class ReportService {
     constructor(private http:HttpClient){
 
     }
-
-    SendMassage(massage){
+    SendReport(report){
         const headers = new HttpHeaders({'Contant-Type':'application/json'});
-        return this.http.post(endpoint,massage,{headers:headers});
+        return this.http.post(endpoint,report,{headers:headers});
     }
 
-    RetriveMassage(){
+    RetriveReport(report){
         const headers = new HttpHeaders({'Contant-Type':'application/json'});
-        return this.http.get(endpoint,{headers:headers});
+        return this.http.get(endpoint,{headers:headers});  
+
     }
 
 }
+

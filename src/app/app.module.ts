@@ -53,14 +53,15 @@ import { ScanPage } from '../pages/scan/scan';
 import { Camera } from '@ionic-native/camera';
 import { scannedproductServices } from '../services/user/scannedproduct.services';
 import { ProfileService } from '../services/user/profile.service';
-import { MessageService } from '../services/messages.service';
+
 import { HttpClientModule } from '@angular/common/http';
 import { AUTHService } from '../services/user/AUTH.service';
-
-
+import { MassageService } from '../services/messages.service'
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SimilarProductsPage } from '../pages/similar-products/similar-products';
+import { SearchService } from '../services/Search.Service';
+import { ReportService } from '../services/Report.Service';
 @NgModule({
   declarations: [
     MyApp,
@@ -150,7 +151,6 @@ import { SimilarProductsPage } from '../pages/similar-products/similar-products'
     SplashScreen,
     CameraPreview,
     Camera,
-    MessageService,
     ProfileService,
     scannedproductServices,
     AUTHService,
@@ -160,6 +160,9 @@ import { SimilarProductsPage } from '../pages/similar-products/similar-products'
     ScanService,
     ProductService,
     FavouriteService,
+    MassageService,
+    SearchService,
+    ReportService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -9,6 +9,7 @@ import { FavouritesPage } from '../pages/favourites/favourites';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { LogInPage } from '../pages/log-in/log-in';
 import { HomePage } from '../pages/home/home';
+import { CommonModule } from '@angular/common';
 import firebase from 'firebase';
 
 

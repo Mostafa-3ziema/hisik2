@@ -36,7 +36,7 @@ import { scannedproductServices } from './../../services/user/scannedproduct.ser
       <ion-row  *ngFor="let Scanned of ScannedProducts; let i= index;"  >
          <ion-col class="c" >
            <ion-card  >
-             <ion-item class="r" *ngIf="i<2" *ngIf="Scanned?.product != '' ">
+             <ion-item class="r"  *ngIf="Scanned?.product != '' && i<2">
                  <ion-avatar  >
                    <img src="{{Scanned.productDetails?.ImageURL}}" >
                  </ion-avatar>
