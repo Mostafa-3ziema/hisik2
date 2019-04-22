@@ -30,9 +30,14 @@ export class SearchResualtPage implements OnInit {
     public SearchService:SearchService,
     public FavouriteService:FavouriteService,
     public productService:ProductService,
-    public alertCtrl:AlertController) {
-    this.user=this.auth.getUser();
-  }
+    public alertCtrl:AlertController) 
+    {
+      if(this.auth.IsAuthinticated)
+      {
+        this.user=this.auth.getUser();
+      }
+     
+    }
 
 ngOnInit()
 {

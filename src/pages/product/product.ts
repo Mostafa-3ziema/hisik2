@@ -90,7 +90,7 @@ export class ProductPage {
   }
   AddReport()
   {
-    this.navCtrl.push(ReportPage);
+    this.navCtrl.push(ReportPage,{'product':this.product});
   }
   ShowLinks()
   {

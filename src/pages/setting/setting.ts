@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import firebase from 'firebase';
+import { LogInPage } from '../log-in/log-in';
 
 @IonicPage()
 @Component({
@@ -14,6 +15,7 @@ export class SettingPage {
   imagePath="";
   user:any;
   changePassword=false;
+  isauth:boolean;
   constructor(public navCtrl: NavController
     ,public auth:AUTHService,
     public toastCtrl:ToastController,
@@ -25,8 +27,19 @@ export class SettingPage {
   }
 
   ionViewDidLoad() {
+    this.isauth=this.auth.IsAuthinticated();
     console.log('ionViewDidLoad SettingPage');
-    this.user=this.auth.getUser();
+    if(this.isauth)
+    {
+      this.user=this.auth.getUser();
+      this.imagePath=this.user.ImageURL;
+      console.log(this.user);
+    }else
+    {
+      this.imagePath='';
+    }
+
+    
     
     /*this.user={
       id: 1,
@@ -41,9 +54,9 @@ export class SettingPage {
       WarningScore: 0,
       BlockedBy: null
   };*/
-  this.imagePath=this.user.ImageURL;
+ 
   //this.imagePath="../assets/imgs/IMG_20190118_152815.jpg"
-  console.log(this.user);
+  
   }
   updatingUser(form:NgForm)
   {
@@ -238,6 +251,7 @@ export class SettingPage {
         message:'Loged out Succussfully',
         duration:3000
       }).present();
+      this.navCtrl.push(LogInPage);
     }else
     {
       this.toastCtrl.create({
@@ -246,6 +260,10 @@ export class SettingPage {
       }).present();
     }
     
+  }
+  Login()
+  {
+    this.navCtrl.push(LogInPage);
   }
   showActionSheet()
   {

@@ -30,6 +30,11 @@ export class RecommandedResualtPage {
     public SearchService:SearchService,public productService:ProductService,
     public FavouriteService:FavouriteService,public auth:AUTHService,
     public alertCtrl:AlertController) {
+      if(this.auth.IsAuthinticated())
+      {
+          this.user=this.auth.getUser();
+          this.ShowRecommanded(this.user.id);
+      }
   }
 
   ionViewDidLoad() {
@@ -37,12 +42,11 @@ export class RecommandedResualtPage {
   }
 
   ShowRecommanded(user){
-    this.products=this.navParams.get('product');
     this.SearchService.ShowRecommandedSearch(user).subscribe(
       (data:any[])=>{
         console.log(data);
-        this.recommandeditem = data;
-
+        this.products = data;
+        this.CalculateRate();
       }
     );
   }
@@ -112,19 +116,12 @@ export class RecommandedResualtPage {
     let isauthinticated=this.auth.IsAuthinticated();
     if(isauthinticated)
     {
-     let info = {
-      'text':this.usersearch.text, 
-      'user':this.user.id,
-      'product':item.id,
-     };
-      console.log(info);
-      this.SearchService.UpdatSearch(info,this.usersearch.id).subscribe((data)=>{
       this.navCtrl.push(ProductPage,{'product':item});
-    });
-   }else
-   {
-     this.showAlert()
-   }
+
+    }else
+    {
+      this.showAlert()
+    }
   }
   showAlert() {
     const alert = this.alertCtrl.create({
