@@ -15,51 +15,44 @@
 
       <ion-item>
         <ion-label>Name :</ion-label>
-        <ion-input type="text" placeholder="Adele T-shirt"></ion-input>
+        <ion-input type="text" name='Name' placeholder="Adele T-shirt" required [ngModel]="product?.name"></ion-input>
       </ion-item>
     
       <ion-item>
-        <ion-label>Product :</ion-label>
-        <ion-input type="text" placeholder="T-shirt"></ion-input>
+        <ion-label>Category :</ion-label>
+        <ion-input type="text" placeholder="T-shirt" name='Category'  required [ngModel]="product.product_Category?.Name"></ion-input>
       </ion-item>
       
       <ion-item>
-        <ion-label>Type :</ion-label>
-        <ion-input type="text"  placeholder="Clothes"></ion-input>
+        <ion-label>Brand :</ion-label>
+        <ion-input type="text"  placeholder="Clothes" name='Brand'  required [ngModel]="product.product_Brand?.Name"></ion-input>
       </ion-item>
     
       <ion-item>
-        <ion-label>location :</ion-label>
-        <ion-input type="text"  placeholder="Maadi"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>country :</ion-label>
-        <ion-input type="text"  placeholder="Egypt"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Ragion :</ion-label>
-        <ion-input type="text"  placeholder="Middle East"></ion-input>
+        <ion-label>Description :</ion-label>
+        <ion-input type="text"  placeholder=" " name='Description' [ngModel]="product?.Description"></ion-input>
       </ion-item>
             
       <ion-item>
         <ion-label>Comment :</ion-label>
-        <ion-input type="text"  placeholder="optional"></ion-input>
+        <ion-input type="text"  name='Comment' placeholder="optional" ngModel></ion-input>
       </ion-item>
-
+      <button ion-button icon-end color="royal" [disabled]="!form.valid" >
+        Send
+        <ion-icon name="send"></ion-icon>
+      </button>   
       </ion-list>  
     </form>   
-      <ion-footer>
+      <!--<ion-footer>
         <ion-toolbar>
           
           <ion-buttons end>
-            <button ion-button icon-end color="royal">
+            <button ion-button icon-end color="royal" [disabled]="!form.valid" >
               Send
               <ion-icon name="send"></ion-icon>
             </button>
           </ion-buttons>
         </ion-toolbar>
-      </ion-footer>
+      </ion-footer>-->
 </ion-content>
 <page-fab-camera ></page-fab-camera>

@@ -37,7 +37,10 @@ export class SearchTextPage {
    /* this.showproduct('fff');
     this.showBrand('rolex');
     this.showCategory('watches');*/
-    this.user=this.auth.getUser();
+    if(this.auth.IsAuthinticated)
+    {
+      this.user=this.auth.getUser();
+    }
     this.initializeItems();
   }
 

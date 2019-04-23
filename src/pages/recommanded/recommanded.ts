@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RecommandedResualtPage } from '../recommanded-resualt/recommanded-resualt';
-import { userInfo } from 'os';
 import { SearchService } from '../../services/Search.Service';
 import { AUTHService } from '../../services/user/AUTH.service';
 import { ProductService } from '../../services/product.service';

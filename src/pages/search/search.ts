@@ -1,3 +1,4 @@
+import { RecommandedResualtPage } from './../recommanded-resualt/recommanded-resualt';
 import { Component } from '@angular/core';
 import { NavController, NavPush, NavParams, LoadingController , AlertController, List ,IonicPage } from 'ionic-angular';
 import { SearchTextPage } from '../search-text/search-text';
@@ -29,11 +30,17 @@ export class SearchPage {
      public auth:AUTHService,
      public SearchService:SearchService) 
      {
-       /*this.user=this.auth.getUser();
-       this.RecentSearch(this.user.id);*/
-       //this.isauthinticated=this.auth.IsAuthinticated();
+       this.isauthinticated=this.auth.IsAuthinticated()
+       if(this.isauthinticated)
+       {
+        this.user=this.auth.getUser();
+        this.RecentSearch(this.user.id);
+        this.ShowRecommanded(this.user.id)
+       }
+       
+       /*this.isauthinticated=this.auth.IsAuthinticated();
        this.isauthinticated=true;
-       this.user=1;
+       this.user=1;*/
      }
 
   searchbar(){
@@ -41,7 +48,7 @@ export class SearchPage {
   }
 
   Recommended(){
-    this.navCtrl.push(RecommandedPage);
+    this.navCtrl.push(RecommandedResualtPage);
   }
 
   ShowRecommanded(user){

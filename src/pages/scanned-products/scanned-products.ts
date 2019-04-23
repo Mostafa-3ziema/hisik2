@@ -28,8 +28,9 @@ export class ScannedProductsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScannedProductsPage');
-    //this.user=this.AUTHService.getUser();
-    this.userScanned(1);
+     this.user=this.AUTHService.getUser();
+     this.userScanned(this.user.id)
+    //this.userScanned(1);
     
   }
 
@@ -40,7 +41,7 @@ export class ScannedProductsPage {
 
 
   userScanned(userid)
-{
+  {
   this.scannedproductServices.showscannedproduct(userid)
   .subscribe(
     (data:any[])=>
