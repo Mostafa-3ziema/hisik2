@@ -30,7 +30,9 @@ export class RecommandedResualtPage {
     public SearchService:SearchService,public productService:ProductService,
     public FavouriteService:FavouriteService,public auth:AUTHService,
     public alertCtrl:AlertController) {
+      this.user=this.auth.getUser();
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecommandedResualtPage');
@@ -42,7 +44,6 @@ export class RecommandedResualtPage {
       (data:any[])=>{
         console.log(data);
         this.recommandeditem = data;
-
       }
     );
   }
@@ -109,46 +110,6 @@ export class RecommandedResualtPage {
     });
   }
   Detials(item){
-    let isauthinticated=this.auth.IsAuthinticated();
-    if(isauthinticated)
-    {
-     let info = {
-      'text':this.usersearch.text, 
-      'user':this.user.id,
-      'product':item.id,
-     };
-      console.log(info);
-      this.SearchService.UpdatSearch(info,this.usersearch.id).subscribe((data)=>{
       this.navCtrl.push(ProductPage,{'product':item});
-    });
-   }else
-   {
-     this.showAlert()
-   }
   }
-  showAlert() {
-    const alert = this.alertCtrl.create({
-      title: 'Warning',
-      subTitle: 'you must be logged in',
-      buttons: [
-        {
-          text: 'make an account!',
-          handler: () => {
-            this.navCtrl.push(SignUpPage)
-          }
-        },
-        {
-          text: 'LogIin!',
-          handler: () => {
-            this.navCtrl.push(LogInPage)
-          }
-        },
-        {
-          text: 'Cancel',
-        }
-      ]
-    });
-    alert.present();
-  }
-
 }
