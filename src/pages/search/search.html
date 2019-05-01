@@ -8,10 +8,10 @@
 </ion-searchbar>
 
 <div *ngIf="isauthinticated">
-    <div *ngIf="(recommandeditem?.length>0 || recentsearch?.length>0 || popualeritem?.length>0);">
-        <h1 style="text-align: left">Recommended</h1>
+    <div>
+        <h1 style="text-align: left" *ngIf="recommandeditem?.length>0">Recommended</h1>
 
-        <div style="display: block" >
+        <div style="display: block" *ngIf="recommandeditem?.length>0" >
             <div style="display: inline-block"> 
                 <ion-item *ngFor="let m of recommandeditem;">
                     <ion-thumbnail slot="start">
@@ -21,7 +21,7 @@
             </div>
         </div> 
         
-        <div style="text-align: center" >
+        <div style="text-align: center" *ngIf="recommandeditem?.length>0" >
              <button 
                 ion-button color="danger" round
                 (click)="Recommended()">
@@ -29,9 +29,9 @@
              </button>
         </div>
         
-        <h1 style="text-align: left">Recent Search</h1> 
+        <h1 style="text-align: left" *ngIf="recentsearch?.length>0">Recent Search</h1> 
         
-        <div style="display: block">
+        <div style="display: block" *ngIf="recentsearch?.length>0">
             <ion-item *ngFor="let item of recentsearch; let i=index;">
                 <p *ngIf="i<2"  list-start> {{ item?.timestamp | date }} </p>
                 <h1 *ngIf="i<2" style="text-align: center" item-none > {{ item.text }} </h1>
@@ -40,7 +40,7 @@
         </div>
         
         
-        <div style="text-align: center" >
+        <div style="text-align: center" *ngIf="recentsearch?.length>0">
             <button 
                ion-button color="danger" round
                (click)="ShowMore()">
@@ -50,10 +50,10 @@
         
         
         
-        <h1 style="text-align: left">Popualer Searches</h1> 
+        <h1 style="text-align: left" *ngIf="popualeritem?.length>0)">Popualer Searches</h1> 
         
         
-            <div style="width:80px;height:60px; display: block;" class="ion-text-center">
+            <div style="width:80px;height:60px; display: block;" class="ion-text-center" *ngIf="popualeritem?.length>0)">
                 <div style="display: inline-block" >
                     <ion-item *ngFor="let r of popualeritem;" >
                         <ion-avatar start>
