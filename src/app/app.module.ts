@@ -1,3 +1,5 @@
+import { BrowserTab } from '@ionic-native/browser-tab';
+import { LinksService } from './../services/crowler.service';
 import { FavouriteService } from './../services/favourite.service';
 import { ProductService } from './../services/product.service';
 import { ScanService } from './../services/scan.Service';
@@ -62,6 +64,13 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { SimilarProductsPage } from '../pages/similar-products/similar-products';
 import { SearchService } from '../services/Search.Service';
 import { ReportService } from '../services/Report.Service';
+
+import { AgmCoreModule } from '@agm/core';
+import { ShopingLinksPage } from '../pages/shoping-links/shoping-links';
+import { ShopingPlacesPage } from '../pages/shoping-places/shoping-places';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -97,7 +106,9 @@ import { ReportService } from '../services/Report.Service';
     TopBarPage,
     ScanPage,
     ScanResultPage,
-    SimilarProductsPage
+    SimilarProductsPage,
+    ShopingLinksPage,
+    ShopingPlacesPage
     ],
   imports: [
     BrowserModule,
@@ -105,6 +116,9 @@ import { ReportService } from '../services/Report.Service';
     HttpModule,
     HttpClientModule,
     //ComponentsModule,
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyDoDSUnSuYfJCLY-PkdDBIa8ZN_2BE6ank'
+    }),
     IonicStorageModule.forRoot(),
     NotificationPageModule,
     StarRatingModule
@@ -144,7 +158,9 @@ import { ReportService } from '../services/Report.Service';
     TopBarPage,
     ScanPage,
     ScanResultPage,
-    SimilarProductsPage
+    SimilarProductsPage,
+    ShopingLinksPage,
+    ShopingPlacesPage
     ],
   providers: [
     StatusBar,
@@ -163,6 +179,10 @@ import { ReportService } from '../services/Report.Service';
     MassageService,
     SearchService,
     ReportService,
+    LinksService,
+    Geolocation,
+    BrowserTab,
+    Clipboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

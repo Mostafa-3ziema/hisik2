@@ -16,21 +16,24 @@
 <ion-grid>
   <ion-row>
     <ion-col col-12 >
-      <div class="scanned">
-        <img src="{{scanimage}}">
+      <div class="scanned" *ngIf='scanimage'>
+        <img  src="{{scanimage}}">
+      </div>
+      <div class="scanned" *ngIf='!scanimage'>
+        <img  src="../assets/imgs/default-thumbnail.jpg">
       </div>
     </ion-col>
     <ion-col class="left">
-      <h3>{{productRate}}</h3>
-      <h5 col-7 class="rate">{{productVotes}} Ratings</h5>
+      <h3>{{proEvalute?.productRate}}</h3>
+      <h5 col-7 class="rate">{{proEvalute?.productVotes}} Ratings</h5>
      <div class="stars">
         <ionic3-star-rating 
               activeIcon = "ios-star"
               defaultIcon = "ios-star-outline"
               activeColor = "#FFDF00" 
-              defaultColor = ""
-              readonly="false"
-              [rating]="procuctStars">
+              defaultColor = "grey"
+              readonly="true"
+              [rating]="proEvalute?.procuctStars">
           </ionic3-star-rating>
      </div>
       </ion-col>
@@ -54,7 +57,7 @@
            Report
          </button>
       </ion-col>
-      <div *ngIf='isFavourite;then liked else dislike'>
+      <div *ngIf='proEvalute?.favorite;then liked else dislike'>
       </div>
       <ng-template #liked>
           <ion-col>

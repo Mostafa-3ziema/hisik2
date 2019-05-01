@@ -1,7 +1,8 @@
+import { LinksService } from './../../services/crowler.service';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { Camera } from '@ionic-native/camera';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, AlertController, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, AlertController, LoadingController, Events, Slides, Platform } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import firebase from 'firebase';
 import { LogInPage } from '../log-in/log-in';
@@ -16,6 +17,7 @@ export class SettingPage {
   user:any;
   changePassword=false;
   isauth:boolean;
+ 
   constructor(public navCtrl: NavController
     ,public auth:AUTHService,
     public toastCtrl:ToastController,
@@ -23,9 +25,15 @@ export class SettingPage {
     public navParams: NavParams,
     public camera :Camera , 
     public actionSheetCtrl :ActionSheetController
-    ,public loadCtrl:LoadingController) {
-  }
-
+    ,public loadCtrl:LoadingController,public events: Events,public linksService:LinksService,) {
+     
+   }
+   
+  /*getrate()
+  {
+    this.events.subscribe('star-rating:changed', (starRating) => {console.log(starRating)});
+  }*/
+  
   ionViewDidLoad() {
     this.isauth=this.auth.IsAuthinticated();
     console.log('ionViewDidLoad SettingPage');
@@ -38,8 +46,6 @@ export class SettingPage {
     {
       this.imagePath='';
     }
-
-    
     
     /*this.user={
       id: 1,
@@ -58,7 +64,7 @@ export class SettingPage {
   //this.imagePath="../assets/imgs/IMG_20190118_152815.jpg"
   
   }
-  updatingUser(form:NgForm)
+ updatingUser(form:NgForm)
   {
       const loading = this.loadCtrl.create({
       content:"Updating...",

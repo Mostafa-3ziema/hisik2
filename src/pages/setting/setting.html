@@ -1,5 +1,5 @@
 <ion-header mode="md" >
-    <page-top-bar  Pagetitle="Setting" Noifictaion="1"></page-top-bar>
+    <page-top-bar  [Pagetitle]="Setting" Noifictaion="1"></page-top-bar>
 </ion-header>
 
 
@@ -8,7 +8,7 @@
   <div id="Photo">     
     <ion-avatar id="avatar">
        <img *ngIf="imagePath" src="{{imagePath}}">
-       <img *ngIf="imagePath==''" src="../assets/imgs/download.jpg">
+     <img *ngIf="imagePath==''" src="../assets/imgs/download.jpg">
     </ion-avatar>
     <ion-fab right bottom id="fabs">
       <button  ion-fab icon-only (click)="showActionSheet()">
@@ -16,8 +16,16 @@
       </button>
     </ion-fab>
   </div> 
-   
-  <!-- <ion-grid>
+  <!--<ionic3-star-rating 
+  (click)="getrate()"
+  activeIcon = "ios-star"
+  defaultIcon = "ios-star-outline"
+  activeColor = "#FFDF00" 
+  defaultColor = "grey"
+  readonly="false"
+   [rating]="4">
+  </ionic3-star-rating>
+ <ion-grid>
      <ion-row>
        <ion-col text-center>
           <ion-note color="primary" id="note">Update the profile photo</ion-note>
@@ -81,7 +89,7 @@
         </ion-select>
       </ion-item>
       <ion-item >
-        <button ion-button type="submit" round block color="danger"  [disabled]="!form.valid">
+        <button ion-button type="submit" round block color="danger"  icon-start [disabled]="!form.valid">
           <ion-icon name="done-all" item-start></ion-icon>
           SaveChanges
         </button>
@@ -95,6 +103,6 @@
   <button ion-button outline block color="danger" (click)="Login()" *ngIf="!isauth" icon-start>
     <ion-icon name="log-out"></ion-icon>
       Log in
-   </button> 
+   </button>
 </ion-content>
 <page-fab-camera></page-fab-camera>

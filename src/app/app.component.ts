@@ -1,3 +1,5 @@
+import { HomePage } from './../pages/home/home';
+import { SettingPage } from './../pages/setting/setting';
 import { AUTHService } from './../services/user/AUTH.service';
 import { MyReviewsPage } from './../pages/my-reviews/my-reviews';
 import { Component, ViewChild } from '@angular/core';
@@ -8,7 +10,6 @@ import { ScannedProductsPage } from '../pages/scanned-products/scanned-products'
 import { FavouritesPage } from '../pages/favourites/favourites';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { LogInPage } from '../pages/log-in/log-in';
-import { HomePage } from '../pages/home/home';
 import { CommonModule } from '@angular/common';
 import firebase from 'firebase';
 

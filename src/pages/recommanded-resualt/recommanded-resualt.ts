@@ -15,64 +15,81 @@ import { LogInPage } from '../log-in/log-in';
 })
 export class RecommandedResualtPage {
   recommandeditem:any[];
-  products:any[];
   q:string;
   text:string;
   id:any;
   usersearch;
-  finalResult:any=[];
-  productRate:number=0;
-  productVotes:number=0;
-  procuctStars:number=0;
+  RateResult:any=[];
+  FavResult:any=[];
+  productRate:number;
+  productVotes:number;
+  procuctStars:number;
+  products:any=[];
+  result:any=[];
   user;
-
+  isauth=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public SearchService:SearchService,public productService:ProductService,
     public FavouriteService:FavouriteService,public auth:AUTHService,
     public alertCtrl:AlertController) {
-      if(this.auth.IsAuthinticated())
-      {
-          this.user=this.auth.getUser();
-          this.ShowRecommanded(this.user.id);
-      }
+     
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecommandedResualtPage');
+    if(this.auth.IsAuthinticated())
+    {
+        this.user=this.auth.getUser();
+        this.ShowRecommanded(this.user.id);
+        this.isauth=true;
+        this.CheckFavourits();
+    }else
+    {
+        this.isauth=false;
+
+    }
+    this.CalculateRate();
   }
 
   ShowRecommanded(user){
     this.SearchService.ShowRecommandedSearch(user).subscribe(
       (data:any[])=>{
         console.log(data);
-        this.products = data;
-        this.CalculateRate();
+        data.forEach(pro => {
+          this.products.push(pro);
+        });
       }
     );
   }
-
+  CheckFavourits()
+  {
+   this.products.forEach(product=>
+    { 
+     let fav:boolean=false;
+  
+     this.FavouriteService.ProductsFavourite(product.id).subscribe((data)=>{
+      data.forEach(favourite =>
+        {
+            if(favourite.user == this.user.id)
+            {
+               fav=true;
+            }else
+            {
+               fav=false;
+            }
+        });
+        this.FavResult.push({'product':product,'isfav':fav});
+        fav=false;
+        console.log(this.FavResult);
+      }
+    );
+   });
+  }
   CalculateRate()
   {
    this.products.forEach(product=>
     { 
-      let fav:boolean=false;
-      if(this.auth.IsAuthinticated())
-      {
-        this.FavouriteService.MyFavourites(this.user.id).subscribe((data)=>{
-          data.forEach(favourite =>
-            {
-                if(favourite.product == product.id)
-                {
-                   fav=true;
-                }else
-                {
-                   fav=false;
-                }
-            });
-          }
-        );
-       }
-       this.productService.CalculateRate(product.id).subscribe(
+      this.productService.CalculateRate(product.id).subscribe(
         (data)=>
         {
           if(data)
@@ -101,7 +118,7 @@ export class RecommandedResualtPage {
            this.productVotes=data.length;
            this.procuctStars=Math.round(this.productRate);
            console.log(this.procuctStars+" "+this.productVotes+" "+this.productRate);
-           this.finalResult.push({'product':product,'rate':this.productRate,'stars':this.procuctStars,'fav':fav});
+           this.RateResult.push({'product':product,'rate':this.productRate,'stars':this.procuctStars});
           }else
           {
            this.procuctStars=0;
@@ -111,6 +128,7 @@ export class RecommandedResualtPage {
         }
         );
     });
+    console.log(this.RateResult);
   }
   Detials(item){
     let isauthinticated=this.auth.IsAuthinticated();

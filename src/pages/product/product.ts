@@ -31,6 +31,12 @@ export class ProductPage {
   procuctStars:number;
   isFavourite:boolean;
   favID:number;
+  proEvalute={
+    productRate:null,
+    productVotes:null,
+    procuctStars:null,
+    favorite:null
+  };
   constructor(public navCtrl: NavController,
     public productService:ProductService,
     public navParams: NavParams,
@@ -44,9 +50,13 @@ export class ProductPage {
     this.product=this.navParams.get('product');
     console.log(this.product)
     this.scanimage=this.navParams.get('scanimage');
-    //this.user=this.auth.getUser();
+    this.user=this.auth.getUser();
     this.CalculateRate();
-    //this.ISFavourite()
+    this.ISFavourite();
+    this.proEvalute.procuctStars=this.procuctStars;
+    this.proEvalute.productRate=this.productRate;
+    this.proEvalute.productVotes=this.productVotes;
+    this.proEvalute.favorite=this.ISFavourite;
   }
   CalculateRate()
   {
@@ -94,7 +104,7 @@ export class ProductPage {
   }
   ShowLinks()
   {
-    this.navCtrl.push(LinksPage);
+    this.navCtrl.push(LinksPage,{'product':this.product.name});
   }
   ISFavourite()
   {
@@ -106,10 +116,12 @@ export class ProductPage {
            if(favourite.product == this.product.id)
            {
                this.isFavourite=true;
+               console.log(this.isFavourite);
                this.favID=favourite.id
            }else
            {
                this.isFavourite=false;
+               console.log(this.isFavourite);
            }
        });
    });

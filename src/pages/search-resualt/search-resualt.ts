@@ -19,11 +19,14 @@ export class SearchResualtPage implements OnInit {
   products:any=[];
   id:any;
   usersearch;
-  finalResult:any=[];
-  productRate:number=0;
-  productVotes:number=0;
-  procuctStars:number=0;
+  RateResult:any=[];
+  FavResult:any=[];
+  productRate:number;
+  productVotes:number;
+  procuctStars:number;
+  result:any=[];
   user;
+  isauth=false;
   constructor(public navCtrl: NavController
     ,public auth:AUTHService,
     public navParams: NavParams ,
@@ -32,13 +35,19 @@ export class SearchResualtPage implements OnInit {
     public productService:ProductService,
     public alertCtrl:AlertController) 
     {
-      if(this.auth.IsAuthinticated)
-      {
-        this.user=this.auth.getUser();
-      }
-     
     }
-
+  ionViewDidLoad() 
+  {
+      if(this.auth.IsAuthinticated())
+      {
+          this.user=this.auth.getUser();
+          this.isauth=true;
+      }else
+      {
+          this.isauth=false;
+  
+      }
+  }
 ngOnInit()
 {
   this.q=this.navParams.get('page');
@@ -48,45 +57,60 @@ ngOnInit()
   console.log(this.q+":"+this.text);
   if(this.q=='brand'){
     this.SearchService.BrandProduct(this.text).subscribe(
-      (data)=>{
+      (data:any[])=>{
         console.log(data);
-        this.products = data;
+        data.forEach(pro => {
+          this.products.push(pro);
+        });
         this.CalculateRate()
+        if(this.auth.IsAuthinticated())
+        {
+          this.CheckFavourits();
+        }
       }
       );
 
   }else{
     this.SearchService.Categoryproduct(this.text).subscribe(
-      (data)=>{
+      (data:any[])=>{
         console.log(data);
-        this.products = data;
+        data.forEach(pro => {
+          this.products.push(pro);
+        });
         this.CalculateRate()
       }
       );
   }
 }
-CalculateRate()
+CheckFavourits()
   {
    this.products.forEach(product=>
     { 
-      let fav:boolean=false;
-      if(this.auth.IsAuthinticated())
-      {
-        this.FavouriteService.MyFavourites(this.user.id).subscribe((data)=>{
-          data.forEach(favourite =>
+     let fav:boolean=false;
+  
+     this.FavouriteService.ProductsFavourite(product.id).subscribe((data)=>{
+      data.forEach(favourite =>
+        {
+            if(favourite.user == this.user.id)
             {
-                if(favourite.product == product.id)
-                {
-                   fav=true;
-                }else
-                {
-                   fav=false;
-                }
-            });
-          }
-        );
-       }
-       this.productService.CalculateRate(product.id).subscribe(
+               fav=true;
+            }else
+            {
+               fav=false;
+            }
+        });
+        this.FavResult.push({'product':product,'isfav':fav});
+        fav=false;
+        console.log(this.FavResult);
+      }
+    );
+   });
+  }
+  CalculateRate()
+  {
+   this.products.forEach(product=>
+    { 
+      this.productService.CalculateRate(product.id).subscribe(
         (data)=>
         {
           if(data)
@@ -115,7 +139,7 @@ CalculateRate()
            this.productVotes=data.length;
            this.procuctStars=Math.round(this.productRate);
            console.log(this.procuctStars+" "+this.productVotes+" "+this.productRate);
-           this.finalResult.push({'product':product,'rate':this.productRate,'stars':this.procuctStars,'fav':fav});
+           this.RateResult.push({'product':product,'rate':this.productRate,'stars':this.procuctStars});
           }else
           {
            this.procuctStars=0;
@@ -125,6 +149,7 @@ CalculateRate()
         }
         );
     });
+    console.log(this.RateResult);
   }
   Detials(item){
     let isauthinticated=this.auth.IsAuthinticated();

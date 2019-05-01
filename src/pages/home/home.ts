@@ -22,11 +22,9 @@ export class HomePage {
    tabs:any=[];
    lastTime:number;
    title:string="";
-   finalResult:any=[];
-   productRate:number;
-   productVotes:number;
-   procuctStars:number;
-  constructor(public navCtrl: NavController,public productService:ProductService,public ScanService:ScanService,public favSerive : FavouriteService,public proService : ProductService ,platform: Platform) {
+  
+  constructor(public navCtrl: NavController,
+    public ScanService:ScanService,platform: Platform) {
     this.tabs=["search","person"];
     console.log('Width: ' + platform.width());
     this.screenWidth_px=platform.width();
@@ -62,60 +60,9 @@ export class HomePage {
        console.log(data.id);
       }
     });*/
-    this.productService.getSimilarProducts('rolex','').subscribe(
-      (data:any[])=>
-      { 
-      
-        if(data.length>0)
-        {
-          data.forEach(product=>
-            {
-              this.productService.CalculateRate(product.id).subscribe(
-                (data)=>
-                {
-                  if(data)
-                  {
-                      let rate5:number=0 ,rate4:number=0 ,rate3:number=0 ,rate2:number=0 ,rate1 :number =0; 
-                      console.log(data);
-                      data.forEach(review => {
-                          if(review.rate == 5)
-                          {
-                              rate5=rate5+1;
-                          }else if(review.rate == 4)
-                          {
-                              rate4=rate4+1;
-                          }else if(review.rate == 3)
-                          {
-                              rate3=rate3+1;
-                          }else if(review.rate == 2)
-                          {
-                              rate2=rate2+1;
-                          }else if(review.rate == 1)
-                          {
-                              rate1=rate1+1;
-                          }
-                      });
-                   this.productRate=((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length;
-                   this.productVotes=data.length;
-                   this.procuctStars=Math.round(this.productRate);
-                   console.log(this.procuctStars+" "+this.productVotes+" "+this.productRate);
-                   this.finalResult.push({'produc':product,'rate':this.productRate,'stars':this.procuctStars});
-                   console.log(this.finalResult);
-                  }else
-                  {
-                   this.procuctStars=0;
-                   this.productRate=0.0;
-                   this.productVotes=0;
-                  }
-                }
-                );
-            });
-           console.log(this.finalResult); 
-        }
-      }
-    );
+   
   }
-
+  
   selectTab(index)
   {
     this.SwipedTabsIndicator.style.width = this.tabTitleWidthArray[index]+"px";
