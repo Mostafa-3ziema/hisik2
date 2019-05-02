@@ -77,7 +77,11 @@ ngOnInit()
         data.forEach(pro => {
           this.products.push(pro);
         });
-        this.CalculateRate()
+        this.CalculateRate();
+        if(this.auth.IsAuthinticated())
+        {
+          this.CheckFavourits();
+        }
       }
       );
   }

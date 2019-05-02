@@ -10,26 +10,39 @@
 
 
 <ion-content padding>    
-    <ion-list>
-        <ion-item>
-          <ion-avatar item-start>
-            <img src="../assets/imgs/IMG_20190118_152815.jpg">
-          </ion-avatar>
-          <ionic3-star-rating 
-          activeIcon = "ios-star"
-          defaultIcon = "ios-star-outline"
-          activeColor = "#D90F24" 
-          defaultColor = ""
-          readonly="false"
-          [rating]="5">
-      </ionic3-star-rating>
-        </ion-item>
-        <ion-item>
-            <ion-icon name="send" item-start (click)="SendReview()"></ion-icon>
-            <br>
-            <ion-input type="text" placeholder="What do think about this ?"></ion-input>
-          </ion-item> 
-    </ion-list>
-   
+
+    <form #form="ngForm" (ngSubmit)="ADDREVIEW(form)">
+          <ion-list>
+             <ion-item>
+                 <ion-avatar item-start>
+                   <img src="../assets/imgs/IMG_20190118_152815.jpg">
+                 </ion-avatar>
+                     <ionic3-star-rating 
+                        (click)="getrate()"
+                        activeIcon = "ios-star"
+                        defaultIcon = "ios-star-outline"
+                        activeColor = "#FFDF00" 
+                        defaultColor = "#FFDF00"
+                        readonly="false"
+                        [rating]="rate"
+                        >
+                     </ionic3-star-rating>
+            </ion-item>
+            <ion-item>
+               <ion-input type="text" ngModel name="text" required placeholder=" put your opinion"></ion-input>
+            </ion-item>
+            <ion-item>
+                <button ion-button block type="submit" icon-only color="danger" [disabled]="!form.valid">
+                    <ion-icon name="send"  item-start></ion-icon>
+                 </button>
+            </ion-item>
+         </ion-list>    
+     </form>
+     <ion-item>
+        <button ion-button block  icon-start color="danger" (click)="cancel()">
+          <ion-icon ios="ios-close" md="md-close"></ion-icon>
+              Cancel
+         </button>
+    </ion-item>
 </ion-content>
 <page-fab-camera ></page-fab-camera>

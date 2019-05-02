@@ -42,13 +42,11 @@ export class RecommandedResualtPage {
         this.user=this.auth.getUser();
         this.ShowRecommanded(this.user.id);
         this.isauth=true;
-        this.CheckFavourits();
     }else
     {
         this.isauth=false;
-
     }
-    this.CalculateRate();
+    
   }
 
   ShowRecommanded(user){
@@ -58,6 +56,8 @@ export class RecommandedResualtPage {
         data.forEach(pro => {
           this.products.push(pro);
         });
+        this.CalculateRate();
+        this.CheckFavourits();
       }
     );
   }

@@ -64,7 +64,8 @@ export class SearchTextPage {
         data.forEach(pro => {
           this.products.push(pro);
         });
-        this.CalculateRate()
+        this.CalculateRate();
+        this.CheckFavourits();
       }
     );
   }
@@ -106,7 +107,6 @@ export class SearchTextPage {
           this.showproduct(text);
           this.showBrand(text);
           this.showCategory(text);
-          this.CheckFavourits();
         },err=>
         console.log(err));
       }else

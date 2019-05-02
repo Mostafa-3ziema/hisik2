@@ -1,3 +1,10 @@
+import { EditReplayPage } from './../pages/edit-replay/edit-replay';
+import { Reply } from './../pages/replay/Replay.Service';
+import { ProductReviews } from './../pages/product/Product.Service';
+import { Edit_MyReview } from './../pages/edit-reviews/EditReviews.Service';
+import { My_Reviews } from './../pages/my-reviews/MyReviews.Service';
+import { MyReviews } from './../pages/reviews/Reviews.Service';
+import { ReviewService } from './../pages/review/Review.service';
 import { BrowserTab } from '@ionic-native/browser-tab';
 import { LinksService } from './../services/crowler.service';
 import { FavouriteService } from './../services/favourite.service';
@@ -43,7 +50,6 @@ import { HomePage } from '../pages/home/home';
 import { NotificationPageModule } from '../pages/notification/notification.module';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { ReplayPage } from './../pages/replay/replay';
-import { ReplaysPage } from './../pages/replays/replays';
 import { ReportPage } from './../pages/report/report';
 import { ReviewPage } from './../pages/review/review';
 import { ReviewsPage } from './../pages/reviews/reviews'; 
@@ -84,7 +90,6 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     FabCameraPage,
     ProductPage,
     ReplayPage,
-    ReplaysPage,
     ReportPage,
     ReviewPage,
     ReviewsPage,
@@ -108,7 +113,8 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     ScanResultPage,
     SimilarProductsPage,
     ShopingLinksPage,
-    ShopingPlacesPage
+    ShopingPlacesPage,
+    EditReplayPage
     ],
   imports: [
     BrowserModule,
@@ -136,7 +142,6 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     FabCameraPage,
     ProductPage,
     ReplayPage,
-    ReplaysPage,
     ReportPage,
     ReviewPage,
     ReviewsPage,
@@ -160,7 +165,8 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     ScanResultPage,
     SimilarProductsPage,
     ShopingLinksPage,
-    ShopingPlacesPage
+    ShopingPlacesPage,
+    EditReplayPage
     ],
   providers: [
     StatusBar,
@@ -183,6 +189,13 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     Geolocation,
     BrowserTab,
     Clipboard,
+    ReviewService,
+    MyReviews,
+    My_Reviews,
+    Edit_MyReview,
+    ProductReviews,
+    Reply,
+
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

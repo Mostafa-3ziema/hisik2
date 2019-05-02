@@ -9,6 +9,7 @@
 
 <div *ngIf="isauthinticated">
     <div>
+
         <h1 style="text-align: left" *ngIf="recommandeditem?.length>0">Recommended</h1>
 
         <div style="display: block" *ngIf="recommandeditem?.length>0" >
@@ -50,10 +51,10 @@
         
         
         
-        <h1 style="text-align: left" *ngIf="popualeritem?.length>0)">Popualer Searches</h1> 
+        <h1 style="text-align: left" *ngIf="popualeritem?.length>0">Popualer Searches</h1> 
         
         
-            <div style="width:80px;height:60px; display: block;" class="ion-text-center" *ngIf="popualeritem?.length>0)">
+            <div style="width:80px;height:60px; display: block;" class="ion-text-center" *ngIf="popualeritem?.length>0">
                 <div style="display: inline-block" >
                     <ion-item *ngFor="let r of popualeritem;" >
                         <ion-avatar start>
