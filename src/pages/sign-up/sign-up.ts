@@ -22,7 +22,12 @@ import { Device } from '@ionic-native/device';
 export class SignUpPage {
 
 
-  constructor(public alertCtrl: AlertController,private device: Device,public navCtrl: NavController, public navParams: NavParams,private AUTHService:AUTHService) {
+  constructor(public alertCtrl: AlertController,
+    private device: Device,
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private AUTHService:AUTHService,
+    ) {
   }
 
   ionViewDidLoad() {
@@ -30,16 +35,17 @@ export class SignUpPage {
   }
 
   Register(form:NgForm)
-  {
-   const body= {
+  { if(form.value.password===form.value.Confirmpassword)
+    {
+     const body= {
      'FirstName': form.value.FirstName,
      'LastName' : form.value.LastName,
      'UserName' : form.value.UserName,
      'Password' : form.value.Password,
-     'Email'    : form.value.Email
-     //'DeviceID' : this.device.uuid
-    }
-    this.AUTHService.register(body).subscribe((res)=>{
+     'Email'    : form.value.Email,
+     'DeviceID' : this.device.uuid
+      }
+     this.AUTHService.register(body).subscribe((res)=>{
       let check=this.AUTHService.store_user(res,true);
         if(check) 
          {
@@ -61,13 +67,25 @@ export class SignUpPage {
       {
         const alert = this.alertCtrl.create({
           title: 'error!',
-          subTitle: 'user name or email is already exixt!',
+          subTitle: 'user name or email is already exist!',
           buttons: ['OK']
         });
         alert.present();
       }
     });
     console.log(form.value.text);
+  }else
+  {
+    this.showAlert();
   }
- 
+  
+}
+showAlert() {
+  const alert = this.alertCtrl.create({
+    title: 'Warning',
+    subTitle: 'Please, be sure that the confirm password is the same as new password',
+    buttons: ['OK']
+  });
+  alert.present();
+}
 }

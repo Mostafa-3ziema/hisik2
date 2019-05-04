@@ -15,13 +15,16 @@
      
          <ion-item class="r">
              <ion-avatar  >
-                 <img src="{{Scanned.productDetails?.ImageURL}}">
+                 <img src="{{Scanned?.ImageURL}}">
              </ion-avatar>
          </ion-item>
-         <ion-item >
+        <ion-item *ngIf="Scanned?.product != '' ">
              <p >{{Scanned.ProductDetail?.name}}</p>
              <br>
-             <button class="pp" ion-button clear (click)="detail()" >details</button>
+             <button class="pp" ion-button clear (click)="detail(Scanned?.ProductDetail)" >details</button>
+        </ion-item>
+        <ion-item *ngIf="Scanned?.product == '' ">
+            <p >this scan has no product</p>
        </ion-item>
      </ion-card>
      </ion-col> 

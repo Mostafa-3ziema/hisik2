@@ -5,92 +5,43 @@
 
 <ion-content padding>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <ion-list>
-      <ion-item>
-        <ion-icon name="bookmark" style="margin-left: 220px"></ion-icon>
-        <ion-avatar item-start>
-          <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681">
-        </ion-avatar>
-        <h2>Monkey</h2>
-        <h3>Don't Know What To Do!</h3>
-        <p>I've had a pretty messed up day. If we just...</p>
-        <div style="display: block">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <p style="display: inline-block">3.2</p>
-        </div>
-        <button
-        style="margin-left: 160px" 
-        ion-button color="danger" round>
-        Show All</button>
-      </ion-item>
-      <ion-item>
-          <ion-icon name="bookmark" style="margin-left: 220px"></ion-icon>
-          <ion-avatar item-start>
-            <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681">
-          </ion-avatar>
-          <h2>Monkey</h2>
-          <h3>Don't Know What To Do!</h3>
-          <p>I've had a pretty messed up day. If we just...</p>
-          <div style="display: block">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <p style="display: inline-block">3.2</p>
-          </div>
-          <button
-          style="margin-left: 160px" 
-          ion-button color="danger" round>
-          Show All</button>
-        </ion-item>
-        <ion-item>
-            <ion-icon name="bookmark" style="margin-left: 220px"></ion-icon>
-            <ion-avatar item-start>
-              <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681">
-            </ion-avatar>
-            <h2>Monkey</h2>
-            <h3>Don't Know What To Do!</h3>
-            <p>I've had a pretty messed up day. If we just...</p>
-            <div style="display: block">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <p style="display: inline-block">3.2</p>
-            </div>
-            <button
-            style="margin-left: 160px" 
-            ion-button color="danger" round>
-            Show All</button>
-          </ion-item>
-          <ion-item>
-              <ion-icon name="bookmark" style="margin-left: 220px"></ion-icon>
-              <ion-avatar item-start>
-                <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681">
-              </ion-avatar>
-              <h2>Monkey</h2>
-              <h3>Don't Know What To Do!</h3>
-              <p>I've had a pretty messed up day. If we just...</p>
-              <div style="display: block">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                  <p style="display: inline-block">3.2</p>
-              </div>
-              <button
-              style="margin-left: 160px" 
-              ion-button color="danger" round>
-              Show All</button>
-            </ion-item>
-    </ion-list>
+  <ion-list *ngFor='let product of RateResult;let i = index'>
+    <ion-item>
+          <div *ngIf='isauth;then show else hide'></div>
+          <ng-template #>
+              <div *ngIf='FavResult[i].isfav;then dislike else liked'>
+                </div>
+                <ng-template #dislike>
+                    <ion-icon name="bookmark" style="margin-left: 220px"></ion-icon>
+                </ng-template>
+                <ng-template #liked>
+                    <ion-icon name="bookmark-outline" style="margin-left: 220px"></ion-icon>
+                </ng-template>
+          </ng-template>
+          <ng-template #hide>
+              <ion-icon name="bookmark-outline" style="margin-left: 220px"></ion-icon>
+          </ng-template>
+         
+      <ion-avatar item-start>
+        <img src="{{product.product?.ImageURL}}">
+      </ion-avatar>
+      <h2>{{product.product?.name}}</h2>
+      <p>{{product.product?.Description}}</p>
+      <div style="display: block">
+          <span [ngClass]="(product?.stars>=1)?'fa fa-star checked':'fa fa-star'"></span>
+          <span [ngClass]="(product?.stars>=2)?'fa fa-star checked':'fa fa-star'"></span>
+          <span [ngClass]="(product?.stars>=3)?'fa fa-star checked':'fa fa-star'"></span>
+          <span [ngClass]="(product?.stars>=4)?'fa fa-star checked':'fa fa-star'"></span>
+          <span [ngClass]="(product?.stars==5)?'fa fa-star checked':'fa fa-star'"></span>
+          <p style="display: inline-block">{{product?.rate}}</p>
+      </div>
+      <button 
+      (click)="Detials(product?.product)"
+      style="margin-left: 160px" 
+      ion-button color="danger" round>
+      Show</button>
+    </ion-item>
+  </ion-list> 
 </ion-content>
 <page-fab-camera></page-fab-camera>
 

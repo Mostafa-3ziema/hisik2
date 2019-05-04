@@ -21,13 +21,16 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
   templateUrl: 'similar-products.html',
 })
 export class SimilarProductsPage {
-  products:any[];
   scan;
-  finalResult:any=[];
+  RateResult:any=[];
+  FavResult:any=[];
   productRate:number;
   productVotes:number;
   procuctStars:number;
+  products:any=[];
+  result:any=[];
   user;
+  isauth=false;
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      public productService:ProductService,
@@ -40,35 +43,51 @@ export class SimilarProductsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SimilarProductsPage');
-    this.products=this.navParams.get('products');
+    this.result=this.navParams.get('products');
+    this.result.forEach(pro => {
+      this.products.push(pro);
+    });
     if(this.auth.IsAuthinticated())
     {
       this.scan=this.navParams.get('scan');
       this.user=this.auth.getUser();
+      this.isauth=true;
+      this.CheckFavourits();
+    }else
+    {
+      this.isauth=false;
+
     }
     this.CalculateRate();
+  }
+  CheckFavourits()
+  {
+   this.products.forEach(product=>
+    { 
+     let fav:boolean=false;
+  
+     this.FavouriteService.ProductsFavourite(product.id).subscribe((data)=>{
+      data.forEach(favourite =>
+        {
+            if(favourite.user == this.user.id)
+            {
+               fav=true;
+            }else
+            {
+               fav=false;
+            }
+        });
+        this.FavResult.push({'product':product,'isfav':fav});
+        fav=false;
+        console.log(this.FavResult);
+      }
+    );
+   });
   }
   CalculateRate()
   {
    this.products.forEach(product=>
     { 
-      let fav:boolean=false;
-      if(this.auth.IsAuthinticated())
-      {
-        this.FavouriteService.MyFavourites(this.user.id).subscribe((data)=>{
-          data.forEach(favourite =>
-            {
-                if(favourite.product == product.id)
-                {
-                   fav=true;
-                }else
-                {
-                   fav=false;
-                }
-            });
-          }
-        );
-      }
       this.productService.CalculateRate(product.id).subscribe(
         (data)=>
         {
@@ -98,7 +117,7 @@ export class SimilarProductsPage {
            this.productVotes=data.length;
            this.procuctStars=Math.round(this.productRate);
            console.log(this.procuctStars+" "+this.productVotes+" "+this.productRate);
-           this.finalResult.push({'product':product,'rate':this.productRate,'stars':this.procuctStars,'fav':fav});
+           this.RateResult.push({'product':product,'rate':this.productRate,'stars':this.procuctStars});
           }else
           {
            this.procuctStars=0;
@@ -108,6 +127,7 @@ export class SimilarProductsPage {
         }
         );
     });
+    console.log(this.RateResult);
   }
   ShowProduct(product)
   {
@@ -147,7 +167,7 @@ export class SimilarProductsPage {
       subTitle: 'you must be logged in',
       buttons: [
         {
-          text: 'have an account!',
+          text: 'make an account!',
           handler: () => {
             this.navCtrl.push(SignUpPage)
           }

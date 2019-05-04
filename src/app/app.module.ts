@@ -1,3 +1,12 @@
+import { EditReplayPage } from './../pages/edit-replay/edit-replay';
+import { Reply } from './../pages/replay/Replay.Service';
+import { ProductReviews } from './../pages/product/Product.Service';
+import { Edit_MyReview } from './../pages/edit-reviews/EditReviews.Service';
+import { My_Reviews } from './../pages/my-reviews/MyReviews.Service';
+import { MyReviews } from './../pages/reviews/Reviews.Service';
+import { ReviewService } from './../pages/review/Review.service';
+import { BrowserTab } from '@ionic-native/browser-tab';
+import { LinksService } from './../services/crowler.service';
 import { FavouriteService } from './../services/favourite.service';
 import { ProductService } from './../services/product.service';
 import { ScanService } from './../services/scan.Service';
@@ -41,7 +50,6 @@ import { HomePage } from '../pages/home/home';
 import { NotificationPageModule } from '../pages/notification/notification.module';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { ReplayPage } from './../pages/replay/replay';
-import { ReplaysPage } from './../pages/replays/replays';
 import { ReportPage } from './../pages/report/report';
 import { ReviewPage } from './../pages/review/review';
 import { ReviewsPage } from './../pages/reviews/reviews'; 
@@ -53,11 +61,10 @@ import { ScanPage } from '../pages/scan/scan';
 import { Camera } from '@ionic-native/camera';
 import { scannedproductServices } from '../services/user/scannedproduct.services';
 import { ProfileService } from '../services/user/profile.service';
-import { MessageService } from '../services/messages.service';
+
 import { HttpClientModule } from '@angular/common/http';
 import { AUTHService } from '../services/user/AUTH.service';
-
-
+import { MassageService } from '../services/messages.service'
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SimilarProductsPage } from '../pages/similar-products/similar-products';
@@ -74,6 +81,15 @@ const firebase = {
   storageBucket: "ionic-763e1.appspot.com",
   messagingSenderId: "543642243705"
 }
+import { SearchService } from '../services/Search.Service';
+import { ReportService } from '../services/Report.Service';
+
+import { AgmCoreModule } from '@agm/core';
+import { ShopingLinksPage } from '../pages/shoping-links/shoping-links';
+import { ShopingPlacesPage } from '../pages/shoping-places/shoping-places';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -87,7 +103,6 @@ const firebase = {
     FabCameraPage,
     ProductPage,
     ReplayPage,
-    ReplaysPage,
     ReportPage,
     ReviewPage,
     ReviewsPage,
@@ -109,7 +124,10 @@ const firebase = {
     TopBarPage,
     ScanPage,
     ScanResultPage,
-    SimilarProductsPage
+    SimilarProductsPage,
+    ShopingLinksPage,
+    ShopingPlacesPage,
+    EditReplayPage
     ],
   imports: [
     BrowserModule,
@@ -117,6 +135,9 @@ const firebase = {
     HttpModule,
     HttpClientModule,
     //ComponentsModule,
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyDoDSUnSuYfJCLY-PkdDBIa8ZN_2BE6ank'
+    }),
     IonicStorageModule.forRoot(),
     NotificationPageModule,
     StarRatingModule,
@@ -136,7 +157,6 @@ const firebase = {
     FabCameraPage,
     ProductPage,
     ReplayPage,
-    ReplaysPage,
     ReportPage,
     ReviewPage,
     ReviewsPage,
@@ -158,14 +178,16 @@ const firebase = {
     TopBarPage,
     ScanPage,
     ScanResultPage,
-    SimilarProductsPage
+    SimilarProductsPage,
+    ShopingLinksPage,
+    ShopingPlacesPage,
+    EditReplayPage
     ],
   providers: [
     StatusBar,
     SplashScreen,
     CameraPreview,
     Camera,
-    MessageService,
     ProfileService,
     scannedproductServices,
     AUTHService,
@@ -177,6 +199,20 @@ const firebase = {
     FavouriteService,
     NotficationService,
     Firebase,
+    MassageService,
+    SearchService,
+    ReportService,
+    LinksService,
+    Geolocation,
+    BrowserTab,
+    Clipboard,
+    ReviewService,
+    MyReviews,
+    My_Reviews,
+    Edit_MyReview,
+    ProductReviews,
+    Reply,
+
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

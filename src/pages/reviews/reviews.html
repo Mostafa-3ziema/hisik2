@@ -10,100 +10,58 @@
 
 
 <ion-content padding>
+    <h1>Ratings</h1>
     <div style="padding-top:10px;">
         <canvas #chartCanvas></canvas>
-      </div>
-    <ion-list>
-        <ion-item>
-          <ion-avatar item-start>
-            <img src="../assets/imgs/IMG_20190118_152815.jpg">
-          </ion-avatar>
-          <ionic3-star-rating 
-          activeIcon = "ios-star"
-          defaultIcon = "ios-star-outline"
-          activeColor = "#D90F24" 
-          defaultColor = ""
-          readonly="false"
-          [rating]="5">
-          </ionic3-star-rating> 
-          <h2>Mostafa</h2>
-          <p>good product</p>
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-              <img src="../assets/imgs/IMG_20190118_152815.jpg">
-            </ion-avatar>
-            <ionic3-star-rating 
-            activeIcon = "ios-star"
-            defaultIcon = "ios-star-outline"
-            activeColor = "#EAAE1C" 
-            defaultColor = ""
-            readonly="false"
-            [rating]="4">
-        </ionic3-star-rating>
-            <h2>mostafa</h2>
-            <p>good product</p>
-          </ion-item>
-          <ion-item>
-              <ion-avatar item-start>
-                <img src="../assets/imgs/IMG_20190118_152815.jpg">
-              </ion-avatar>
-              <ionic3-star-rating 
-              activeIcon = "ios-star"
-              defaultIcon = "ios-star-outline"
-              activeColor = "#DC7919" 
-              defaultColor = ""
-              readonly="false"
-              [rating]="3">
-          </ionic3-star-rating>
-              <h2>mostafa</h2>
-              <p>good product</p>
+    </div>
+    <hr>
+    <div *ngFor="let review of ReviewsLikeResult;let i = index" >
+         <ion-card>
+             <ion-item>
+               <ion-avatar item-start>
+                 <img *ngIf="review.userData?.ImageURL" src="{{review.userData?.ImageURL}}">
+                 <img *ngIf="!review.userData?.ImageURL" src="../assets/imgs/download.jpg">
+               </ion-avatar>
+               <div *ngIf="review?.islike;then notlike;else like">
+               </div> 
+               <ng-template #notlike>
+                   <button ion-button  icon-only color="danger" (click)="dislike(i,review?.likeid)">
+                       <ion-icon name="thumbs-up" ></ion-icon> 
+                       {{review?.likecount}}
+                   </button>
+               </ng-template>
+               <ng-template #like>
+                   <button ion-button  icon-only color="danger" (click)="Like(i,review.review?.id)">
+                       <ion-icon name="thumbs-up-outline" ></ion-icon> 
+                       {{review?.likecount}}
+                   </button>
+               </ng-template> 
+               <div *ngFor="let replay of ReviewsReplayResult;let x = index" >
+                  <div *ngIf="replay.review?.id == review.review?.id;then print"></div>
+                   <ng-template #print>
+                      <ion-icon name="ios-text-outline"  (click)="AddReplay(review.review?.id)"></ion-icon>
+                         {{replay?.replayCount}}
+                   </ng-template>
+               </div>
+              
+               <br>
+               <p>{{review.review.timestamp | date:'medium'}}</p>
+     
+                 <ionic3-star-rating 
+                 activeIcon = "ios-star"
+                 defaultIcon = "ios-star-outline"
+                 activeColor = "#FFDF00" 
+                 defaultColor = "#FFDF00"
+                 readonly="true"
+                 [rating]="review.review?.rate">
+             </ionic3-star-rating>
             </ion-item>
-            <ion-item>
-                <ion-avatar item-start>
-                  <img src="../assets/imgs/IMG_20190118_152815.jpg">
-                </ion-avatar>
-                <ionic3-star-rating 
-                activeIcon = "ios-star"
-                defaultIcon = "ios-star-outline"
-                activeColor = "#DB491E" 
-                defaultColor = ""
-                readonly="false"
-                [rating]="2">
-            </ionic3-star-rating>
-                <h2>mostafa</h2>
-                <p>good product</p>
-              </ion-item>
-              <ion-item>
-                  <ion-avatar item-start>
-                    <img src="../assets/imgs/IMG_20190118_152815.jpg">
-                  </ion-avatar>
-                  <ionic3-star-rating 
-                  activeIcon = "ios-star"
-                  defaultIcon = "ios-star-outline"
-                  activeColor = "#DB1816" 
-                  defaultColor = ""
-                  readonly="false"
-                  [rating]="1">
-              </ionic3-star-rating>
-                  <h2>mostafa</h2>
-                  <p>good product</p>
-                </ion-item>
-                <ion-item>
-                    <ion-avatar item-start>
-                      <img src="../assets/imgs/IMG_20190118_152815.jpg">
-                    </ion-avatar>
-                    <ionic3-star-rating 
-                    activeIcon = "ios-star"
-                    defaultIcon = "ios-star-outline"
-                    activeColor = "#DB491E" 
-                    defaultColor = ""
-                    readonly="false"
-                    [rating]="2">
-                </ionic3-star-rating>
-                    <h2>mostafa</h2>
-                    <p>good product</p>
-                  </ion-item> 
-      </ion-list>
+             <ion-card-content >
+               <h1>{{review.review.userData?.UserName}}</h1>
+               <p>{{review.review?.text}}</p>
+             </ion-card-content>
+           </ion-card>
+     </div>
+ 
 </ion-content>
 <page-fab-camera ></page-fab-camera>

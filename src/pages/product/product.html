@@ -12,25 +12,28 @@
 <ion-content padding>
   <ion-avatar id="avatar">
     <img src="{{product?.ImageURL}}">
-</ion-avatar>
+  </ion-avatar>
 <ion-grid>
   <ion-row>
     <ion-col col-12 >
-      <div class="scanned">
-        <img src="{{scanimage}}">
+      <div class="scanned" *ngIf='scanimage'>
+        <img  src="{{scanimage}}">
+      </div>
+      <div class="scanned" *ngIf='!scanimage'>
+        <img  src="../assets/imgs/default-thumbnail.jpg">
       </div>
     </ion-col>
     <ion-col class="left">
-      <h3>{{productRate}}</h3>
-      <h5 col-7 class="rate">{{productVotes}} Ratings</h5>
+      <h3>{{proEvalute?.productRate}}</h3>
+      <h5 col-7 class="rate">{{proEvalute?.productVotes}} Ratings</h5>
      <div class="stars">
         <ionic3-star-rating 
               activeIcon = "ios-star"
               defaultIcon = "ios-star-outline"
               activeColor = "#FFDF00" 
-              defaultColor = ""
-              readonly="false"
-              [rating]="procuctStars">
+              defaultColor = "#FFDF00"
+              readonly="true"
+              [rating]="proEvalute?.procuctStars">
           </ionic3-star-rating>
      </div>
       </ion-col>
@@ -54,7 +57,7 @@
            Report
          </button>
       </ion-col>
-      <div *ngIf='isFavourite;then liked else dislike'>
+      <div *ngIf='proEvalute?.favorite;then liked else dislike'>
       </div>
       <ng-template #liked>
           <ion-col>
@@ -77,49 +80,69 @@
       </ion-col>
     </ion-row>
 </ion-grid>
+
 <h3>Reviews</h3>
-<ion-card>
 
-    <ion-item>
-      <ion-avatar item-start>
+<div *ngFor="let review of ReviewsLikeResult;let i = index" >
+   <div *ngIf="i<=2">
+    <ion-card>
+        <ion-item>
+          <ion-avatar item-start>
+            <img *ngIf="review.userData?.ImageURL" src="{{review.userData?.ImageURL}}">
+            <img *ngIf="!review.userData?.ImageURL" src="../assets/imgs/download.jpg">
+          </ion-avatar>
+          <div *ngIf="review?.islike;then notlike;else like">
+          </div> 
+          <ng-template #notlike>
+              <button ion-button  icon-only color="danger" (click)="dislike(i,review?.likeid)">
+                  <ion-icon name="thumbs-up" ></ion-icon> 
+                  {{review?.likecount}}
+              </button>
+          </ng-template>
+          <ng-template #like>
+              <button ion-button  icon-only color="danger" (click)="Like(i,review.review?.id)">
+                  <ion-icon name="thumbs-up-outline" ></ion-icon> 
+                  {{review?.likecount}}
+              </button>
+          </ng-template> 
+          <div *ngFor="let replay of ReviewsReplayResult;let x = index" >
+              <div *ngIf="replay.review?.id == review.review?.id;then print"></div>
+               <ng-template #print>
+                  <ion-icon name="ios-text-outline"  (click)="AddReplay(review.review?.id)"></ion-icon>
+                     {{replay?.replayCount}}
+               </ng-template>
+           </div>
+          <br>
+          <p>{{review.review.timestamp | date:'medium'}}</p>
 
-        <img src="../assets/imgs/IMG_20190118_152815.jpg">
-      </ion-avatar>
-      <ion-icon name="ios-thumbs-up" ></ion-icon> 20
-      <ion-icon name="ios-text-outline"  (click)="AddReplay()"></ion-icon>15
-          <ionic3-star-rating 
-        activeIcon = "ios-star"
-        defaultIcon = "ios-star-outline"
-        activeColor = "#FFDF00" 
-        defaultColor = ""
-        readonly="false"
-        [rating]="4">
-    </ionic3-star-rating>
-      <p>feb 5, 2019</p>
-    </ion-item>
-  
-  
-    <ion-card-content>
+            <ionic3-star-rating 
+            activeIcon = "ios-star"
+            defaultIcon = "ios-star-outline"
+            activeColor = "#FFDF00" 
+            defaultColor = "#FFDF00"
+            readonly="true"
+            [rating]="review.review?.rate">
+        </ionic3-star-rating>
+      </ion-item>
       
-      <p>Good product</p>
-    </ion-card-content>
-  
-    <ion-row>
-     
-      <ion-col align-self-center text-center>
-        <ion-note>
-          11h ago
-        </ion-note>
-      </ion-col>
-    </ion-row>
-  
-  </ion-card>
+      
+        <ion-card-content >
+          <h1>{{review.review.userData?.UserName}}</h1>
+          <p>{{review.review?.text}}</p>
+        </ion-card-content>
+      
+        
+      
+      </ion-card>
+    </div>    
+</div>
+
   <ion-list>
       <ion-item>
         <ion-icon name="add" item-start (click)="AddReview()"></ion-icon>
           
         <ion-icon name="browsers" item-end (click)="ShowReviews()"></ion-icon>
       </ion-item>
-    </ion-list>
+  </ion-list>
 </ion-content>
 <page-fab-camera ></page-fab-camera>

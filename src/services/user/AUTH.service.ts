@@ -1,3 +1,4 @@
+import { Device } from '@ionic-native/device';
 
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 
@@ -14,7 +15,11 @@ const endpoint2= 'http://127.0.0.1:8000/api/user/?';
 @Injectable()
 export class AUTHService{
 
-    constructor(private http:HttpClient ,private emailComposer: EmailComposer,public alertCtrl: AlertController , private storage: Storage)
+    constructor(private http:HttpClient ,
+       private emailComposer: EmailComposer,
+       public alertCtrl: AlertController , 
+       private device: Device,
+       private storage: Storage)
     {
       
     }
@@ -45,7 +50,7 @@ export class AUTHService{
               'UserName'      : data[0].UserName,
               'Password'      : data[0].Password,
               'Email'         : data[0].Email,
-              //'DeviceID'      : " ",
+              'DeviceID'      : this.device.uuid,
               'Status'        : false,
               'ImageURL'      : "",
               'WarningScore'  : 0,

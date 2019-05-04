@@ -8,7 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'faq-help.html',
 })
 export class FaqHelpPage {
-
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -19,4 +19,5 @@ export class FaqHelpPage {
   {
     this.navCtrl.push(MessagePage);
   }
+ 
 }

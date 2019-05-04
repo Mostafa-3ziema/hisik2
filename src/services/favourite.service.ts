@@ -13,7 +13,13 @@ export class FavouriteService
     } 
     MyFavourites(userid:number)
     {
-      let endpoint='http://127.0.0.1:8000/api/favourite/?search='+userid;
+      let endpoint='http://127.0.0.1:8000/api/favourite/?user__id='+userid;
+      return this.http.get(endpoint,{headers : this.headers})
+      .map((response)=> {return response.json();});
+    }
+    ProductsFavourite(proid)
+    {
+      let endpoint='http://127.0.0.1:8000/api/favourite/?product__id='+proid;
       return this.http.get(endpoint,{headers : this.headers})
       .map((response)=> {return response.json();});
     }
