@@ -68,6 +68,19 @@ import { MassageService } from '../services/messages.service'
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SimilarProductsPage } from '../pages/similar-products/similar-products';
+import { NotficationService } from '../services/Notfcation/notfication.service';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { Firebase } from '@ionic-native/firebase';
+const firebase = {
+  production: false,
+  apiKey: "AIzaSyBYThMrbjOwXLTksqVd2zWKmwH86nfbydg",
+  authDomain: "ionic-763e1.firebaseapp.com",
+  databaseURL: "https://ionic-763e1.firebaseio.com",
+  projectId: "ionic-763e1",
+  storageBucket: "ionic-763e1.appspot.com",
+  messagingSenderId: "543642243705"
+}
 import { SearchService } from '../services/Search.Service';
 import { ReportService } from '../services/Report.Service';
 
@@ -127,7 +140,9 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     }),
     IonicStorageModule.forRoot(),
     NotificationPageModule,
-    StarRatingModule
+    StarRatingModule,
+    AngularFireModule.initializeApp(firebase), 
+    AngularFirestoreModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -182,6 +197,8 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     ScanService,
     ProductService,
     FavouriteService,
+    NotficationService,
+    Firebase,
     MassageService,
     SearchService,
     ReportService,

@@ -4,8 +4,9 @@ import { ProductService } from './../../services/product.service';
 import { ScanPage } from './../scan/scan';
 import { ProductPage } from './../product/product';
 import { Component,ViewChild} from '@angular/core';
-import { NavController, PopoverController, Slides ,Platform} from 'ionic-angular';
-
+import { NavController, PopoverController, Slides, Platform, ToastController } from 'ionic-angular';
+import { tap } from 'rxjs/operators';
+import { NotficationService } from '../../services/Notfcation/notfication.service';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -22,9 +23,18 @@ export class HomePage {
    tabs:any=[];
    lastTime:number;
    title:string="";
-  
-  constructor(public navCtrl: NavController,
-    public ScanService:ScanService,platform: Platform) {
+   finalResult:any=[];
+   productRate:number;
+   productVotes:number;
+   procuctStars:number;
+  constructor(public navCtrl: NavController
+    ,public productService:ProductService,
+    public ScanService:ScanService,
+    public favSerive : FavouriteService,
+    public proService : ProductService 
+    ,platform: Platform
+    ,private NotficationSer:NotficationService,
+    private toast:ToastController) {
     this.tabs=["search","person"];
     console.log('Width: ' + platform.width());
     this.screenWidth_px=platform.width();
@@ -149,5 +159,12 @@ export class HomePage {
     if(!this.isRight && !this.isLeft)
       this.SwipedTabsIndicator.style.width = this.tabTitleWidthArray[this.SwipedTabsSlider.getActiveIndex()]+"px";
 
+  }
+  ionViewDidLoad(){
+    this.NotficationSer.getToken()
+
+    this.NotficationSer.listenToNotfication().pipe(
+     
+    ).subscribe();
   }
 }
