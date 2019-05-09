@@ -1,3 +1,4 @@
+import { ScanPage } from './../scan/scan';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -14,7 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   template:
    `
   <ion-fab right bottom id="fabs">
-    <button ion-fab icon-only>
+    <button ion-fab icon-only (click)="openScan()">
       <ion-icon name="camera" color="blue"></ion-icon>
     </button>
   </ion-fab>
@@ -27,6 +28,10 @@ export class FabCameraPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FabCameraPage');
+  }
+  openScan()
+  {
+    this.navCtrl.push(ScanPage);
   }
 
 }

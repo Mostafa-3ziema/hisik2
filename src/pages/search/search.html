@@ -33,15 +33,19 @@
         <h1 style="text-align: left" *ngIf="recentsearch?.length>0">Recent Search</h1> 
         
         <div style="display: block" *ngIf="recentsearch?.length>0">
-            <ion-item *ngFor="let item of recentsearch; let i=index;">
-                <p *ngIf="i<2"  list-start> {{ item?.timestamp | date }} </p>
-                <h1 *ngIf="i<2" style="text-align: center" item-none > {{ item.text }} </h1>
-                <ion-icon *ngIf="i<2" name="trash" item-end (click)="RemoveSearch(item.id)"></ion-icon>
-            </ion-item>
+            <div *ngFor="let item of recentsearch; let i=index;">
+               <div *ngIf="i<2">
+                    <ion-item>
+                        <p  list-start> {{ item?.timestamp | date }} </p>
+                        <h1  style="text-align: center" item-none > {{ item.text }} </h1>
+                        <ion-icon name="trash" item-end (click)="RemoveSearch(item.id)"></ion-icon>
+                    </ion-item>
+               </div>
+            </div>
         </div>
         
         
-        <div style="text-align: center" *ngIf="recentsearch?.length>0">
+        <div style="text-align: center" *ngIf="recentsearch?.length>2">
             <button 
                ion-button color="danger" round
                (click)="ShowMore()">

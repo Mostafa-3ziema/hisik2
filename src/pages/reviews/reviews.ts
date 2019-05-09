@@ -1,3 +1,4 @@
+import { ProductService } from './../../services/product.service';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { ReplayPage } from './../replay/replay';
 import { Chart } from 'chart.js';
@@ -36,58 +37,25 @@ export class ReviewsPage {
   
   @ViewChild('chartCanvas') chartCanvas;
   chartVar: any;  
+  rate5:number=0 ;
+  rate4:number=0 ;
+  rate3:number=0 ;
+  rate2:number=0 ;
+  rate1:number=0 ; 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private MyReviews:MyReviews
+    ,public productService: ProductService
     ,public toastCtrl:ToastController
     ,public auth:AUTHService
     ) {
   }
-  ngAfterViewInit() {
-    this.showChart();
-  }
-
+ 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReviewsPage');
     this.productid=this.navParams.get('productid');
     this.product_Reviews();
     this.user=this.auth.getUser();
-  }
-  showChart() {
-    this.chartVar = new Chart(this.chartCanvas.nativeElement, {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: [10, 4, 8 , 20 , 5 ],
-          backgroundColor: [
-            'rgb(217, 15, 36)',
-            'rgb(234, 174, 28)',
-            'rgb(220, 121, 25)',
-            'rgb(219, 73, 30)',
-            'rgb(219, 24, 22)',
-
-          ]
-        }],
-        labels: [
-          '5',
-          '4',
-          '3',
-          '2',
-          '1',
-        ]
- 
-      },
- 
-      options: {
-        legend: {
-          display: false
-        },
-        tooltips: {
-          enabled: true
-        }
-      }
- 
-    })
   }
   product_Reviews()
   {
@@ -208,6 +176,91 @@ export class ReviewsPage {
   {
     this.navCtrl.push(ReplayPage,{'reviewid':reviewId});
   }
+  
+  ngAfterViewInit() {
+    this.CalculateRate();
+  }
+  showChart() {
+    this.chartVar = new Chart(this.chartCanvas.nativeElement, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          label: 'Ratings',
+          data: [this.rate5, this.rate4, this.rate3 , this.rate2 , this.rate1 ],
+          backgroundColor: [
+            'rgb(217, 15, 36)',
+            'rgb(234, 174, 28)',
+            'rgb(220, 121, 25)',
+            'rgb(219, 73, 30)',
+            'rgb(219, 24, 22)',
+
+          ],hoverBackgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56",
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
+        ],
+        weight:5
+        }],
+        labels: [
+          'five star',
+          'four star',
+          'three star',
+          'two star',
+          'one star',
+        ]
+ 
+      },
+      options: {
+        legend: {
+          display: true,
+          position:'bottom'
+        },
+        tooltips: {
+          enabled: true,
+          mode: 'point'
+        },
+        title:{
+          display:true,
+          text:"Ratings",
+        }
+      }
+ 
+    })
+  }
+  CalculateRate()
+  {
+    this.productService.CalculateRate(1).subscribe(
+        (data)=>
+        {
+          if(data)
+          {
+              console.log(data);
+              data.forEach(review => {
+                  if(review.rate == 5)
+                  {
+                     this.rate5= this.rate5+1;
+                  }else if(review.rate == 4)
+                  {
+                     this.rate4=this.rate4+1;
+                  }else if(review.rate == 3)
+                  {
+                     this.rate3=this.rate3+1;
+                  }else if(review.rate == 2)
+                  {
+                     this.rate2=this.rate2+1;
+                  }else if(review.rate == 1)
+                  {
+                     this.rate1=this.rate1+1;
+                  }
+              });
+              console.log(this.rate1+" "+this.rate2+" "+this.rate3+" "+this.rate4+" "+this.rate5)
+              this.showChart();
+          }
+    });
+ }
 }
 
   

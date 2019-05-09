@@ -20,7 +20,7 @@ placeholder="Search…"
 
 <ion-content>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div *ngIf="(Branditem?.length>0 || categoryitem?.length>0 || products?.length>0);then Result else NoResult">
+<div *ngIf="(Branditem?.length>0 || categoryitem?.length>0 || products?.length>0 || searchText == '' );then Result else NoResult">
 </div>
 <ng-template #Result>
 <ion-item-group>
@@ -39,7 +39,7 @@ placeholder="Search…"
 </ion-item-divider>
     <ion-item *ngFor='let product of RateResult;let i = index'>
           <div *ngIf='isauth;then show else hide'></div>
-          <ng-template #>
+          <ng-template #show>
               <div *ngIf='FavResult[i].isfav;then dislike else liked'>
                 </div>
                 <ng-template #dislike>
@@ -64,7 +64,8 @@ placeholder="Search…"
           <span [ngClass]="(product?.stars>=3)?'fa fa-star checked':'fa fa-star'"></span>
           <span [ngClass]="(product?.stars>=4)?'fa fa-star checked':'fa fa-star'"></span>
           <span [ngClass]="(product?.stars==5)?'fa fa-star checked':'fa fa-star'"></span>
-          <p style="display: inline-block">{{product?.rate}}</p>
+          <p style="display: inline-block" *ngIf="product?.rate">{{product?.rate}}</p>
+          <p style="display: inline-block" *ngIf="!product?.rate">0</p>
       </div>
       <button 
       (click)="SearchResualt3(product?.product)"
@@ -76,7 +77,7 @@ placeholder="Search…"
 </ion-item-group>
 </ng-template>
 <ng-template #NoResult>
-<p *ngIf="searchText !== '' ">No search reasult found for : <b>{{searchText}}</b> </p>
+ <p *ngIf="shownoResult==true">No search reasult found for : <b>{{searchText}}</b> </p>
 </ng-template>
 
 </ion-content> 

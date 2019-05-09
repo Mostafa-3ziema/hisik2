@@ -18,9 +18,10 @@ import { LogInPage } from '../log-in/log-in';
 export class SearchTextPage {
   myInput:string;
   searchText:string='';
-  products:any=[];
-  Branditem;
-  categoryitem;
+  shownoResult:boolean=false;
+  products:any[]=[];
+  Branditem:any[]=[];
+  categoryitem:any[]=[];
   userSearch:any;
   items:any[];
   RateResult:any=[];
@@ -29,6 +30,7 @@ export class SearchTextPage {
   productVotes:number;
   procuctStars:number;
   result:any=[];
+  count=0;
   user;
   isauth=false;
   constructor(public navCtrl: NavController
@@ -58,41 +60,73 @@ export class SearchTextPage {
       this.initializeItems();
   }
   showproduct(text){
+    this.products=[];
     this.SearchService.SearchProduct(text).subscribe(
-      (data:any)=>{
+      (data:any[])=>{
+       if(data.length>0)
+       {
         console.log(data);
+        this.products=[];
+        this.RateResult=[];
+        this.FavResult=[];
         data.forEach(pro => {
           this.products.push(pro);
         });
         this.CalculateRate();
         this.CheckFavourits();
+        this.showBrand(text);
+       }else
+       {
+        this.products=[];
+        this.RateResult=[];
+        this.FavResult=[];
+        this.showBrand(text);
+       } 
       }
     );
   }
 
   showBrand(text){
     this.SearchService.SearchBrand(text).subscribe(
-      (data:any)=>{
-        console.log(data);
-        this.Branditem = data;
+      (data:any[])=>{
+        if(data.length>0)
+        {
+          console.log(data);
+          this.Branditem=[];
+          this.Branditem = data;
+          this.showCategory(text);
+        }else
+        {
+          this.Branditem=[];
+          this.showCategory(text);
+        }
       }
     );
   }
 
   showCategory(text){
     this.SearchService.SearchCategory(text).subscribe(
-      (data)=>{
-        console.log(data);
-        this.categoryitem = data;
+      (data:any[])=>{
+        if(data.length>0)
+        { 
+          console.log(data);
+          this.categoryitem=[];
+          this.categoryitem = data;
+        }else
+        {
+          this.categoryitem=[];
+          this.shownoResult=true;
+        }
       }
     );
   }
 
   search(text:string) {
     this.initializeItems();
-    this.searchText=text;
+    this.shownoResult=false;
     if(text)
     {
+      this.searchText=text;
       if(this.auth.IsAuthinticated())
       {
         let info = {
@@ -105,15 +139,11 @@ export class SearchTextPage {
           console.log("success");
           this.userSearch=data;
           this.showproduct(text);
-          this.showBrand(text);
-          this.showCategory(text);
         },err=>
         console.log(err));
       }else
       {
           this.showproduct(text);
-          this.showBrand(text);
-          this.showCategory(text);
       }
       
     }else{

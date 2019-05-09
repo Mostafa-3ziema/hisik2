@@ -4,21 +4,15 @@ import { Injectable} from '@angular/core';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs';
 
-const endpoint = '';
+const endpoint = 'http://127.0.0.1:8000/api/report/';
 @Injectable()
 export class ReportService {
     constructor(private http:HttpClient){
 
     }
     SendReport(report){
-        const headers = new HttpHeaders({'Contant-Type':'application/json'});
+        const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.post(endpoint,report,{headers:headers});
-    }
-
-    RetriveReport(report){
-        const headers = new HttpHeaders({'Contant-Type':'application/json'});
-        return this.http.get(endpoint,{headers:headers});  
-
     }
 
 }

@@ -8,7 +8,7 @@
   <ion-list *ngFor='let product of RateResult;let i = index'>
     <ion-item>
           <div *ngIf='isauth;then show else hide'></div>
-          <ng-template #>
+          <ng-template #show>
               <div *ngIf='FavResult[i].isfav;then dislike else liked'>
                 </div>
                 <ng-template #dislike>
@@ -33,7 +33,8 @@
           <span [ngClass]="(product?.stars>=3)?'fa fa-star checked':'fa fa-star'"></span>
           <span [ngClass]="(product?.stars>=4)?'fa fa-star checked':'fa fa-star'"></span>
           <span [ngClass]="(product?.stars==5)?'fa fa-star checked':'fa fa-star'"></span>
-          <p style="display: inline-block">{{product?.rate}}</p>
+          <p style="display: inline-block" *ngIf="product?.rate">{{product?.rate}}</p>
+          <p style="display: inline-block" *ngIf="!product?.rate">0</p>
       </div>
       <button 
       (click)="Detials(product?.product)"

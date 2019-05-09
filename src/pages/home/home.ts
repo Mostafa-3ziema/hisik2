@@ -150,8 +150,4 @@ export class HomePage {
       this.SwipedTabsIndicator.style.width = this.tabTitleWidthArray[this.SwipedTabsSlider.getActiveIndex()]+"px";
 
   }
-  Scan()
-  {
-    this.navCtrl.push(ScanPage);
-  }
 }
