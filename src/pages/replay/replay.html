@@ -28,7 +28,7 @@
   
         <ion-list>
             <ion-item-sliding *ngFor="let replay of Replays;let i = index">
-              <ion-item>
+              <ion-item detail-push>
                 <ion-avatar item-start>
                     <img *ngIf="replay.owner?.ImageURL" src="{{review.userData?.ImageURL}}">
                     <img *ngIf="!replay.owner?.ImageURL" src="../assets/imgs/download.jpg">
@@ -37,7 +37,7 @@
                 <p>{{replay?.timestamp | date:'medium'}}</p>
                 <h3>{{replay?.text}}</h3>
               </ion-item>
-              <ion-item-options side="right" *ngIf="replay.owner?.id==user">
+              <ion-item-options side="right" *ngIf="replay.owner?.id==user?.id">
                 <button ion-button color="primary" (click)="delete(i,replay?.id)">
                   <ion-icon name="trash"></ion-icon>
                   delete

@@ -83,7 +83,7 @@ export class SignUpPage {
 showAlert() {
   const alert = this.alertCtrl.create({
     title: 'Warning',
-    subTitle: 'Please, be sure that the confirm password is the same as new password',
+    subTitle: 'Please, be sure that the confirm password is the same as password',
     buttons: ['OK']
   });
   alert.present();

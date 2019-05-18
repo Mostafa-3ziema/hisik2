@@ -1,3 +1,4 @@
+import { LikesPage } from './../likes/likes';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { FavouriteService } from './../../services/favourite.service';
 import { ProductService } from './../../services/product.service';
@@ -306,5 +307,13 @@ AddReview()
       
     });
 
+  }
+  showlikes(reviewid:number)
+  {
+  let likesModal = this.modalCtrl.create(LikesPage, {'reviewid':reviewid});
+  likesModal.onDidDismiss(data => {
+    console.log('likespage close')
+  });
+  likesModal.present();
   }
 }

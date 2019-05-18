@@ -1,8 +1,9 @@
+import { ScanService } from './../../services/scan.Service';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { scannedproductServices } from './../../services/user/scannedproduct.services';
 import { ProductPage } from './../product/product';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 
 /**
@@ -23,26 +24,25 @@ export class ScannedProductsPage {
 
   user :any;
   ScannedProducts =[];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public AUTHService:AUTHService ,  public scannedproductServices:scannedproductServices) {
+  constructor(public navCtrl: NavController,
+     public navParams: NavParams, public AUTHService:AUTHService , 
+     public scannedproductServices:ScanService,public toastCtrl:ToastController
+    ) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad()
+  {
     console.log('ionViewDidLoad ScannedProductsPage');
      this.user=this.AUTHService.getUser();
      this.userScanned(this.user.id)
     //this.userScanned(1);
-    
   }
-
-
   detail(product){
     this.navCtrl.push(ProductPage,{'products':product});
   }
-
-
   userScanned(userid)
   {
-  this.scannedproductServices.showscannedproduct(userid)
+   this.scannedproductServices.getRecentScan(userid)
   .subscribe(
     (data:any[])=>
     {
@@ -57,7 +57,18 @@ export class ScannedProductsPage {
       }
     }
     );
-
-}
-  
+   }
+   Delete(index:number,scanid:number)
+   {
+     this.scannedproductServices.DeleteUserScan(scanid).subscribe(
+       (data)=>
+       {
+        this.ScannedProducts.splice(index,1);
+        this.toastCtrl.create({
+          message:'this scan is deleted succussfully',
+          duration:2000
+        }).present();
+       }
+     );
+   }  
 }

@@ -9,29 +9,42 @@
 
 
 <ion-grid class="g">
-  <ion-row *ngFor="let Scanned of ScannedProducts" >
+  <ion-row *ngFor="let Scanned of ScannedProducts;let i = index" >
      <ion-col class="c" >
-       <ion-card >
-     
-         <ion-item class="r">
-             <ion-avatar  >
-                 <img src="{{Scanned?.ImageURL}}">
-             </ion-avatar>
-         </ion-item>
-        <ion-item *ngIf="Scanned?.product != '' ">
-             <p >{{Scanned.ProductDetail?.name}}</p>
-             <br>
-             <button class="pp" ion-button clear (click)="detail(Scanned?.ProductDetail)" >details</button>
-        </ion-item>
-        <ion-item *ngIf="Scanned?.product == '' ">
-            <p >this scan has no product</p>
-       </ion-item>
+       <ion-card>
+          <img src="{{Scanned?.ImageURL}}">
+          <div *ngIf="Scanned?.product != '' ">
+            <ion-card-content>
+              <ion-card-title>
+                  {{Scanned.ProductDetail?.name}}
+              </ion-card-title>
+            </ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <button ion-button block round outline color="danger" (click)="detail(Scanned?.ProductDetail)">
+                      details
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button block outline (click)="Delete(i,Scanned?.id)">Delete</button>
+                </ion-col>
+            </ion-row>
+          </div> 
+          <div *ngIf="Scanned?.product == '' ">
+              <ion-card-content>
+                  <ion-card-title>
+                      this scan has no product
+                  </ion-card-title>
+              </ion-card-content>
+              <ion-row>
+                  <ion-col>
+                      <button ion-button block outline (click)="Delete(i,Scanned?.id)">Delete</button>
+                  </ion-col>
+              </ion-row>
+          </div> 
      </ion-card>
-     </ion-col> 
- 
-  </ion-row>
+    </ion-col> 
+   </ion-row>
  </ion-grid>
-
-
 </ion-content>
 <page-fab-camera></page-fab-camera>

@@ -1,3 +1,4 @@
+import { LikesPage } from './../pages/likes/likes';
 import { EditReplayPage } from './../pages/edit-replay/edit-replay';
 import { Reply } from './../pages/replay/Replay.Service';
 import { ProductReviews } from './../pages/product/Product.Service';
@@ -127,7 +128,8 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     SimilarProductsPage,
     ShopingLinksPage,
     ShopingPlacesPage,
-    EditReplayPage
+    EditReplayPage,
+    LikesPage
     ],
   imports: [
     BrowserModule,
@@ -181,7 +183,8 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     SimilarProductsPage,
     ShopingLinksPage,
     ShopingPlacesPage,
-    EditReplayPage
+    EditReplayPage,
+    LikesPage
     ],
   providers: [
     StatusBar,

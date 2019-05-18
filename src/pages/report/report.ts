@@ -1,7 +1,7 @@
 import { LogInPage } from './../log-in/log-in';
 import { SignUpPage } from './../sign-up/sign-up';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { MassageService } from '../../services/messages.service';
 import { ReportService } from '../../services/Report.Service';
@@ -15,7 +15,8 @@ import { AUTHService } from '../../services/user/AUTH.service';
 export class ReportPage {
   user;
   product;
-  constructor(public navCtrl: NavController, public alertCtrl:AlertController,public navParams: NavParams
+  constructor(public navCtrl: NavController,public toastCtrl:ToastController,
+    public alertCtrl:AlertController,public navParams: NavParams
     ,private ReportService:ReportService,public auth:AUTHService) {
 
       
@@ -45,8 +46,11 @@ export class ReportPage {
       'comment':form.value.Comment,
      } 
       this.ReportService.SendReport(body).subscribe((data)=>{
-       console.log(data);
-     });
+        this.toastCtrl.create({
+          message:'the report is sent',
+          duration:3000
+        }).present();
+       });
      console.log(form.value.text);
     }else
     {

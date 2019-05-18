@@ -10,7 +10,7 @@
     <div *ngFor="let review of ReviewsLikeResult;let i = index" >
         <ion-card>
          <ion-list>
-            <ion-item-sliding>  
+            <!--<ion-item-sliding>-->  
               <ion-item>
               <ion-avatar item-start>
                 <img *ngIf="review.userData?.ImageURL" src="{{review.userData?.ImageURL}}">
@@ -21,14 +21,21 @@
               <ng-template #notlike>
                   <button ion-button  icon-only color="danger" (click)="dislike(i,review?.likeid)">
                       <ion-icon name="thumbs-up" ></ion-icon> 
-                      {{review?.likecount}}
+                  </button>
+                  <button *ngIf="review?.likecount>0" ion-button color="danger" (click)="showlikes(review.review?.id)">
+                    {{review?.likecount}}
                   </button>
               </ng-template>
               <ng-template #like>
-                  <button ion-button  icon-only color="danger" (click)="Like(i,review.review?.id)">
-                      <ion-icon name="thumbs-up-outline" ></ion-icon> 
-                      {{review?.likecount}}
-                  </button>
+                 <button ion-button  icon-only color="danger" (click)="Like(i,review.review?.id)">
+                  <ion-icon name="ios-thumbs-up-outline"></ion-icon> 
+                 </button>
+                 <button *ngIf="review?.likecount>0" ion-button color="danger" (click)="showlikes(review.review?.id)">
+                  {{review?.likecount}}
+                 </button>
+                 <button *ngIf="review?.likecount==0" ion-button color="danger">
+                  {{review?.likecount}}
+                 </button>
               </ng-template> 
               <div *ngFor="let replay of ReviewsReplayResult;let x = index" >
                  <div *ngIf="replay.review?.id == review.review?.id;then print"></div>
@@ -52,8 +59,11 @@
                 readonly="true"
                 [rating]="review.review?.rate">
             </ionic3-star-rating>
+            <button ion-button clear item-end  icon-only color="danger" (click)="Setting($event,i,review?.review,review?.review.id)">
+              <ion-icon name="settings"></ion-icon>
+            </button>
            </ion-item>
-           <ion-item-options side="right">
+           <!--<ion-item-options side="right">
                 <button ion-button color="primary" (click)="delete(i,review.review?.id)">
                   <ion-icon name="trash"></ion-icon>
                   delete
@@ -63,7 +73,7 @@
                   update
                 </button>
             </ion-item-options>
-        </ion-item-sliding>
+        </ion-item-sliding>-->
     </ion-list>  
     </ion-card>
  </div>

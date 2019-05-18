@@ -6,18 +6,19 @@
  
 <ion-content >
   <ion-card *ngFor="let Favourite of FavouriteProducts">
-    <ion-item>
-    <h2>{{Favourite.ProductDetails?.name}}</h2>
-    <p>{{Favourite?.timestamp}}</p>
-    </ion-item> 
-
-    <img src="{{Favourite.ProductDetails?.ImageURL}}" (click)="product(Favourite.ProductDetails)" >
-
+    <img src="{{Favourite.ProductDetails?.ImageURL}}">
     <ion-card-content>
-      <p>
-        {{Favourite.ProductDetail?.Description}}
-      </p>
+        <ion-card-title>
+            {{Favourite.ProductDetails?.name}}
+        </ion-card-title>
+        <h3>
+            {{Favourite?.timestamp | date}}        
+        </h3>
+        <p>
+            {{Favourite.ProductDetail?.Description}}
+        </p>
     </ion-card-content>
+    <button ion-button block outline (click)="product(Favourite.ProductDetails)">Details</button>
   </ion-card>
 </ion-content>
 <page-fab-camera></page-fab-camera>

@@ -27,12 +27,19 @@
                <ng-template #notlike>
                    <button ion-button  icon-only color="danger" (click)="dislike(i,review?.likeid)">
                        <ion-icon name="thumbs-up" ></ion-icon> 
-                       {{review?.likecount}}
+                   </button>
+                   <button *ngIf="review?.likecount>0" ion-button color="danger" (click)="showlikes(review.review?.id)">
+                    {{review?.likecount}}
                    </button>
                </ng-template>
                <ng-template #like>
                    <button ion-button  icon-only color="danger" (click)="Like(i,review.review?.id)">
-                       <ion-icon name="thumbs-up-outline" ></ion-icon> 
+                       <ion-icon name="ios-thumbs-up-outline" ></ion-icon> 
+                   </button>
+                   <button *ngIf="review?.likecount>0" ion-button color="danger" (click)="showlikes(review.review?.id)">
+                       {{review?.likecount}}
+                   </button>
+                   <button *ngIf="review?.likecount==0" ion-button color="danger">
                        {{review?.likecount}}
                    </button>
                </ng-template> 

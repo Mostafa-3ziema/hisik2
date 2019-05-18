@@ -3,9 +3,10 @@ import { AUTHService } from './../../services/user/AUTH.service';
 import { ReplayPage } from './../replay/replay';
 import { Chart } from 'chart.js';
 import { Component ,ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
 
 import {MyReviews} from'../reviews/Reviews.Service';
+import { LikesPage } from '../likes/likes';
 
 
 
@@ -45,6 +46,7 @@ export class ReviewsPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private MyReviews:MyReviews
+    ,public modalCtrl: ModalController
     ,public productService: ProductService
     ,public toastCtrl:ToastController
     ,public auth:AUTHService
@@ -260,6 +262,14 @@ export class ReviewsPage {
               this.showChart();
           }
     });
+ }
+ showlikes(reviewid:number)
+ {
+  let likesModal = this.modalCtrl.create(LikesPage, {'reviewid':reviewid});
+  likesModal.onDidDismiss(data => {
+    console.log('likespage close')
+  });
+  likesModal.present();
  }
 }
 

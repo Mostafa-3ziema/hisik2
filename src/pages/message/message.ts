@@ -1,7 +1,7 @@
 import { LogInPage } from './../log-in/log-in';
 import { SignUpPage } from './../sign-up/sign-up';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { MassageService } from '../../services/messages.service';
 import { NgForm } from '@angular/forms';
 import { AUTHService } from '../../services/user/AUTH.service';
@@ -13,7 +13,11 @@ import { AUTHService } from '../../services/user/AUTH.service';
 })
 export class MessagePage {
   user;
-  constructor(public navCtrl: NavController,public alertCtrl:AlertController, public navParams: NavParams,private messageService:MassageService
+  constructor(public navCtrl: NavController,
+    public alertCtrl:AlertController, 
+    public navParams: NavParams,
+    private messageService:MassageService
+    ,public toastCtrl:ToastController
     ,public auth:AUTHService) {
       
   }
@@ -37,7 +41,10 @@ export class MessagePage {
       'user' : this.user.id
      } 
     this.messageService.SendMassage(body).subscribe((data)=>{
-      console.log(data);
+      this.toastCtrl.create({
+        message:'the message is sent',
+        duration:3000
+      }).present();
      });
     }
     else

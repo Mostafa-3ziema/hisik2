@@ -55,7 +55,7 @@ export class TopBarPage {
   }
   OpenMore(myevent:MouseEvent)
   {
-   const more =this.options.create(OptionsPage);
+   const more =this.options.create(OptionsPage,{'option':'setting'});
    more.present({ev : myevent});
    more.onDidDismiss(
      (option:number)=>

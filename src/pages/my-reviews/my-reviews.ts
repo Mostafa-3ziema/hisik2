@@ -1,8 +1,10 @@
+import { OptionsPage } from './../options/options';
+import { LikesPage } from './../likes/likes';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { MyReviews } from './../reviews/Reviews.Service';
 import { ReplayPage } from './../replay/replay';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, PopoverController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { EditReviewsPage } from '../edit-reviews/edit-reviews';
 import {My_Reviews} from '../my-reviews/MyReviews.Service';
@@ -32,7 +34,7 @@ export class MyReviewsPage {
   likecount=0;
   mydata;
   constructor(public navCtrl: NavController,
-    public toastCtrl:ToastController, public navParams: NavParams,
+    public toastCtrl:ToastController, public navParams: NavParams,public options:PopoverController,
     private MyReviews:MyReviews,private My_Reviews:My_Reviews,public modalCtrl: ModalController ,public auth:AUTHService ) {
  
   }
@@ -45,6 +47,26 @@ export class MyReviewsPage {
 
   back(){
     this.navCtrl.push(HomePage);
+  }
+  Setting(myevent,index,review,reviewid)
+  {
+   const more =this.options.create(OptionsPage,{'option':'review'});
+   more.present({ev : myevent});
+   more.onDidDismiss(
+     (option:number)=>
+       {
+         switch (option) {
+          case 4:
+               this.update(index,review);
+             break;
+          case 5:
+               this.delete(index,reviewid);
+             break;
+          default:
+             break;
+         }
+       }
+   );
   }
   update(index,review)
   {
@@ -194,5 +216,13 @@ export class MyReviewsPage {
   AddReplay(reviewId)
   {
     this.navCtrl.push(ReplayPage,{'reviewid':reviewId});
+  }
+  showlikes(reviewid:number)
+  {
+   let likesModal = this.modalCtrl.create(LikesPage, {'reviewid':reviewid});
+   likesModal.onDidDismiss(data => {
+    console.log('likespage close')
+   });
+   likesModal.present();
   }
 }

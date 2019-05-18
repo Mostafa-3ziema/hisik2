@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { NavController,  } from 'ionic-angular';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { scannedproductServices } from './../../services/user/scannedproduct.services';
+import { ScanService } from '../../services/scan.Service';
 
 
 @Component({
@@ -33,10 +34,12 @@ import { scannedproductServices } from './../../services/user/scannedproduct.ser
 
       <br>
       <ion-grid class="g" *ngIf="isauthinticated">
-      <ion-row  *ngFor="let Scanned of ScannedProducts; let i= index;"  >
+      <div *ngFor="let Scanned of ScannedProducts; let i = index">
+       <div *ngIf="i<=1">
+       <ion-row>
          <ion-col class="c" >
-           <ion-card  >
-             <ion-item class="r"  *ngIf="Scanned?.product != '' && i<2">
+           <ion-card>
+             <ion-item class="r"  *ngIf="Scanned?.product != ''">
                  <ion-avatar  >
                    <img src="{{Scanned.productDetails?.ImageURL}}" >
                  </ion-avatar>
@@ -44,32 +47,28 @@ import { scannedproductServices } from './../../services/user/scannedproduct.ser
                  <br>
                  <button class="pp" ion-button clear (click)="detail(Scanned?.ProductDetail)">details</button>
              </ion-item>
-           <ion-item *ngIf="Scanned?.product == '' ">
-            <p >this scan has no product</p>
-           </ion-item>
-            <ion-item>
-                 <button class="pp" ion-button clear (click)="more()" >show more</button>
-            </ion-item>
-         </ion-card>
+             <ion-item *ngIf="Scanned?.product == '' ">
+               <p >this scan has no product</p>
+             </ion-item>
+           </ion-card>
          </ion-col> 
-        
-       </ion-row>
+        </ion-row>
+       </div>
+      </div>
      </ion-grid>
-      <h2 *ngIf="!isauthinticated">please, log in or create an acccount</h2>
-
-     
+     <ion-item  *ngIf=" (isauthinticated) && (ScannedProducts?.length >0)" > 
+            <button class="pp" ion-button clear (click)="more()" >show more</button>
+     </ion-item>
+    <h2 *ngIf="!isauthinticated">please, log in or create an acccount</h2>
   `
 })
 export class ProfilePage {
-  Showrecent: any;
   isauthinticated:boolean=false;
-
   user :any;
-  ScannedProducts =[];
-  constructor(public navCtrl: NavController,private ProfileService:ProfileService,public AUTHService:AUTHService ,  public scannedproductServices:scannedproductServices) {
+  ScannedProducts:any[] =[];
+  constructor(public navCtrl: NavController,public AUTHService:AUTHService ,public scannedproductServices:ScanService) {
     if(this.AUTHService.IsAuthinticated())
     {
-      this.Showrecent= this.ProfileService.show_recent_scan();
       this.user=this.AUTHService.getUser();
       this.userScanned(this.user.id);
       this.isauthinticated=true;
@@ -78,20 +77,23 @@ export class ProfilePage {
       this.isauthinticated=false;
     }
   }
-  ionViewDidLoad() {
+ ionViewDidLoad() 
+  {
     console.log('ionViewDidLoad ScannedProductsPage');
     
   }
-  detail(product){
+ detail(product)
+  {
     this.navCtrl.push(ProductPage,{'products':product});
   }
-  more(){
+ more()
+  {
     this.navCtrl.push(ScannedProductsPage);
-}
+  }
 
-userScanned(userid)
-{
-  this.scannedproductServices.showscannedproduct(userid)
+ userScanned(userid)
+ {
+  this.scannedproductServices.getRecentScan(userid)
   .subscribe(
     (data:any[])=>
     {
@@ -106,8 +108,6 @@ userScanned(userid)
       }
     }
     );
-
-}
-
+ }
 
 }
