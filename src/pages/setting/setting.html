@@ -51,58 +51,108 @@
       <ion-list-header color="danger">
           <ion-icon name="information-circle" item-start></ion-icon> 
        Update your information 
-      </ion-list-header>  
-      <ion-item>
+      </ion-list-header> 
+
+      <ion-item [ngClass]="{'inputErorr': FirstName.touched && FirstName.dirty && !FirstName.valid}">
         <ion-label color="primary" stacked>First Name</ion-label>
-        <ion-input type="text"  name="FirstName" placeholder="First Name"  required [disabled]="!isauth" [ngModel]="user?.FirstName" clearInput="true"></ion-input>
+        <ion-input type="text"  name="FirstName" placeholder="First Name is required"  #FirstName="ngModel" pattern="[a-zA-z]+" required [ngModel]="user?.FirstName" clearInput="true"></ion-input>
       </ion-item>
-      <ion-item>
+      <div class="error" *ngIf="FirstName.touched && FirstName.dirty && !FirstName.valid">
+          <div  *ngIf="FirstName.errors.pattern">
+              <p>First Name can conatain only Letters capital or small.</p> 
+          </div>
+      </div>
+
+      <ion-item [ngClass]="{'inputErorr': LastName.touched && LastName.dirty && !LastName.valid}">
         <ion-label color="primary" stacked>Last Name</ion-label>
-        <ion-input type="text" name="LastName" placeholder="Last Name"  required [disabled]="!isauth"  [ngModel]="user?.LastName" clearInput="true"></ion-input>
+        <ion-input type="text" name="LastName" placeholder="Last Name is required"  #LastName="ngModel" pattern="[a-zA-z]+" required  [ngModel]="user?.LastName" clearInput="true"></ion-input>
       </ion-item>
-      <ion-item>
+      <div class="error" *ngIf="LastName.touched && LastName.dirty && !LastName.valid">
+          <div *ngIf="FirstName.errors.pattern">
+              <p>Last Name can conatain only Letters capital or small.</p> 
+          </div>
+      </div>
+
+      <ion-item [ngClass]="{'inputErorr': Username.touched && Username.dirty && !Username.valid}">
         <ion-label color="primary" stacked>User name</ion-label>
-        <ion-input type="text" name="Username" placeholder="Last Name" required [disabled]="!isauth"  [ngModel]="user?.UserName" clearInput="true"></ion-input>
+        <ion-input type="text" name="Username" placeholder="User Name is required"  #Username="ngModel" pattern="[a-zA-Z0-9 _-]+" required  [ngModel]="user?.UserName" clearInput="true"></ion-input>
       </ion-item>
-      <ion-item>
+      <div class="error" *ngIf="Username.touched && Username.dirty && !Username.valid">
+        <div  *ngIf="Username.errors.pattern">
+            <p>User Name can conatain only Letters and numbers or underscore or - or space.</p> 
+        </div>
+      </div>
+
+      <ion-item [ngClass]="{'inputErorr': Email.touched && Email.dirty && !Email.valid}">
         <ion-label color="primary" stacked>Email</ion-label>
-        <ion-input type="email" name="Email" placeholder="Email"  required [disabled]="!isauth" [ngModel]="user?.Email" clearInput="true"></ion-input>
+        <ion-input type="email" name="Email" placeholder="Email is required"   #Email="ngModel" pattern="([a-zA-Z0-9_.-]+@([a-zA-Z0-9_-]+).+[a-zA-Z0-9_]{2,})+" required  [ngModel]="user?.Email" clearInput="true"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label color="primary" stacked>Old Password</ion-label>
-        <ion-input type="password" name="OldPassword"  placeholder="Old Password" [disabled]="!isauth"  required [ngModel]="user?.Password"></ion-input>
+      <div class="error" *ngIf="Email.touched && Email.dirty && !Email.valid">
+          <div  *ngIf="Email.errors.pattern">
+              <p>must match this pattern "example@example.domain" .</p>
+          </div>
+      </div>
+
+      <ion-item *ngIf="changePassword == false">
+        <ion-label color="primary" stacked>Password</ion-label>
+        <ion-input  disabled="true" type="password" name="Password"  placeholder="Password"  required [ngModel]="user?.Password"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label color="primary" stacked>New Password</ion-label>
-        <ion-input type="password" name="newPassword" placeholder="new Password" [disabled]="!isauth"  required [ngModel]="user?.Password" (ngModelChange)="showConfirm()"></ion-input>
+      <ion-item *ngIf="changePassword == false">
+          <button ion-button round  color="danger" (click)="ChangePassword()">
+            Change Password
+          </button>
       </ion-item>
-      <ion-item *ngIf="changePassword==true">
-        <ion-label color="primary" stacked>Confirm Password</ion-label>
-        <ion-input type="password" name="ConfirmPassword" placeholder="new Password"  [disabled]="!isauth" required ngModel></ion-input>
-      </ion-item>
+
+      <div class="changePassword" *ngIf="changePassword == true">
+        <ion-item-group>
+         <ion-item-divider color="light">Update your password</ion-item-divider>
+          <ion-item [ngClass]="{'inputErorr': OldPassowrderror }">
+              <ion-label color="primary" stacked>Old Password</ion-label>
+              <ion-input type="password" name="ConfirmOldPassword"  placeholder="Rewrite your old Password is required" #OldPassword="ngModel" pattern="" required ngModel></ion-input>
+          </ion-item>
+
+          <ion-item [ngClass]="{'inputErorr': (newPassword.touched && newPassword.dirty && !newPassword.valid) || ConfirmPassowrderror }">
+              <ion-label color="primary" stacked>New Password</ion-label>
+              <ion-input type="password" name="newPassword" placeholder="New password is required" #newPassword="ngModel" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^!&+=._*/-])([a-zA-Z0-9@#$%^!&+=*._/-])+" required ngModel></ion-input>
+          </ion-item>
+          <div class="error" *ngIf="newPassword.touched && newPassword.dirty && !newPassword.valid">
+            <div  *ngIf="newPassword.errors.pattern">
+                <p>Password can contain only a number, a lowercase, a uppercase, and a special character</p> 
+            </div>
+          </div>
+          <ion-item [ngClass]="{'inputErorr': ConfirmPassowrderror}">
+              <ion-label color="primary" stacked>Confirm Password</ion-label>
+              <ion-input type="password" name="ConfirmPassword" placeholder="Rewrite the new password is required"  required ngModel></ion-input>
+          </ion-item>
+        </ion-item-group>  
+      </div>
+
       <ion-item>
         <ion-label color="primary">App Start in</ion-label>
-        <ion-select  ngModel="Scanner" name="Appstart" interface="alert"  [disabled]="!isauth"  placeholder="App Start"  cancelText="Dismiss" okText="Okay">
+        <ion-select  ngModel="Scanner" name="Appstart" interface="alert"   placeholder="App Start"  cancelText="Dismiss" okText="Okay">
           <ion-option value="Scanner" >Scanner</ion-option>
           <ion-option value="Profile">Profile</ion-option>
           <ion-option value="Search">Search</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item >
-        <button ion-button type="submit" round block color="danger"  icon-start [disabled]="!form.valid">
+
+      <button ion-button type="submit" round block color="danger"  icon-start >
           <ion-icon name="done-all" item-start></ion-icon>
-          SaveChanges
-        </button>
-      </ion-item>
+          Save Changes
+      </button>
+
     </ion-list>
   </form>
+
   <button ion-button outline block color="danger" (click)="LogOut()" *ngIf="isauth" icon-start>
      <ion-icon name="log-out"></ion-icon>
        Log Out
   </button> 
+
   <button ion-button outline block color="danger" (click)="Login()" *ngIf="!isauth" icon-start>
     <ion-icon name="log-out"></ion-icon>
       Log in
    </button>
+
 </ion-content>
 <page-fab-camera></page-fab-camera>

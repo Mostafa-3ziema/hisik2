@@ -62,7 +62,7 @@ export class TopBarPage {
        {
          switch (option) {
           case 1:
-             this.navCtrl.push(SettingPage,{'product':"rolex"});
+             this.navCtrl.push(SettingPage);
              break;
           case 2:
              this.navCtrl.push(FaqHelpPage);

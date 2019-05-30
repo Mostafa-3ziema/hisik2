@@ -17,7 +17,9 @@ export class SettingPage {
   user:any;
   changePassword=false;
   isauth:boolean;
- 
+  ConfirmPassowrderror:boolean=false; 
+  OldPassowrderror:boolean=false; 
+
   constructor(public navCtrl: NavController
     ,public auth:AUTHService,
     public toastCtrl:ToastController,
@@ -29,12 +31,8 @@ export class SettingPage {
      
    }
    
-  /*getrate()
+  ionViewDidLoad() 
   {
-    this.events.subscribe('star-rating:changed', (starRating) => {console.log(starRating)});
-  }*/
-  
-  ionViewDidLoad() {
     this.isauth=this.auth.IsAuthinticated();
     console.log('ionViewDidLoad SettingPage');
     if(this.isauth)
@@ -46,31 +44,15 @@ export class SettingPage {
     {
       this.imagePath='';
     }
-    
-    /*this.user={
-      id: 1,
-      FirstName: "Mickey",
-      LastName: "mr",
-      UserName: "3aziema",
-      Password: "8f7rwvoj3836jtqhn9ip8f",
-      Email: "tito68932@gmail.com",
-      //DeviceID: "",
-      Status: false,
-      ImageURL: "",
-      WarningScore: 0,
-      BlockedBy: null
-  };*/
- 
-  //this.imagePath="../assets/imgs/IMG_20190118_152815.jpg"
-  
   }
+
  updatingUser(form:NgForm)
   {
       const loading = this.loadCtrl.create({
       content:"Updating...",
        });
       loading.present();
-      if(this.imagePath != this.user.ImageURL)
+      if(this.imagePath != '' && this.imagePath != this.user.ImageURL)
       { 
        const ImageRef=firebase.storage().ref("UserPictures/image-"+new Date().getMilliseconds()+".jpg");
        ImageRef.putString(this.imagePath,firebase.storage.StringFormat.DATA_URL)
@@ -78,7 +60,14 @@ export class SettingPage {
        this.user.FirstName=form.value.FirstName;
        this.user.LastName=form.value.LastName;
        this.user.UserName=form.value.Username;
-       this.user.Password=form.value.newPassword;
+       if(this.changePassword)
+       {
+        this.user.Password=form.value.newPassword;
+       }
+       else
+       {
+        this.user.Password=form.value.OldPassword;
+       }
        this.user.Email=form.value.Email;
        this.user.ImageURL=snapshot.downloadURL;
        this.auth.updateUser(this.user.id,this.check(this.user)).subscribe((data)=>
@@ -114,7 +103,14 @@ export class SettingPage {
          this.user.FirstName=form.value.FirstName;
          this.user.LastName=form.value.LastName;
          this.user.UserName=form.value.Username;
-         this.user.Password=form.value.newPassword;
+         if(this.changePassword)
+         {
+          this.user.Password=form.value.newPassword;
+         }
+         else
+         {
+          this.user.Password=form.value.Password;
+         }
          this.user.Email=form.value.Email;
          this.auth.updateUser(this.user.id,this.check(this.user)).subscribe((data)=>
          {
@@ -144,20 +140,32 @@ export class SettingPage {
   SaveChanges(form:NgForm)
   {
     if(this.changePassword) 
-    { if(form.value.newPassword===form.value.ConfirmPassword)
-      {
-        this.updatingUser(form);
-      }
+    { 
+      /*if(form.value.ConfirmOldPassword===this.user.Password)
+      {*/
+        if(form.value.newPassword===form.value.ConfirmPassword)
+        {
+           //this.updatingUser(form);
+           console.log(form);
+        }else
+        {
+          this.ConfirmPassowrderror=true;
+          this.showAlert('Please, be sure that the confirm password is the same as new password');
+        }
+       
+      /*}
       else
       {
-        this.showAlert();
-      }
+        this.OldPassowrderror=true;
+        this.showAlert('Please, be sure that the old password is right');
+      }*/
       
     }else
     {
-      this.updatingUser(form);
+      //this.updatingUser(form);
+      console.log(form);
     }
-    console.log(form);
+    //console.log(form);
   }
   check(user)
   {
@@ -192,15 +200,15 @@ export class SettingPage {
      }
     return verfingUser;
   }
-  showConfirm()
+  ChangePassword()
   {
     this.changePassword=true;
     console.log(this.changePassword);
   }
-  showAlert() {
+  showAlert(message:string) {
     const alert = this.alertCtrl.create({
       title: 'Warning',
-      subTitle: 'Please, be sure that the confirm password is the same as new password',
+      subTitle: message,
       buttons: ['OK']
     });
     alert.present();

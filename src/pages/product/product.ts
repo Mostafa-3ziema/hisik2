@@ -310,10 +310,10 @@ AddReview()
   }
   showlikes(reviewid:number)
   {
-  let likesModal = this.modalCtrl.create(LikesPage, {'reviewid':reviewid});
-  likesModal.onDidDismiss(data => {
+   let likesModal = this.modalCtrl.create(LikesPage, {'reviewid':reviewid});
+   likesModal.onDidDismiss(data => {
     console.log('likespage close')
-  });
-  likesModal.present();
+   });
+   likesModal.present();
   }
 }

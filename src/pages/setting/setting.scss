@@ -49,5 +49,23 @@ page-setting {
      position: relative;
      right:10px;
  }
+ .changePassword
+ {
+     border:1px solid red;
+ }
+ .changePassword ion-item
+ {
+     border:1px solid red;
+     position: relative;
+     right:0px;
+ }
+ .error
+ {
+    border: 1px solid red ;
+ }
+ .inputErorr ion-input
+ {
+    border: 1px solid red ;
+ }
  
 }
