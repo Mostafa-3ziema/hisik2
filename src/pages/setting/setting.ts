@@ -6,6 +6,7 @@ import { IonicPage, NavController, NavParams, ActionSheetController, ToastContro
 import { NgForm } from '@angular/forms';
 import firebase from 'firebase';
 import { LogInPage } from '../log-in/log-in';
+import { SignUpPage } from '../sign-up/sign-up';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,6 @@ export class SettingPage {
   isauth:boolean;
   ConfirmPassowrderror:boolean=false; 
   OldPassowrderror:boolean=false; 
-
   constructor(public navCtrl: NavController
     ,public auth:AUTHService,
     public toastCtrl:ToastController,
@@ -141,11 +141,11 @@ export class SettingPage {
   {
     if(this.changePassword) 
     { 
-      /*if(form.value.ConfirmOldPassword===this.user.Password)
-      {*/
+      if(form.value.ConfirmOldPassword===this.user.Password)
+      {
         if(form.value.newPassword===form.value.ConfirmPassword)
         {
-           //this.updatingUser(form);
+           this.updatingUser(form);
            console.log(form);
         }else
         {
@@ -153,19 +153,19 @@ export class SettingPage {
           this.showAlert('Please, be sure that the confirm password is the same as new password');
         }
        
-      /*}
+      }
       else
       {
         this.OldPassowrderror=true;
         this.showAlert('Please, be sure that the old password is right');
-      }*/
+      }
       
     }else
     {
-      //this.updatingUser(form);
+      this.updatingUser(form);
       console.log(form);
     }
-    //console.log(form);
+    console.log(form);
   }
   check(user)
   {
@@ -278,6 +278,10 @@ export class SettingPage {
   Login()
   {
     this.navCtrl.push(LogInPage);
+  }
+  SignUp()
+  {
+    this.navCtrl.push(SignUpPage);
   }
   showActionSheet()
   {
