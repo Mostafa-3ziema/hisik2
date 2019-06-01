@@ -75,7 +75,7 @@ export class ProductPage {
   CalculateRate()
   {
     this.productService.CalculateRate(this.product.id).subscribe(
-        (data)=>
+        (data:any[])=>
         {
           if(data)
           {
@@ -122,7 +122,7 @@ export class ProductPage {
   }
   ISFavourite()
   {
-   this.favoriteService.MyFavourites(this.user.id).subscribe((data)=>
+   this.favoriteService.MyFavourites(this.user.id).subscribe((data:any[])=>
    {
        console.log(data);
        data.forEach(favourite =>
@@ -161,14 +161,11 @@ export class ProductPage {
     this.favoriteService.DeleteFavourite(this.favID).subscribe(
       (data)=>
       {
-        if(data)
-        {
           this.isFavourite=false;
           this.toastCtrl.create({
             message:'the product is removed from your favourites list',
             duration:3000
           }).present();
-        }
       }
     );
   }

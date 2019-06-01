@@ -67,7 +67,7 @@ export class RecommandedResualtPage {
     { 
      let fav:boolean=false;
   
-     this.FavouriteService.ProductsFavourite(product.id).subscribe((data)=>{
+     this.FavouriteService.ProductsFavourite(product.id).subscribe((data:any[])=>{
       data.forEach(favourite =>
         {
             if(favourite.user == this.user.id)
@@ -90,7 +90,7 @@ export class RecommandedResualtPage {
    this.products.forEach(product=>
     { 
       this.productService.CalculateRate(product.id).subscribe(
-        (data)=>
+        (data:any[])=>
         {
           if(data)
           {

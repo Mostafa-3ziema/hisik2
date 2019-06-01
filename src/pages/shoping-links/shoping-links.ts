@@ -26,7 +26,7 @@ export class ShopingLinksPage {
     console.log('ionViewDidLoad ShopingLinksPage');
     this.product=this.navParams.get('product');
     console.log(this.product)
-    this.LinksService.getShoppingLinks(this.product).subscribe((data)=>
+    this.LinksService.getShoppingLinks(this.product).subscribe((data:any)=>
       {
         if(data)
         {

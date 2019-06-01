@@ -1,14 +1,14 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { scan } from 'rxjs/operator/scan';
+import 'rxjs/add/operator/map'
+
 @Injectable()
 export class ScanService
 {
     headers = new Headers({'Content-Type':'application/json'});
     constructor(public http:Http)
     {
-     
     }
     getRecentScan(userid:number)
     {

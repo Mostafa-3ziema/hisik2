@@ -27,7 +27,7 @@ export class SettingPage {
     public navParams: NavParams,
     public camera :Camera , 
     public actionSheetCtrl :ActionSheetController
-    ,public loadCtrl:LoadingController,public events: Events,public linksService:LinksService,) {
+    ,public loadCtrl:LoadingController,public events: Events) {
      
    }
    
@@ -98,7 +98,8 @@ export class SettingPage {
           duration:3000
         }).present();
       });
-      }else
+      }
+      else
       {
          this.user.FirstName=form.value.FirstName;
          this.user.LastName=form.value.LastName;
@@ -131,7 +132,7 @@ export class SettingPage {
         this.toastCtrl.create({
         message:'problem happened during updating the data',
         duration:3000
-      }).present();
+        }).present();
        });
       }
        this.changePassword=false;

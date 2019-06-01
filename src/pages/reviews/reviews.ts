@@ -235,7 +235,7 @@ export class ReviewsPage {
   CalculateRate()
   {
     this.productService.CalculateRate(1).subscribe(
-        (data)=>
+        (data:any[])=>
         {
           if(data)
           {
