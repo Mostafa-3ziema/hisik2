@@ -35,7 +35,7 @@ export class ScannedProductsPage {
     console.log('ionViewDidLoad ScannedProductsPage');
      this.user=this.AUTHService.getUser();
      this.userScanned(this.user.id)
-    //this.userScanned(1);
+     //this.userScanned(1);
   }
   detail(product){
     this.navCtrl.push(ProductPage,{'product':product});

@@ -19,7 +19,7 @@ import { ProductPage } from '../product/product';
 })
 export class FavouritesPage {
   
-   user :any;
+   user :any; 
    FavouriteProducts =[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public favouriteService :FavouriteService,public AUTHService:AUTHService) {
   }
@@ -28,6 +28,7 @@ export class FavouritesPage {
     console.log('ionViewDidLoad FavouritesPage');
     this.user=this.AUTHService.getUser();
     this.userfavourites(this.user.id);
+    //this.userfavourites(1);
   }
 
 

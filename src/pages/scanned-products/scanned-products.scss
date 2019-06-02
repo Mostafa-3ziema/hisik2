@@ -2,25 +2,43 @@ page-scanned-products {
 
 
 
-    .g{
+  .gird{
         width: 100%;
     }
 
-  .c{
+  .col{
       width: 49%;
   }
 
+  .photo{
+    width: 100%;
+  }
+  .name{
+    font-family: AxiForma; 
+    font-weight: bold;
+    color: rgb(18, 26, 73);
+    font-size: 28px;
+  }
 
-    .r{
-        margin-left: 25%;
-    }
 
-    .p{
-      margin-left: 15%;
-    }
+  .red{
+    color: red;
+    font-family: AxiForma; 
+    font-weight: bold;
+    font-size: 18px
+  }
 
-    .pp{
-      margin-left: 12%;
-    }
+  .data{
+    font-family: AxiForma; 
+    font-weight: bold;
+    color: #00093C;
+    font-size: 18px
+  }
+
+  .warnning{
+    text-align: center;
+    font-weight: bold;
+  }
 
 }
+ 
