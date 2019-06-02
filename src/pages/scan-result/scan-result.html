@@ -1,0 +1,124 @@
+<!--
+  Generated template for the ScanResultPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header mode="md" >
+    <page-top-bar  Pagetitle="scanResult" Noifictaion="1"></page-top-bar>
+</ion-header>
+
+
+<ion-content padding>
+   <ion-item-group>
+        <ion-item-divider color="light">
+          <b>Possible categories</b>
+        </ion-item-divider>
+        <ion-list>
+          <ion-item-sliding *ngFor= "let result of labelAnotation">
+            <ion-item  (click)="SimilarCategoryProduct(result.description)">
+              <ion-thumbnail item-start >
+                  <img src="{{image}}">
+              </ion-thumbnail>
+             {{ result.description }}
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="primary">
+                <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list> 
+   </ion-item-group>
+   <ion-item-group>    
+        <ion-item-divider color="light"><b>Possible brands</b></ion-item-divider>
+        <ion-list>
+          <ion-item-sliding *ngFor= "let result of logo;let i=index">
+            <ion-item  (click)="SimilarBrandsProduct(result.description)">
+              <ion-thumbnail item-start>
+                  <img src="{{image}}">
+              </ion-thumbnail>
+              {{result.description}}
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="primary">
+                <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding *ngFor= "let result of text">
+            <ion-item   (click)="SimilarBrandsProduct(result.description)">
+              <ion-thumbnail item-start>
+                  <img src="{{image}}">
+              </ion-thumbnail>
+              {{result.description}}
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="primary">
+                <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list> 
+   </ion-item-group>
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<p>objects</p>
+  <ion-list *ngFor= "let result of localizedObjectAnnotations" >
+    <ion-avatar item-start>
+          <img src="img/avatar-cher.png">
+    </ion-avatar>
+    <ion-item>
+     {{ result.name }} 
+    <ion-icon name="md-volume-up" (click)="speak(result.name)" item-end></ion-icon> 
+    </ion-item>
+    <hr>
+  </ion-list>
+  <hr>
+ <p>labels</p>
+  <ion-list *ngFor= "let result of labelAnotation" >
+    <ion-item>
+      <ion-avatar item-start>
+         <img src="img/avatar-cher.png">
+      </ion-avatar>
+     {{ result.description }}
+    <ion-icon name="md-volume-up" (click)="speak(result.description)" item-end></ion-icon>  
+    </ion-item>
+    <hr>
+  </ion-list>
+  <hr>
+  <ion-list>
+  <p>Adult</p>
+    <ion-item>
+     {{ adults.adult }}
+     <ion-icon name="md-volume-up" (click)="speak(adults.adult)" item-end></ion-icon> 
+    </ion-item>
+    <ion-item>
+     {{ adults.spoof }}
+     <ion-icon name="md-volume-up" (click)="speak(adults.spoof)" item-end></ion-icon> 
+    </ion-item> 
+     <ion-item>
+     {{ adults.medical }}
+     <ion-icon name="md-volume-up" (click)="speak( adults.medical )" item-end></ion-icon> 
+    </ion-item> 
+     <ion-item>
+     {{ adults.violence }}
+     <ion-icon name="md-volume-up" (click)="speak( adults.violence)" item-end></ion-icon> 
+    </ion-item> 
+     <ion-item>
+     {{ adults.racy }}
+     <ion-icon name="md-volume-up" (click)="speak(adults.racy)" item-end></ion-icon> 
+    </ion-item>
+</ion-list>-->
+
+</ion-content>
