@@ -15,10 +15,10 @@
             {{Favourite?.timestamp | date}}        
         </h3>
         <p>
-            {{Favourite.ProductDetail?.Description}}
+            {{Favourite.ProductDetails?.Description}}
         </p>
     </ion-card-content>
-    <button ion-button block outline (click)="product(Favourite.ProductDetails)">Details</button>
+    <button ion-button block outline (click)="product(Favourite?.ProductDetails)">Details</button>
   </ion-card>
 </ion-content>
 <page-fab-camera></page-fab-camera>

@@ -1,3 +1,4 @@
+import { ScanService } from './../../services/scan.Service';
 import { LinksService } from './../../services/crowler.service';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { Camera } from '@ionic-native/camera';
@@ -18,8 +19,10 @@ export class SettingPage {
   user:any;
   changePassword=false;
   isauth:boolean;
+  usernameEmailError:boolean=false;
   ConfirmPassowrderror:boolean=false; 
   OldPassowrderror:boolean=false; 
+
   constructor(public navCtrl: NavController
     ,public auth:AUTHService,
     public toastCtrl:ToastController,
@@ -45,7 +48,7 @@ export class SettingPage {
       this.imagePath='';
     }
   }
-
+  
  updatingUser(form:NgForm)
   {
       const loading = this.loadCtrl.create({
@@ -85,12 +88,24 @@ export class SettingPage {
          }
        },(err)=>
        {
-        loading.dismiss();
-        this.toastCtrl.create({
-        message:'problem happened during updating the data',
-        duration:3000
-         }).present();
-       });
+         loading.dismiss();
+         if(err.status == 400)
+         {
+            this.usernameEmailError=true;
+            const alert = this.alertCtrl.create({
+            title: 'error!',
+            subTitle: 'user name or email is already exist!',
+            buttons: ['OK']
+           });
+           alert.present();
+         }else
+         {
+          this.toastCtrl.create({
+            message:'problem happened during updating the data',
+            duration:3000
+             }).present();
+         }
+         });
        }).catch(error=>{
         loading.dismiss();
         this.toastCtrl.create({
@@ -129,11 +144,23 @@ export class SettingPage {
        },(err)=>
        {
         loading.dismiss();
-        this.toastCtrl.create({
-        message:'problem happened during updating the data',
-        duration:3000
-        }).present();
-       });
+        if(err.status == 400)
+        {
+           this.usernameEmailError=true;
+           const alert = this.alertCtrl.create({
+           title: 'error!',
+           subTitle: 'user name or email is already exist!',
+           buttons: ['OK']
+          });
+         alert.present();
+        }else
+        {
+           this.toastCtrl.create({
+           message:'problem happened during updating the data',
+           duration:3000
+            }).present();
+         }
+        });
       }
        this.changePassword=false;
        console.log(this.user);

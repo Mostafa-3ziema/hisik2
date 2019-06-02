@@ -46,6 +46,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>-->
+  
   <form #form="ngForm" (ngSubmit)="SaveChanges(form)" *ngIf="isauth">
     <ion-list>
       <ion-list-header color="danger">
@@ -73,7 +74,7 @@
           </div>
       </div>
 
-      <ion-item [ngClass]="{'inputErorr': Username.touched && Username.dirty && !Username.valid}">
+      <ion-item [ngClass]="{'inputErorr': (Username.touched && Username.dirty && !Username.valid) || usernameEmailError }">
         <ion-label color="primary" stacked>User Name</ion-label>
         <ion-input type="text" name="Username" placeholder="User Name is required"  #Username="ngModel" pattern="[a-zA-Z0-9 _-]+" required  [ngModel]="user?.UserName" clearInput="true"></ion-input>
       </ion-item>
@@ -83,7 +84,7 @@
         </div>
       </div>
 
-      <ion-item [ngClass]="{'inputErorr': Email.touched && Email.dirty && !Email.valid}">
+      <ion-item [ngClass]="{'inputErorr': (Email.touched && Email.dirty && !Email.valid) || usernameEmailError}">
         <ion-label color="primary" stacked>Email</ion-label>
         <ion-input type="email" name="Email" placeholder="Email is required"   #Email="ngModel" pattern="([a-zA-Z0-9_.-]+@([a-zA-Z0-9_-]+).+[a-zA-Z0-9_]{2,})+" required  [ngModel]="user?.Email" clearInput="true"></ion-input>
       </ion-item>

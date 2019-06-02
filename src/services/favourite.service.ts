@@ -26,13 +26,13 @@ export class FavouriteService
     AddToFovourite(userID:number,ProID:number)
     {
       const favourite={'user':userID,'product':ProID} ; 
-      let endpoint='http://127.0.0.1:8000/api/scan/';
+      let endpoint='http://127.0.0.1:8000/api/favourite/';
       return this.http.post(endpoint,favourite,{headers : this.headers})
      
     }
     DeleteFavourite(FavouriteID:number)
     {
-       let endpoint='http://127.0.0.1:8000/api/scan/'+FavouriteID+'/';
+       let endpoint='http://127.0.0.1:8000/api/favourite/'+FavouriteID+'/';
       return this.http.delete(endpoint,{headers : this.headers})
     }
    

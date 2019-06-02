@@ -33,7 +33,7 @@
               activeColor = "#FFDF00" 
               defaultColor = "#FFDF00"
               readonly="true"
-              [rating]="proEvalute?.procuctStars">
+              [rating]="proEvalute?.productStars">
           </ionic3-star-rating>
      </div>
       </ion-col>
@@ -57,20 +57,20 @@
            Report
          </button>
       </ion-col>
-      <div *ngIf='proEvalute?.favorite;then liked else dislike'>
+      <div *ngIf='proEvalute?.favorite;then dislike ;else liked'>
       </div>
-      <ng-template #liked>
-          <ion-col>
-              <button ion-button  block icon-only color="danger" (click)="RemoveFromFavourite()">
-                  <ion-icon name="heart"></ion-icon>
-                </button>
-           </ion-col>
-      </ng-template>
       <ng-template #dislike>
           <ion-col>
-              <button ion-button  block icon-only color="danger" (click)="AddToFavourite()">
-                  <ion-icon name="heart"></ion-icon>
-                </button>
+              <button ion-button  block icon-only  (click)="RemoveFromFavourite()">
+                  <ion-icon color="danger" name="heart"></ion-icon>
+              </button>
+           </ion-col>
+      </ng-template>
+      <ng-template #liked>
+          <ion-col>
+              <button ion-button  block icon-only  (click)="AddToFavourite()">
+                  <ion-icon color="dark" name="heart"></ion-icon>
+              </button>
            </ion-col>
       </ng-template>
        <ion-col>

@@ -38,7 +38,7 @@ export class ScannedProductsPage {
     //this.userScanned(1);
   }
   detail(product){
-    this.navCtrl.push(ProductPage,{'products':product});
+    this.navCtrl.push(ProductPage,{'product':product});
   }
   userScanned(userid)
   {

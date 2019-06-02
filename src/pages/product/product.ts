@@ -30,13 +30,13 @@ export class ProductPage {
   scanimage='';
   productRate:number;
   productVotes:number;
-  procuctStars:number;
+  productStars:number;
   isFavourite:boolean;
   favID:number;
   proEvalute={
     productRate:null,
     productVotes:null,
-    procuctStars:null,
+    productStars:null,
     favorite:null
   };
 
@@ -66,10 +66,6 @@ export class ProductPage {
     this.user=this.auth.getUser();
     this.CalculateRate();
     this.ISFavourite();
-    this.proEvalute.procuctStars=this.procuctStars;
-    this.proEvalute.productRate=this.productRate;
-    this.proEvalute.productVotes=this.productVotes;
-    this.proEvalute.favorite=this.ISFavourite;
     this.product_Reviews();
   }
   CalculateRate()
@@ -101,13 +97,19 @@ export class ProductPage {
               });
            this.productRate=((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length;
            this.productVotes=data.length;
-           this.procuctStars=Math.round(this.productRate);
-           console.log(this.procuctStars+" "+this.productVotes+" "+this.productRate);
+           this.productStars=Math.round(this.productRate);
+           console.log(this.productStars+" "+this.productVotes+" "+this.productRate);
+           this.proEvalute.productStars=this.productStars;
+           this.proEvalute.productRate=this.productRate;
+           this.proEvalute.productVotes=this.productVotes;
           }else
           {
-           this.procuctStars=0;
+           this.productStars=0;
            this.productRate=0.0;
            this.productVotes=0;
+           this.proEvalute.productStars=this.productStars;
+           this.proEvalute.productRate=this.productRate;
+           this.proEvalute.productVotes=this.productVotes;
           }
         }
         );
@@ -132,10 +134,12 @@ export class ProductPage {
                this.isFavourite=true;
                console.log(this.isFavourite);
                this.favID=favourite.id
+               this.proEvalute.favorite=this.isFavourite;
            }else
            {
                this.isFavourite=false;
                console.log(this.isFavourite);
+               this.proEvalute.favorite=this.isFavourite;
            }
        });
    });
@@ -143,11 +147,13 @@ export class ProductPage {
   AddToFavourite()
   {
     this.favoriteService.AddToFovourite(this.user.id,this.product.id).subscribe(
-      (data)=>
+      (data:any)=>
       {
         if(data)
         {
           this.isFavourite=true;
+          this.favID=data.id;
+          this.proEvalute.favorite=this.isFavourite;
           this.toastCtrl.create({
             message:'the product is added to your favourites list',
             duration:3000
@@ -162,6 +168,7 @@ export class ProductPage {
       (data)=>
       {
           this.isFavourite=false;
+          this.proEvalute.favorite=this.isFavourite;
           this.toastCtrl.create({
             message:'the product is removed from your favourites list',
             duration:3000

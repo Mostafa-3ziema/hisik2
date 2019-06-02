@@ -36,7 +36,7 @@ export class FavouritesPage {
   }
 
   product(ProductDetails){
-    this.navCtrl.push(ProductPage,{'products':ProductDetails});
+    this.navCtrl.push(ProductPage,{'product':ProductDetails});
     console.log(ProductDetails)
   }
 
