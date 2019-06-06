@@ -10,20 +10,20 @@
 <ion-content padding>
     <form #form="ngForm" (ngSubmit)="sendMessage(form)">
         <ion-list>
-          <ion-list-header color="danger">
+          <ion-list-header style="font-family: AxiForma;font-weight: medium;" color="danger">
               <ion-icon name="text" item-start></ion-icon> 
            Send your problem
           </ion-list-header>  
           <ion-item>
-             <textarea placeholder="how we can help?" ngModel name="text" required clearInput="true"></textarea>
+             <textarea style="font-family: AxiForma;font-weight: medium;" placeholder="how we can help?" ngModel name="text" required clearInput="true"></textarea>
           </ion-item>
           <ion-item> 
-            <ion-input type="text" name="username" placeholder="Your name" Value="" required ngModel clearInput="true"></ion-input>
+            <ion-input style="font-family: AxiForma;font-weight: medium;" type="text" name="username" placeholder="Your name" Value="" required ngModel clearInput="true"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input type="email" name="email" placeholder="Email" Value="" required ngModel clearInput="true"></ion-input>
+            <ion-input style="font-family: AxiForma;font-weight: medium;" type="email" name="email" placeholder="Email" Value="" required ngModel clearInput="true"></ion-input>
           </ion-item>
-          <button ion-button type="submit"  block color="danger"  [disabled]="!form.valid">
+          <button style="font-family: AxiForma;font-weight: medium;" ion-button type="submit"  block color="danger"  [disabled]="!form.valid">
               <ion-icon name="send" item-start></ion-icon>
                Send
            </button> 

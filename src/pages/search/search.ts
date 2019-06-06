@@ -36,11 +36,15 @@ export class SearchPage {
         this.user=this.auth.getUser();
         this.RecentSearch(this.user.id);
         this.ShowRecommanded(this.user.id)
+        this.PopualerSearch(this.user.id)
        }
-       
-       /*this.isauthinticated=this.auth.IsAuthinticated();
+       /*
        this.isauthinticated=true;
-       this.user=1;*/
+       this.user=1;
+       this.RecentSearch(this.user.id);
+       this.ShowRecommanded(this.user.id);
+       this.PopualerSearch();
+       */
      }
 
   searchbar(){

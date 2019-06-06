@@ -24,8 +24,8 @@
         <ion-avatar item-start>
           <img src="{{product.product?.ImageURL}}">
         </ion-avatar>
-        <h2>{{product.product?.name}}</h2>
-        <p>{{product.product?.Description}}</p>
+        <h2 style="font-family: AxiForma;font-weight: medium;">{{product.product?.name}}</h2>
+        <p style="font-family: AxiForma;font-weight: medium;">{{product.product?.Description}}</p>
         <div style="display: block">
             <span [ngClass]="(product?.stars>=1)?'fa fa-star checked':'fa fa-star'"></span>
             <span [ngClass]="(product?.stars>=2)?'fa fa-star checked':'fa fa-star'"></span>
@@ -37,7 +37,7 @@
         </div>
         <button 
         (click)="Detials(product?.product)"
-        style="margin-left: 160px" 
+        style="margin-left: 160px ;font-family: AxiForma;" 
         ion-button color="danger" round>
         Show</button>
       </ion-item>

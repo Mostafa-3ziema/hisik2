@@ -249,9 +249,9 @@ export class SearchTextPage {
      this.showAlert()
    }
   }
+  
   initializeItems(){
       this.items = [
-        'ffff'
        // this.productitem,
        // this.Branditem,
        // this.categoryitem
