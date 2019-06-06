@@ -2,7 +2,9 @@ page-shoping-places {
     ion-card.adv-map p {
         font-size: 0.7em !important;
       }
-      
+      ion-card agm-map {
+        height: 200px;
+      }
       button[fab].fab-map {
         top: calc(100% - 35px);
         z-index: 50;

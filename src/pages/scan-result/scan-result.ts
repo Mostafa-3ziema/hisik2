@@ -48,11 +48,11 @@ export class ScanResultPage {
     console.log(this.visionResponse.responses[0].labelAnnotations);
     this.labelAnotation = this.visionResponse.responses[0].labelAnnotations;
     //console.log(this.visionResponse.responses[0].labelAnnotations);
-    this.logo = this.visionResponse.responses[0].logoAnnotations;
+    this.logo   = this.visionResponse.responses[0].logoAnnotations;
     //console.log(this.visionResponse.responses[0].labelAnnotations);
-    this.text = this.visionResponse.responses[0].textAnnotations;
+    this.text   = this.visionResponse.responses[0].textAnnotations;
     console.log(this.labelAnotation,'anotation');
-    this.adults        = this.visionResponse.responses[0].safeSearchAnnotation;
+    this.adults = this.visionResponse.responses[0].safeSearchAnnotation;
     console.log(this.adults,'adults');
     this.localizedObjectAnnotations = this.visionResponse.responses[0].localizedObjectAnnotations;
     console.log(this.localizedObjectAnnotations,'multible objects');
@@ -60,9 +60,9 @@ export class ScanResultPage {
 
   speak(message)
   {
-  this.tts.speak(message)
-  .then(() => console.log('Success'))
-  .catch((reason: any) => console.log(reason));
+   this.tts.speak(message)
+   .then(() => console.log('Success'))
+   .catch((reason: any) => console.log(reason));
   }
 
   SimilarCategoryProduct(Category:string)

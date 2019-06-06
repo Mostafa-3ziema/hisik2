@@ -12,27 +12,32 @@ import { ScanService } from '../../services/scan.Service';
   selector: 'page-profile',
   template:
   `
-  <ion-card>
+  <ion-card class="card">
     
-  <ion-item class="a">
+  <ion-item class="sora">
     <ion-avatar item-start >
       <img *ngIf="isauthinticated" src="{{user?.ImageURL}}">
       <img *ngIf="!isauthinticated" src="../assets/imgs/download.jpg">
     </ion-avatar>
   </ion-item>
-  <ion-item class="aa" *ngIf="isauthinticated">
-    <h2>{{user?.UserName}}</h2>
-    <p>{{user?.Email}}</p>
+  <ion-item class="details" *ngIf="isauthinticated">
+    <h2 class="details">{{user?.UserName}}</h2>
+    <p  class="details">{{user?.Email}}</p>
   </ion-item>
-  <ion-item class="aa" *ngIf="!isauthinticated">
-    <h2>please, log in or create an acccount</h2>
+  <ion-item  *ngIf="!isauthinticated">
+  <h2 class="hint" >please, log in </h2>
+  <h2 class="hint" > or create an acccount</h2>
   </ion-item>
+
+  </ion-card>
+
       <br>
 
+      <h3>recent scan</h3>
       
-      <h2>recent scan</h2>
 
       <br>
+     
       <ion-grid class="g" *ngIf="isauthinticated">
       <div *ngFor="let Scanned of ScannedProducts; let i = index">
        <div *ngIf="i<=1">

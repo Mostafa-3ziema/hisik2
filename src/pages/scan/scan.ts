@@ -70,7 +70,11 @@ export class ScanPage {
     y: 0,
     width: window.innerWidth,
     height: window.innerHeight,
-    toBack: true
+    toBack: true,
+    camera: 'rear',
+    //tapPhoto: true,
+    //previewDrag: true,
+    //alpha: 1
   };
 
   cameraPictureOpts: CameraPreviewPictureOptions = {
@@ -134,7 +138,7 @@ export class ScanPage {
         }, (err) => {
           loader.dismiss(); // hide loading component
           this.err = err;
-          this.showAlert('');
+          this.showAlert('there is a problem , may be a network problem');
           console.log(err);
         })
       })
@@ -148,7 +152,7 @@ export class ScanPage {
   async takePicture() {
     await this.cameraPreview.takePicture(this.cameraPictureOpts).then(
       (res) => {
-        this.picture = `data:image/jpeg;base64,${res}`;
+        this.picture = 'data:image/jpeg;base64,' + res;//`data:image/jpeg;base64,${res}`;
         console.log(res)
         let loader = this.loader.create({
           content: "Processing..."
@@ -165,7 +169,7 @@ export class ScanPage {
         }, (err) => {
           loader.dismiss(); // hide loading component
           this.err = err;
-          this.showAlert('');
+          this.showAlert('there is a problem , may be a network problem');
           console.log(err);
         })
         console.log('google api');

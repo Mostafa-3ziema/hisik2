@@ -14,40 +14,52 @@
         <ion-item-divider color="light">
           <b>Possible categories</b>
         </ion-item-divider>
-        <ion-item *ngFor= "let result of labelAnotation" (click)="SimilarCategoryProduct(result.description)">
-            <ion-thumbnail item-start >
-                <img src="{{image}}">
-            </ion-thumbnail>
-           {{ result.description }}
-        </ion-item>
-        <ion-item-options side="right">
-            <button ion-button color="primary">
-              <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
-            </button>
-        </ion-item-options>
+        <ion-list>
+          <ion-item-sliding *ngFor= "let result of labelAnotation">
+            <ion-item  (click)="SimilarCategoryProduct(result.description)">
+              <ion-thumbnail item-start >
+                  <img src="{{image}}">
+              </ion-thumbnail>
+             {{ result.description }}
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="primary">
+                <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list> 
+   </ion-item-group>
+   <ion-item-group>    
         <ion-item-divider color="light"><b>Possible brands</b></ion-item-divider>
-        <ion-item  *ngFor= "let result of logo;let i=index" (click)="SimilarBrandsProduct(result.description)">
-            <ion-thumbnail item-start>
-                <img src="{{image}}">
-            </ion-thumbnail>
-            {{result.description}}
-        </ion-item>
-        <ion-item-options side="right">
-            <button ion-button color="primary">
-              <ion-icon name="md-volume-up" (click)="speak()"></ion-icon>  
-            </button>
-        </ion-item-options>
-        <ion-item  *ngFor= "let result of text" (click)="SimilarBrandsProduct(result.description)">
-            <ion-thumbnail item-start>
-                <img src="{{image}}">
-            </ion-thumbnail>
-            {{result.description}}
-        </ion-item>
-        <ion-item-options side="right">
-            <button ion-button color="primary">
-              <ion-icon name="md-volume-up" (click)="speak()"></ion-icon>  
-            </button>
-          </ion-item-options>
+        <ion-list>
+          <ion-item-sliding *ngFor= "let result of logo;let i=index">
+            <ion-item  (click)="SimilarBrandsProduct(result.description)">
+              <ion-thumbnail item-start>
+                  <img src="{{image}}">
+              </ion-thumbnail>
+              {{result.description}}
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="primary">
+                <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding *ngFor= "let result of text">
+            <ion-item   (click)="SimilarBrandsProduct(result.description)">
+              <ion-thumbnail item-start>
+                  <img src="{{image}}">
+              </ion-thumbnail>
+              {{result.description}}
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="primary">
+                <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list> 
    </ion-item-group>
 
 
