@@ -31,7 +31,7 @@
             <ion-list inset>
               
               <ion-item [ngClass]="{'inputErorr': Email.touched && Email.dirty && !Email.valid}">
-                <ion-input type="email" placeholder="Email" ngModel name="Email"  required  #Email="ngModel" pattern="([a-zA-Z0-9_.-]+@([a-zA-Z0-9_-]+).+[a-zA-Z0-9_]{2,})+"  [ngModel]="user?.Email" clearInput="true"></ion-input>
+                <ion-input type="email" placeholder="Email is required" ngModel name="Email"  required  #Email="ngModel" pattern="([a-zA-Z0-9_.-]+@([a-zA-Z0-9_-]+).+[a-zA-Z0-9_]{2,})+"  [ngModel]="user?.Email" clearInput="true"></ion-input>
               </ion-item>
               <div class="error" *ngIf="Email.touched && Email.dirty && !Email.valid">
                  <div  *ngIf="Email.errors.pattern">
@@ -39,8 +39,8 @@
                 </div>
              </div>
               
-              <ion-item>
-                <ion-input type="password" placeholder="Password" ngModel name="Password"  required></ion-input>
+              <ion-item [ngClass]="{'inputErorr': Password.touched && Password.dirty && !Password.valid}">
+                <ion-input type="password" placeholder="Password is required" ngModel #Password="ngModel" name="Password"  required></ion-input>
               </ion-item>
               
             </ion-list>

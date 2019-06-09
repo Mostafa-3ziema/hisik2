@@ -11,12 +11,10 @@
   <ion-grid class="gird">
     <ion-row *ngFor="let Scanned of ScannedProducts;let i = index" >
        <ion-col class="col" >
-         <ion-card *ngIf="Scanned?.Blocked == null  || Scanned?.Blocked == false  ">
+        <ion-card *ngIf="Scanned?.Blocked == null  || Scanned?.Blocked == false  ">
+            <img class="photo" src="{{Scanned?.ImageURL}}">
 
-       
-        <img class="photo" src="{{Scanned?.ImageURL}}">
-
-            <div *ngIf="Scanned?.product != '' ">
+            <div *ngIf="Scanned?.product != '' ||  Scanned?.product != null">
               <ion-card-content>
                 <ion-card-title class="name">
                     {{Scanned.productDetails?.name}}
@@ -41,7 +39,7 @@
                   </ion-col>
               </ion-row>
             </div> 
-            <div *ngIf="Scanned?.product == '' ">
+            <div *ngIf="Scanned?.product == '' ||  Scanned?.product == null ">
                 <ion-card-content>
                     <ion-card-title class="warnning">
                         This scan didn't satisfy

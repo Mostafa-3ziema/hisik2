@@ -21,6 +21,8 @@ import { Device } from '@ionic-native/device';
 })
 export class SignUpPage {
 
+  ConfirmPassowrderror:boolean=false; 
+  usernameEmailError:boolean=false;
 
   constructor(public alertCtrl: AlertController,
     private device: Device,
@@ -65,6 +67,7 @@ export class SignUpPage {
     {
       if(err.status == 400)
       {
+        this.usernameEmailError=true;
         const alert = this.alertCtrl.create({
           title: 'error!',
           subTitle: 'user name or email is already exist!',
@@ -76,6 +79,7 @@ export class SignUpPage {
     console.log(form.value.text);
   }else
   {
+    this.ConfirmPassowrderror=true;
     this.showAlert();
   }
   

@@ -44,7 +44,7 @@
               </div>
 
 
-              <ion-item [ngClass]="{'inputErorr': Username.touched && Username.dirty && !Username.valid}">
+              <ion-item [ngClass]="{'inputErorr': (Username.touched && Username.dirty && !Username.valid) || usernameEmailError}">
                   <ion-input type="text" placeholder="UserName is required " name="UserName"  required #Username="ngModel" pattern="[a-zA-Z0-9 _-]+"  [ngModel]="user?.UserName" clearInput="true"></ion-input>
               </ion-item>
               <div class="error" *ngIf="Username.touched && Username.dirty && !Username.valid">
@@ -54,8 +54,8 @@
               </div> 
 
 
-              <ion-item [ngClass]="{'inputErorr': Email.touched && Email.dirty && !Email.valid}">
-                <ion-input type="email" placeholder="Email is required " name="email" required #Email="ngModel" pattern="([a-zA-Z0-9_.-]+@([a-zA-Z0-9_-]+).+[a-zA-Z0-9_]{2,})+"  [ngModel]="user?.Email" clearInput="true"></ion-input>
+              <ion-item [ngClass]="{'inputErorr': (Email.touched && Email.dirty && !Email.valid) || usernameEmailError}">
+                <ion-input type="email" placeholder="Email is required " name="Email" required #Email="ngModel" pattern="([a-zA-Z0-9_.-]+@([a-zA-Z0-9_-]+).+[a-zA-Z0-9_]{2,})+"  [ngModel]="user?.Email" clearInput="true"></ion-input>
               </ion-item>
               <div class="error" *ngIf="Email.touched && Email.dirty && !Email.valid">
                  <div  *ngIf="Email.errors.pattern">
@@ -63,22 +63,28 @@
                 </div>
              </div>
 
+            <ion-item [ngClass]="{'inputErorr': (Password.touched && Password.dirty && !Password.valid) || ConfirmPassowrderror }">
+                <ion-input type="password" name="Password" maxlength="18" minlength="8" placeholder="Password is required" #Password="ngModel" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=._*/-])([a-zA-Z0-9@#$%^&+=*._/-])+" required ngModel></ion-input>
+            </ion-item>
+            <div class="error" *ngIf="Password.touched && Password.dirty && !Password.valid">
+              <div  *ngIf="Password.errors.pattern">
+                  <p> - Password must contain  a number, a lowercase letters, a uppercase letters, and a special character</p> 
+              </div>
+              <div  *ngIf="Password.errors.maxlength">
+                 <p> - password maximum length is "18"</p> 
+              </div>
+              <div  *ngIf="Password.errors.minlength">
+                 <p> - Password minimum length is "8" and maximum length is "18"</p> 
+              </div>
+            </div>
 
-              <ion-item > 
-                <ion-input type="password" placeholder="Password is required" ngModel name="password" [minlength]="6" required></ion-input>
-              </ion-item>
-         
+            <ion-item [ngClass]="{'inputErorr': ConfirmPassowrderror}">
+                <ion-input type="password" name="ConfirmPassword" placeholder="Rewrite the new password is required"  required ngModel></ion-input>
+            </ion-item>
 
-
- 
-              
-              <ion-item> 
-                <ion-input type="password" placeholder="Confirm password is required" ngModel name="Confirmpassword"  [minlength]="6" required></ion-input>
-              </ion-item>
-              
-            </ion-list>
-          </ion-col>
-        </ion-row>
+          </ion-list>
+        </ion-col>
+      </ion-row>
          
         <ion-row>
           <ion-col class="signup-col">

@@ -73,5 +73,10 @@ page-log-in {
            font-family: AxiForma;
            color:#ff4d4d;
        }
+       .inputErorr ion-input
+       {
+           border: 1px solid red ;
+           color:red;
+       }
     }
 }

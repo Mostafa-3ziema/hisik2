@@ -32,6 +32,12 @@ export class MyApp {
   imagePath="";
 
   constructor(platform: Platform, public menuCtrl:MenuController,statusBar: StatusBar, splashScreen: SplashScreen, private AUTHService:AUTHService) {
+       this.user=this.AUTHService.getUser();
+       this.isAuthinticated=this.AUTHService.IsAuthinticated();
+       if(this.user != null && this.isAuthinticated)
+       {
+        this.imagePath=this.user.ImageURL;
+       }
     firebase.initializeApp({
       apiKey: "AIzaSyC-DLZKGxENWAtBhmMhJNTn2CfNcDfDM58",
       authDomain: "hisik-7625a.firebaseapp.com",
@@ -47,13 +53,6 @@ export class MyApp {
       splashScreen.hide();
     });
 
-
-  }
-
-  ionViewDidLoad() {
-    this.user=this.AUTHService.getUser();
-    this.isAuthinticated=this.AUTHService.IsAuthinticated();
-    this.imagePath=this.user.ImageURL;
 
   }
   onLoad(page:any){
