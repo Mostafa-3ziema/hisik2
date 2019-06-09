@@ -4,10 +4,11 @@ import { ScanResultPage } from './../scan-result/scan-result';
 import { HttpClient } from '@angular/common/http';
 import { HomePage } from './../home/home';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController, Slides } from 'ionic-angular';
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview';
 import { Camera } from '@ionic-native/camera';
 import firebase from 'firebase';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 /**
  * Generated class for the ScanPage page.
@@ -27,7 +28,7 @@ export class ScanPage {
   public err ;
   imageResult;
   Drow = false;
-
+  @ViewChild(Slides) slides: Slides;
   public result;
   public ROOT_URL = 'https://vision.googleapis.com';
   public API_KEY = 'AIzaSyAdDscyxa7qmSXQjMPRUMU516yD_AI_7xg'; // YOUR CLOUD PLATFORM API KEY
@@ -63,7 +64,9 @@ export class ScanPage {
   canvas = document.getElementById('tempCanvas');
   @ViewChild('layout')canvasref;
   public visionResult ;
-  picture: string;
+  picture: string='';
+
+  labelAnotation :Array<any> = [];
 
   cameraOpts: CameraPreviewOptions = {
     x: 0,
@@ -91,11 +94,16 @@ export class ScanPage {
               public alertCtrl: AlertController,
               public ScanService:ScanService,
               public auth:AUTHService,
-              public camera:Camera
-               ) {}
+              public camera:Camera,
+              private tts: TextToSpeech
+               ) 
+               {
+                this.picture="../assets/imgs/download.jpg";
+               }
   
  ionViewDidLoad() {
-    
+   
+
     this.startCamera();
   }
 
@@ -132,6 +140,7 @@ export class ScanPage {
         this.http.post(`${this.ROOT_URL}/v1/images:annotate?key=${this.API_KEY}`, this.visionRequest)
         .subscribe((data: any) => {
           this.visionResult = data;
+          this.labelAnotation = this.visionResult.responses[0].labelAnnotations;
           console.log(data,'working');
           loader.dismiss(); // hide loading component
          
@@ -163,6 +172,7 @@ export class ScanPage {
         this.http.post(`${this.ROOT_URL}/v1/images:annotate?key=${this.API_KEY}`, this.visionRequest)
         .subscribe((data: any) => {
           this.visionResult = data;
+          this.labelAnotation = this.visionResult.responses[0].labelAnnotations;
           console.log(data,'working');
           loader.dismiss(); // hide loading component
          
@@ -273,6 +283,20 @@ export class ScanPage {
       
     
   }
-
+  swaptoLeft()
+  {
+    this.slides.slidePrev();
+  }
+  swaptoRight()
+  {
+    this.slides.slideNext();
+  }
+  slideChanged()
+  {
+    let currentIndex = this.slides.getActiveIndex();
+    this.tts.speak(this.labelAnotation[currentIndex].description)
+   .then(() => console.log('Success'))
+   .catch((reason: any) => console.log(reason));
+  }
 }
 

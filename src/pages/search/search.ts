@@ -35,8 +35,8 @@ export class SearchPage {
        {
         this.user=this.auth.getUser();
         this.RecentSearch(this.user.id);
-        this.ShowRecommanded(this.user.id)
-        this.PopualerSearch(this.user.id)
+        this.ShowRecommanded(this.user.id);
+        this.PopualerSearch();
        }
        /*
        this.isauthinticated=true;
@@ -59,16 +59,27 @@ export class SearchPage {
     this.SearchService.ShowRecommandedSearch(user).subscribe(
       (data:any[])=>{
         console.log(data);
-        this.recommandeditem = data ;
-      }
-    );
+        if(data.length>0){
+          this.recommandeditem = data;
+        }
+        else
+        {
+          this.recommandeditem = [];
+        }      
+      });
   }
 
   PopualerSearch(){
     this.SearchService.ShowPopualerSearch().subscribe(
       (data:any[])=>{
         console.log(data);
-        this.popualeritem = data ;
+        if(data.length>0){
+          this.popualeritem = data;
+        }
+        else
+        {
+          this.popualeritem = [];
+        }
       }
     );
   }
@@ -80,9 +91,15 @@ ShowMore(){
 
 RecentSearch(userid){
   this.SearchService.RecentSearch(userid).subscribe(
-    (data) =>{
+    (data:any[]) =>{
         console.log(data);
-        this.recentsearch = data;
+        if(data.length>0){
+          this.recentsearch = data;
+        }
+        else
+        {
+          this.recentsearch = [];
+        }
     }
   );
 }
