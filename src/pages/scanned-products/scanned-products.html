@@ -14,7 +14,7 @@
         <ion-card *ngIf="Scanned?.Blocked == null  || Scanned?.Blocked == false  ">
             <img class="photo" src="{{Scanned?.ImageURL}}">
 
-            <div *ngIf="Scanned?.product != '' ||  Scanned?.product != null">
+            <div *ngIf="Scanned?.satisfy != null ||  Scanned?.satisfy == false">
               <ion-card-content>
                 <ion-card-title class="name">
                     {{Scanned.productDetails?.name}}
@@ -39,7 +39,7 @@
                   </ion-col>
               </ion-row>
             </div> 
-            <div *ngIf="Scanned?.product == '' ||  Scanned?.product == null ">
+            <div *ngIf="Scanned?.satisfy == null ||  Scanned?.satisfy == true">
                 <ion-card-content>
                     <ion-card-title class="warnning">
                         This scan didn't satisfy

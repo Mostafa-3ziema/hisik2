@@ -169,13 +169,13 @@ export class SimilarProductsPage {
         {
           text: 'make an account!',
           handler: () => {
-            this.navCtrl.push(SignUpPage)
+            this.navCtrl.setRoot(SignUpPage);
           }
         },
         {
           text: 'LogIin!',
           handler: () => {
-            this.navCtrl.push(LogInPage)
+            this.navCtrl.setRoot(LogInPage);
           }
         },
         {

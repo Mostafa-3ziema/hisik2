@@ -1,3 +1,4 @@
+import { LogInPage } from './../log-in/log-in';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { SimilarProductsPage } from './../similar-products/similar-products';
 import { ScanService } from './../../services/scan.Service';
@@ -22,11 +23,13 @@ export class ScanResultPage {
   visionResponse;
   labelAnotation :Array<any> = [];
   localizedObjectAnnotations :Array<any> = [];
-  adults :Array<any> = [];
+  //adults :Array<any> = [];
+  adults:any;
   text :Array<any> = [];
   logo :Array<any> = [];
   image; 
-  scan;
+  scan:any;
+  user:any;
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      private tts: TextToSpeech,
@@ -44,6 +47,7 @@ export class ScanResultPage {
     if(this.auth.IsAuthinticated())
     {
       this.scan=this.navParams.get('scan');
+      this.user=this.auth.getUser();
     }
     console.log(this.visionResponse.responses[0].labelAnnotations);
     this.labelAnotation = this.visionResponse.responses[0].labelAnnotations;
@@ -56,8 +60,87 @@ export class ScanResultPage {
     console.log(this.adults,'adults');
     this.localizedObjectAnnotations = this.visionResponse.responses[0].localizedObjectAnnotations;
     console.log(this.localizedObjectAnnotations,'multible objects');
+    this.CheckNudity();
   }
-
+  CheckNudity()
+  {
+    if(this.adults.adult == 'LIKELY' || this.adults.racy == 'LIKELY')
+    {
+      if(this.auth.IsAuthinticated())
+      {
+        if(this.user.WarningScore == 0)
+        {
+          this.user.WarningScore == 1;
+          this.scan.Blocked=true;
+          this.auth.updateUser(this.user.id,this.user).subscribe((data)=>
+            {
+              this.scanService.UpdateScan(this.scan.id,this.scan).subscribe((data)=>
+              {
+                this.showAlert("this is your frist warning don't scan a nudity  object again ,please!");
+              })
+            });
+        }else
+        {
+          if(this.user.WarningScore == 1)
+          {
+           this.user.WarningScore == 2;
+           this.scan.Blocked=true;
+           this.auth.updateUser(this.user.id,this.user).subscribe((data)=>
+            {
+              this.scanService.UpdateScan(this.scan.id,this.scan).subscribe((data)=>
+              {
+                this.showAlert("this is your second warning don't scan a nudity  object again ,please!");
+              })
+            });
+          }else
+          {
+            if(this.user.WarningScore == 2)
+            {
+             this.user.WarningScore == 3;
+             this.user.Status=true;
+             this.scan.Blocked=true;
+             this.auth.updateUser(this.user.id,this.user).subscribe((data)=>
+             {
+              this.scanService.UpdateScan(this.scan.id,this.scan).subscribe((data)=>
+              {
+                this.showAlert("this was your third time you scan a nudity object so you are blocked until the admin unblocked you");
+                this.navCtrl.setRoot(LogInPage);
+              });
+             });
+            }
+          }
+        }
+      }else
+      {
+         this.showAlert("please don't scan a nudity object again.");
+         this.navCtrl.setRoot(LogInPage);
+        }
+    }else
+    {
+      if(this.adults.adult == 'VERY_LIKELY' || this.adults.racy == 'VERY_LIKELY')
+      {
+        this.user.WarningScore == 3;
+        this.user.Status=true;
+        this.scan.Blocked=true;
+        this.auth.updateUser(this.user.id,this.user).subscribe((data)=>
+         {
+           this.scanService.UpdateScan(this.scan.id,this.scan).subscribe((data)=>
+           {
+            this.showAlert("you scan a very nudity object so you are blocked until the admin unblocked you");
+            this.navCtrl.setRoot(LogInPage);
+          });
+         }); 
+      }  
+    }
+  }
+  showAlert(message:string) {
+    const alert = this.alertCtrl.create({
+      title: 'this scan might have a nudity object',
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
   speak(message)
   {
    this.tts.speak(message)
