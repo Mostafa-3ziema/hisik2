@@ -64,7 +64,7 @@ export class ScanPage {
   canvas = document.getElementById('tempCanvas');
   @ViewChild('layout')canvasref;
   public visionResult ;
-  picture: string='';
+  picture ='';
 
   labelAnotation :Array<any> = [];
 
@@ -89,22 +89,18 @@ export class ScanPage {
               ,public toastCtrl :ToastController
               ,private loader :LoadingController
               ,public navCtrl   :NavController
-              ,public navParams: NavParams,
-              public http: HttpClient,
-              public alertCtrl: AlertController,
-              public ScanService:ScanService,
-              public auth:AUTHService,
-              public camera:Camera,
-              private tts: TextToSpeech
+              ,public navParams: NavParams,public http: HttpClient,public alertCtrl: AlertController,
+               public ScanService:ScanService, public auth:AUTHService, public camera:Camera,private tts: TextToSpeech
                ) 
                {
-                this.picture="../assets/imgs/download.jpg";
+                 //this.picture = "../assets/imgs/download.jpg";
                }
   
  ionViewDidLoad() {
-   
-
+   if(this.picture !='')
+   {
     this.startCamera();
+   }
   }
 
   async startCamera() {

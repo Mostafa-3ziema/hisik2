@@ -8,7 +8,7 @@
   <div id="Photo" *ngIf="isauth">     
     <ion-avatar id="avatar">
        <img *ngIf="imagePath" src="{{imagePath}}">
-     <img *ngIf="imagePath==''" src="../assets/imgs/download.jpg">
+       <img *ngIf="imagePath==''" src="../assets/imgs/download.jpg">
     </ion-avatar>
     <ion-fab right bottom id="fabs">
       <button  ion-fab icon-only (click)="showActionSheet()">
