@@ -21,7 +21,7 @@ export class ScanService
     UpdateScan(scanid:number,Scan:any)
     {
       let endpoint='http://127.0.0.1:8000/api/scan/'+scanid+'/';
-      return this.http.post(endpoint,Scan,{headers : this.headers})
+      return this.http.put(endpoint,Scan,{headers : this.headers})
     }
     DeleteUserScan(scanID:number)
     {

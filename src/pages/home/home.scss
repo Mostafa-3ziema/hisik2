@@ -58,6 +58,10 @@ page-home {
         flex: auto !important;
         width: initial !important;
     }
+    ion-slides
+      {
+         height: auto;
+      }
 }
 .ios{
     page-home {

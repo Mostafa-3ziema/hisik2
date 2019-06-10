@@ -1,3 +1,4 @@
+import { AppNotficationService } from './../services/Notfcation/appnotification.service';
 import { LikesPage } from './../pages/likes/likes';
 import { EditReplayPage } from './../pages/edit-replay/edit-replay';
 import { Reply } from './../pages/replay/Replay.Service';
@@ -215,7 +216,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     Edit_MyReview,
     ProductReviews,
     Reply,
-
+    AppNotficationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

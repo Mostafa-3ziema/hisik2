@@ -9,11 +9,8 @@
 <ion-content padding>
     <ion-list>
         <ion-list-header color="danger">
-          Recommended product
+          Recommended Product
         </ion-list-header>
-        <!--<timeline endIcon="call">
-            <timeline-item *ngFor="let item of items">
-             <timeline-time [time]="item.time"></timeline-time>-->
               <button id="recommendnotification"ion-item (click)="openProduct()">
                <ion-thumbnail item-start>
                  <img src="">
@@ -22,8 +19,6 @@
                 <p>Hayao Miyazaki • 1988</p>
                  <button ion-button clear item-end>View</button>
               </button>
-           <!--</timeline-item>
-        </timeline>-->
         <ion-list-header id="socialheader" color="danger">
            Social
         </ion-list-header>
@@ -39,7 +34,7 @@
 
 </ion-content>
 <ion-fab right bottom id="fabs">
-    <button ion-fab icon-only>
+    <button ion-fab icon-only (click)="openScan()">
       <ion-icon name="camera" color="blue"></ion-icon>
     </button>
 </ion-fab>

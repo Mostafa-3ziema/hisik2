@@ -14,10 +14,10 @@
         <h1 style="text-align: left; font-family: AxiForma semiBold;font-weight: bold;" *ngIf="recommandeditem?.length>0" >Recommended</h1>
 
         <div style="display: block" *ngIf="recommandeditem?.length>0" >
-            <div style="display: inline-block"> 
-                <ion-item *ngFor="let m of recommandeditem;">
+            <div style="display: inline-block" *ngFor="let m of recommandeditem;"> 
+                <ion-item>
                     <ion-thumbnail slot="start">
-                    <img src="m?.ImageURL">
+                     <img [src]="m?.ImageURL">
                     </ion-thumbnail>
                 </ion-item>
             </div>
@@ -38,8 +38,8 @@
             <div *ngFor="let item of recentsearch; let i=index;">
                <div *ngIf="i<2">
                     <ion-item >
+                        <h1 style="font-family: AxiForma ; font-weight: Medium;color:#5A5A5A;" item-none > {{ item.text }} </h1>
                         <p style="font-family: AxiForma light;color:#075682 ;" list-start> {{ item?.timestamp | date }} </p>
-                        <h1 style="text-align: center;font-family: AxiForma ; font-weight: Medium;color:#5A5A5A;" item-none > {{ item.text }} </h1>
                         <ion-icon color="danger" name="trash" item-end (click)="RemoveSearch(item.id)"></ion-icon>
                     </ion-item>
                </div>
@@ -65,7 +65,7 @@
                 <div style="display: inline-block" >
                     <ion-item *ngFor="let r of popualeritem;" >
                         <ion-avatar start>
-                            <img src="r?.ImageURL">
+                            <img [src]="r?.ImageURL">
                         </ion-avatar>
                         <h4>{{ r?.text }}</h4>
                     </ion-item>

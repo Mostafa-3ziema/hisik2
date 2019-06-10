@@ -55,13 +55,13 @@ export class SearchService {
 
     
     ShowPopualerSearch(){
-        let endpoint4 = 'http://127.0.0.1:8000/api/search/popualersearch';
+        let endpoint4 = 'http://127.0.0.1:8000/api/search/popular/';
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint4,{headers:headers});
     }
 
     ShowRecommandedSearch(id:number){
-        let endpoint4 = 'http://127.0.0.1:8000/api/search/RecommandedSearch';
+        let endpoint4 = 'http://127.0.0.1:8000/api/search/recommanded/'+id+'/';
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint4,{headers:headers});
     }
