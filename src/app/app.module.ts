@@ -1,3 +1,4 @@
+import { NotficationService } from './../services/Notfcation/notfication.service';
 import { LikesPage } from './../pages/likes/likes';
 import { EditReplayPage } from './../pages/edit-replay/edit-replay';
 import { Reply } from './../pages/replay/Replay.Service';
@@ -69,10 +70,11 @@ import { MassageService } from '../services/messages.service'
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SimilarProductsPage } from '../pages/similar-products/similar-products';
-import { NotficationService } from '../services/Notfcation/notfication.service';
+// import { NotficationService } from '../services/Notfcation/notfication.service';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from '@angular/fire';
-import { Firebase } from '@ionic-native/firebase';
+import { Firebase } from '@ionic-native/firebase/ngx';
+
 const firebase = {
   production: false,
   apiKey: "AIzaSyBYThMrbjOwXLTksqVd2zWKmwH86nfbydg",
@@ -90,6 +92,7 @@ import { ShopingLinksPage } from '../pages/shoping-links/shoping-links';
 import { ShopingPlacesPage } from '../pages/shoping-places/shoping-places';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { FCM } from '@ionic-native/fcm';
 
 @NgModule({
   declarations: [
@@ -200,7 +203,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     ScanService,
     ProductService,
     FavouriteService,
-    NotficationService,
+    
     Firebase,
     MassageService,
     SearchService,
@@ -215,7 +218,8 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     Edit_MyReview,
     ProductReviews,
     Reply,
-
+    FCM,
+    NotficationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -5,8 +5,8 @@ import { ScanPage } from './../scan/scan';
 import { ProductPage } from './../product/product';
 import { Component,ViewChild} from '@angular/core';
 import { NavController, PopoverController, Slides, Platform, ToastController } from 'ionic-angular';
-import { tap } from 'rxjs/operators';
-import { NotficationService } from '../../services/Notfcation/notfication.service';
+// import { NotficationService } from '../../services/Notfcation/notfication.service';
+import { tap } from 'rxjs/operators'
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -32,8 +32,7 @@ export class HomePage {
     public ScanService:ScanService,
     public favSerive : FavouriteService,
     public proService : ProductService 
-    ,platform: Platform
-    ,private NotficationSer:NotficationService,
+    ,platform: Platform,
     private toast:ToastController) {
     this.tabs=["search","person"];
     console.log('Width: ' + platform.width());
@@ -161,10 +160,6 @@ export class HomePage {
 
   }
   ionViewDidLoad(){
-    this.NotficationSer.getToken()
 
-    this.NotficationSer.listenToNotfication().pipe(
-     
-    ).subscribe();
   }
 }

@@ -1,48 +1,51 @@
-import { Platform } from 'ionic-angular';
+import { Header } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Firebase } from '@ionic-native/firebase';
-import { AngularFirestore } from 'angularfire2/firestore';
 @Injectable()
 export class NotficationService{
-    constructor(private firebase :Firebase,private afs:AngularFirestore,private platform:Platform)
+    constructor( private http:HttpClient,private Header:HttpHeaders)
     {
 
     }
-
-    async getToken()
+    PushGeneralNotfiation(title:string,Body:string)
     {
-        let token;
-        
-        if(this.platform.is('android'))
-        {
-            token = await this.firebase.getToken();
-        }
-        if (this.platform.is('ios'))
-        {
-            token = await this.firebase.getToken();
-            await this.firebase.grantPermission();
-        }
-        console.log(token);
-        return this.saveTokenToFirestore(token);
+        let body = {
+            "notification":{
+              "title":title,
+              "body":Body,
+              "sound":"default",
+              "click_action":"FCM_PLUGIN_ACTIVITY",
+              "icon":"fcm_push_icon"
+            },
+              "to":"/topics/all",
+              "priority":"high",
+              "restricted_package_name":""
+          }
+          let options = new HttpHeaders().set('Content-Type','application/json');
+          this.http.post("https://fcm.googleapis.com/fcm/send",body,{
+            headers: options.set('Authorization', 'key=AAAAfpOaUnk:APA91bF4BHLlm5qFRfYcnyr-v4ZyJznr7moEs_sacdBnMHp0PNXSymtBhNpGMkj7kPv2ird68OsxKW1rss4xNEuIaQVVfL3uU5FrlA0kFTAbHbctLBHD8qxgGCmEboLr66J10mZfsk_I'),
+          }).subscribe();
     }
-    private saveTokenToFirestore(token)
+    pushNoticationForUser(title:string,Body:string,token)
     {
-        if (!token)
-        {
-            return
-        }
-        const deviceref = this.afs.collection('devices');
+        let body = {
+            "notification":{
+              "title":title,
+              "body":Body,
+              "sound":"default",
+              "click_action":"FCM_PLUGIN_ACTIVITY",
+              "icon":"fcm_push_icon"
+            },
+              "to":token,
+              "priority":"high",
+              "restricted_package_name":""
+          }
+          let options = new HttpHeaders().set('Content-Type','application/json');
+          this.http.post("https://fcm.googleapis.com/fcm/send",body,{
+            headers: options.set('Authorization', 'key=AAAAfpOaUnk:APA91bF4BHLlm5qFRfYcnyr-v4ZyJznr7moEs_sacdBnMHp0PNXSymtBhNpGMkj7kPv2ird68OsxKW1rss4xNEuIaQVVfL3uU5FrlA0kFTAbHbctLBHD8qxgGCmEboLr66J10mZfsk_I'),
+          }).subscribe();
+    }
 
-        const docdata={
-            token ,
-            userId:'testUser',
-        }
     
-        return deviceref.doc(token).set(docdata);
-    }
-    listenToNotfication()
-    {
-        return this.firebase.onNotificationOpen()
-    }
 }
