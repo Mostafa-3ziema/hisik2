@@ -1,4 +1,5 @@
 import { NotficationService } from './../services/Notfcation/notfication.service';
+import { AppNotficationService } from './../services/Notfcation/appnotification.service';
 import { LikesPage } from './../pages/likes/likes';
 import { EditReplayPage } from './../pages/edit-replay/edit-replay';
 import { Reply } from './../pages/replay/Replay.Service';
@@ -220,6 +221,7 @@ import { FCM } from '@ionic-native/fcm';
     Reply,
     FCM,
     NotficationService,
+    AppNotficationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

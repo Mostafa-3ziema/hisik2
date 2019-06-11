@@ -38,13 +38,13 @@ export class SearchPage {
         this.ShowRecommanded(this.user.id);
         this.PopualerSearch();
        }
-       /*
-       this.isauthinticated=true;
+       
+       /*this.isauthinticated=true;
        this.user=1;
-       this.RecentSearch(this.user.id);
-       this.ShowRecommanded(this.user.id);
-       this.PopualerSearch();
-       */
+       this.RecentSearch(this.user);
+       this.ShowRecommanded(this.user);
+       this.PopualerSearch();*/
+       
      }
 
   searchbar(){
