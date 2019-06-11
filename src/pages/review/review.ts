@@ -1,3 +1,4 @@
+import { AppNotficationService } from './../../services/Notfcation/appnotification.service';
 import { NotficationService } from './../../services/Notfcation/notfication.service';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { Component } from '@angular/core';
@@ -22,7 +23,7 @@ export class ReviewPage {
      public navCtrl: NavController
      ,public viewCtrl: ViewController
      ,public auth:AUTHService ,
-     private PushNot :NotficationService) {
+     private PushNot :NotficationService,private notSer:AppNotficationService) {
   }
 
   ionViewDidLoad() {
@@ -47,15 +48,12 @@ export class ReviewPage {
       'user':this.user.id,
       'product':this.productID,
     }
-    this.ReviewService.addreview(body).subscribe((data)=>{
-      this.viewCtrl.dismiss(data);
-      let body = {
-        Status:false,
-        Type : 1,
-        ProductReviewId:null,
-        ScanId:null,
-      }
-      this.PushNot.pushNotfiation('Review','',form.value.text).subscribe();
+    this.ReviewService.addreview(body).subscribe((data:any)=>{
+     this.notSer.adminNotification(2,null,data.id).subscribe(data=>
+      {
+        this.PushNot.pushNotfiation('Review','',form.value.text).subscribe();
+        this.viewCtrl.dismiss(data);
+      });
     },(err)=>{
       console.log(err);
     });

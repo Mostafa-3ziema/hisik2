@@ -57,13 +57,16 @@ export class ReplayPage {
       'text':form.value.text,
     }
     this.Reply.add_reply(body).subscribe((data)=>{
+      this.Replays.push(data);
       this.notSer.AddUserNotification(3,this.review.userData.id,this.user.id,this.review.id).subscribe(messg=>{
         this.PushNot.pushNoticationForUser('Like',this.user.name + 'replied on your review',this.review.userData.FCMToken).subscribe((message)=>{
           console.log(message);
+          this.notSer.adminNotification(3,null,this.review.id).subscribe(data=>
+            {
+              this.PushNot.pushNotfiation('replay','',this.user.UserName+'has replied on '+ this.review.text).subscribe();
+            });
         });
-        this.PushNot.pushNotfiation('replay','',this.user.UserName+'has replied on '+ this.review.text).subscribe();
       })
-      this.Replays.push(data);
     },(err)=>{
       console.log(err);
     });

@@ -1,3 +1,4 @@
+import { NotficationService } from './../../services/Notfcation/notfication.service';
 import { HomePage } from './../home/home';
 
 import { Component } from '@angular/core';
@@ -28,7 +29,7 @@ export class SignUpPage {
     private device: Device,
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private AUTHService:AUTHService,
+    private AUTHService:AUTHService,private pushNot:NotficationService
     ) {
   }
 
@@ -45,7 +46,8 @@ export class SignUpPage {
      'UserName' : form.value.UserName,
      'Password' : form.value.Password,
      'Email'    : form.value.Email,
-     'DeviceID' : this.device.uuid
+     'DeviceID' : this.device.uuid,
+     'FCMToken' :this.pushNot.getToken,
       }
      this.AUTHService.register(body).subscribe((res)=>{
       let check=this.AUTHService.store_user(res,true);
