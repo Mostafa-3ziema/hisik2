@@ -175,7 +175,7 @@ export class ScanResultPage {
     content:"Searching ...",
      });
     loading.present();
-    this.productService.getSimilarProducts('',Category).subscribe(
+    this.productService.getSimilarProducts(null,Category).subscribe(
      (data:any[])=>
      { 
        loading.dismiss();
@@ -197,6 +197,13 @@ export class ScanResultPage {
           duration:3000
         }).present();
        }
+     },err=>
+     {
+      loading.dismiss();
+      this.toastCtrl.create({
+        message:'there is a problem :'+err,
+        duration:3000
+      }).present();
      }
    );
   }
@@ -207,7 +214,7 @@ export class ScanResultPage {
     content:"Searching ...",
      });
     loading.present();
-    this.productService.getSimilarProducts(brand,'').subscribe(
+    this.productService.getSimilarProducts(brand,null).subscribe(
      (data:any[])=>
      { 
        loading.dismiss();
@@ -229,6 +236,13 @@ export class ScanResultPage {
           duration:3000
         }).present();
        }
+     },err=>
+     {
+      loading.dismiss();
+      this.toastCtrl.create({
+        message:'there is a problem :'+err,
+        duration:3000
+      }).present();
      }
    );
   }

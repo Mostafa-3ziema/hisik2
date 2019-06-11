@@ -14,7 +14,18 @@ export class ProductService
     }
     getSimilarProducts(brand :string ,category:string)
     {
-      let endpoint='http://127.0.0.1:8000/api/product/?brand__Name__icontains='+brand+'&Category__Name__icontains='+category;
+      let  endpoint='';
+      if(brand != null)
+      {
+       endpoint='http://127.0.0.1:8000/api/product/?brand__Name__icontains='+brand;
+
+      }else
+      {
+        if(category != null)
+        {
+          endpoint='http://127.0.0.1:8000/api/product/?Category__Name__icontains='+category;
+        }
+      }
       return this.http.get(endpoint,{headers : this.headers})
     }
     getProduct(productID:number)
