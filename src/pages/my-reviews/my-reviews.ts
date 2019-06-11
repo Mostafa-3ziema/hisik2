@@ -1,3 +1,4 @@
+import { AppNotficationService } from './../../services/Notfcation/appnotification.service';
 import { OptionsPage } from './../options/options';
 import { LikesPage } from './../likes/likes';
 import { AUTHService } from './../../services/user/AUTH.service';
@@ -9,6 +10,7 @@ import { HomePage } from '../home/home';
 import { EditReviewsPage } from '../edit-reviews/edit-reviews';
 import {My_Reviews} from '../my-reviews/MyReviews.Service';
 import { NgForm } from '@angular/forms';
+import { NotficationService } from '../../services/Notfcation/notfication.service';
 
 /**
  * Generated class for the ReviewsPage page.
@@ -35,7 +37,8 @@ export class MyReviewsPage {
   mydata;
   constructor(public navCtrl: NavController,
     public toastCtrl:ToastController, public navParams: NavParams,public options:PopoverController,
-    private MyReviews:MyReviews,private My_Reviews:My_Reviews,public modalCtrl: ModalController ,public auth:AUTHService ) {
+    private MyReviews:MyReviews,private My_Reviews:My_Reviews,public modalCtrl: ModalController ,
+    public auth:AUTHService ,private PushNot:NotficationService,private notSer:AppNotficationService) {
  
   }
 
@@ -178,6 +181,7 @@ export class MyReviewsPage {
     console.log(reviewindex);
     this.ReviewsLikeResult[reviewindex].islike=true;
     this.ReviewsLikeResult[reviewindex].likecount+=1;
+    let review = this.ReviewsLikeResult[reviewindex].review;
     this.MyReviews.Like(this.user.id,reivewID).subscribe((data)=>{
 
       if(data){
@@ -186,6 +190,11 @@ export class MyReviewsPage {
           message:'you liked this review',
           duration:3000
         }).present();
+        this.notSer.AddUserNotification(3,review.userData.id,this.user.id,review.id).subscribe(messg=>{
+          this.PushNot.pushNoticationForUser('Like',this.user.name + 'liked your review',review.userData.FCMToken).subscribe((message)=>{
+            console.log(message);
+          });
+        })
       }else
       {
         this.ReviewsLikeResult[reviewindex].islike=false;

@@ -6,6 +6,7 @@ import { ProductService } from './../../services/product.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { NotficationService } from '../../services/Notfcation/notfication.service';
 
 /**
  * Generated class for the ScanResultPage page.
@@ -35,10 +36,11 @@ export class ScanResultPage {
      private tts: TextToSpeech,
      public productService:ProductService,
      public scanService: ScanService,
-     public toastCtrl:ToastController,
+     public toastCtrl:ToastController, 
      public alertCtrl :AlertController,
      public loadCtrl:LoadingController,
-     public auth:AUTHService) {
+     public auth:AUTHService,
+     private pushNot:NotficationService) {
   }
 
   ionViewDidLoad() {
@@ -72,11 +74,18 @@ export class ScanResultPage {
         {
           this.user.WarningScore == 1;
           this.scan.Blocked=true;
+          let body = {
+            Status:false,
+            Type : 1,
+            ProductReviewId:null,
+            ScanId:this.scan.id,
+          }
           this.auth.updateUser(this.user.id,this.user).subscribe((data)=>
             {
               this.scanService.UpdateScan(this.scan.id,this.scan).subscribe((data)=>
               {
                 this.showAlert("this is your frist warning don't scan a nudity  object again ,please!");
+                this.pushNot.pushNotfiation('Nudity Alerted',null,this.user.UserName + 'has reached the limit of scanning +18 content.').subscribe();
               })
             });
         }else
@@ -90,6 +99,7 @@ export class ScanResultPage {
               this.scanService.UpdateScan(this.scan.id,this.scan).subscribe((data)=>
               {
                 this.showAlert("this is your second warning don't scan a nudity  object again ,please!");
+                this.pushNot.pushNotfiation('Nudity Alerted',null,this.user.UserName + 'has reached the limit of scanning +18 content.').subscribe();
               })
             });
           }else
@@ -104,6 +114,7 @@ export class ScanResultPage {
               this.scanService.UpdateScan(this.scan.id,this.scan).subscribe((data)=>
               {
                 this.showAlert("this was your third time you scan a nudity object so you are blocked until the admin unblocked you");
+                this.pushNot.pushNotfiation('Nudity Alerted',null,this.user.UserName + 'has reached the limit of scanning +18 content.').subscribe();
                 this.navCtrl.setRoot(LogInPage);
               });
              });
@@ -127,6 +138,7 @@ export class ScanResultPage {
            this.scanService.UpdateScan(this.scan.id,this.scan).subscribe((data)=>
            {
             this.showAlert("you scan a very nudity object so you are blocked until the admin unblocked you");
+            this.pushNot.pushNotfiation('Nudity Alerted',null,this.user.UserName + 'has reached the limit of scanning +18 content.').subscribe();
             this.navCtrl.setRoot(LogInPage);
           });
          }); 

@@ -1,3 +1,4 @@
+import { AppNotficationService } from './../../services/Notfcation/appnotification.service';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { EditReplayPage } from './../edit-replay/edit-replay';
 import { Component } from '@angular/core';
@@ -6,6 +7,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import {Reply} from'../replay/Replay.Service';
 import { NgForm } from '@angular/forms';
 import { ProductPage } from '../product/product';
+import { NotficationService } from '../../services/Notfcation/notfication.service';
 
 
 
@@ -22,7 +24,9 @@ export class ReplayPage {
      public navParams: NavParams, 
      private Reply:Reply,
      public modalCtrl: ModalController
-     ,public auth:AUTHService ) {
+     ,public auth:AUTHService,
+     private PushNot:NotficationService ,
+     private notSer:AppNotficationService) {
   }
 
   ionViewDidLoad() {
@@ -53,6 +57,12 @@ export class ReplayPage {
       'text':form.value.text,
     }
     this.Reply.add_reply(body).subscribe((data)=>{
+      this.notSer.AddUserNotification(3,this.review.userData.id,this.user.id,this.review.id).subscribe(messg=>{
+        this.PushNot.pushNoticationForUser('Like',this.user.name + 'replied on your review',this.review.userData.FCMToken).subscribe((message)=>{
+          console.log(message);
+        });
+        this.PushNot.pushNotfiation('replay','',this.user.UserName+'has replied on '+ this.review.text).subscribe();
+      })
       this.Replays.push(data);
     },(err)=>{
       console.log(err);

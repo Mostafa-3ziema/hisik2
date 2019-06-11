@@ -1,3 +1,4 @@
+import { AppNotficationService } from './../../services/Notfcation/appnotification.service';
 import { LikesPage } from './../likes/likes';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { FavouriteService } from './../../services/favourite.service';
@@ -10,6 +11,7 @@ import { ReviewPage } from '../review/review';
 import { ReviewsPage } from '../reviews/reviews';
 import { ReplayPage } from '../replay/replay';
 import { MyReviews } from '../reviews/Reviews.Service';
+import { NotficationService } from '../../services/Notfcation/notfication.service';
 
 
 /**
@@ -55,7 +57,7 @@ export class ProductPage {
     public favoriteService:FavouriteService,
     public auth:AUTHService,
     public toastCtrl:ToastController,public modalCtrl: ModalController, 
-    private MyReviews:MyReviews) {
+    private MyReviews:MyReviews,private PushNot :NotficationService,private notSer:AppNotficationService) {
   }
 
   ionViewDidLoad() {
@@ -277,6 +279,7 @@ AddReview()
     console.log(reviewindex);
     this.ReviewsLikeResult[reviewindex].islike=true;
     this.ReviewsLikeResult[reviewindex].likecount+=1;
+    let review = this.ReviewsLikeResult[reviewindex].review;
     this.MyReviews.Like(this.user.id,reivewID).subscribe((data)=>{
 
       if(data){
@@ -285,6 +288,11 @@ AddReview()
           message:'you liked this review',
           duration:3000
         }).present();
+        this.notSer.AddUserNotification(3,review.userData.id,this.user.id,review.id).subscribe(messg=>{
+          this.PushNot.pushNoticationForUser('Like',this.user.name + 'liked your review',review.userData.FCMToken).subscribe((message)=>{
+            console.log(message);
+          });
+        })
       }else
       {
         this.ReviewsLikeResult[reviewindex].islike=false;

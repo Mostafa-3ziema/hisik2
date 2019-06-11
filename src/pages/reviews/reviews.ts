@@ -1,3 +1,5 @@
+import { AppNotficationService } from './../../services/Notfcation/appnotification.service';
+import { NotficationService } from './../../services/Notfcation/notfication.service';
 import { ProductService } from './../../services/product.service';
 import { AUTHService } from './../../services/user/AUTH.service';
 import { ReplayPage } from './../replay/replay';
@@ -49,7 +51,9 @@ export class ReviewsPage {
     ,public modalCtrl: ModalController
     ,public productService: ProductService
     ,public toastCtrl:ToastController
-    ,public auth:AUTHService
+    ,public auth:AUTHService,
+    private PushNot: NotficationService,
+    private notSer:AppNotficationService
     ) {
   }
  
@@ -139,6 +143,7 @@ export class ReviewsPage {
     console.log(reviewindex);
     this.ReviewsLikeResult[reviewindex].islike=true;
     this.ReviewsLikeResult[reviewindex].likecount+=1;
+    let review = this.ReviewsLikeResult[reviewindex].review;
     this.MyReviews.Like(this.user.id,reivewID).subscribe((data)=>{
 
       if(data){
@@ -147,6 +152,13 @@ export class ReviewsPage {
           message:'you liked this review',
           duration:3000
         }).present();
+        this.notSer.AddUserNotification(3,review.userData.id,this.user.id,review.id).subscribe(messg=>{
+          this.PushNot.pushNoticationForUser('Like',this.user.name + 'liked your review',review.userData.FCMToken).subscribe((message)=>{
+            console.log(message);
+          });
+        })
+     
+        
       }else
       {
         this.ReviewsLikeResult[reviewindex].islike=false;
