@@ -40,7 +40,7 @@ export class NotficationService{
           let options = new HttpHeaders().set('Content-Type','application/json');
           this.http.post("https://fcm.googleapis.com/fcm/send",body,{
             headers: options.set('Authorization', 'key=AAAAfpOaUnk:APA91bF4BHLlm5qFRfYcnyr-v4ZyJznr7moEs_sacdBnMHp0PNXSymtBhNpGMkj7kPv2ird68OsxKW1rss4xNEuIaQVVfL3uU5FrlA0kFTAbHbctLBHD8qxgGCmEboLr66J10mZfsk_I'),
-          }).subscribe();
+          });
     }
     pushNoticationForUser(title:string,Body:string,token)
     {
