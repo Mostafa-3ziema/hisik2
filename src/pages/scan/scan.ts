@@ -97,10 +97,7 @@ export class ScanPage {
                }
   
  ionViewDidLoad() {
-   if(this.picture !='')
-   {
     this.startCamera();
-   }
   }
 
   async startCamera() {

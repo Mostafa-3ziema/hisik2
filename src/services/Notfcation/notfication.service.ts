@@ -20,7 +20,7 @@ const NotHeaders = {
 @Injectable()
 export class NotficationService{
      token:string='';
-    constructor( private http:HttpClient,private Header:HttpHeaders)
+    constructor( private http:HttpClient)
     {
 
     }
