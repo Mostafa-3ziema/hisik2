@@ -1,6 +1,6 @@
 <ion-content>
 
-  <div class="holder" *ngIf="!picture">
+  <div class="holder" *ngIf="picture">
     <div class="img" [ngStyle]="{'background-image': 'url('+picture+')' ,'background-position':'center','background-repeat': 'no-repeat' , 'background-size': 'cover'}">
         <!--<img  src="{{picture}}">-->
     </div>
@@ -36,7 +36,7 @@
    </div>
   </div>
 
-  <div class="holder" *ngIf="picture">
+  <div class="holder" *ngIf="!picture">
 
     <ion-fab bottom center>
       <button ion-fab (click)="takePicture()">
