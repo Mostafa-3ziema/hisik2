@@ -1,3 +1,4 @@
+import { NotficationService } from './../../services/Notfcation/notfication.service';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
@@ -22,7 +23,8 @@ import { HomePage } from '../home/home';
 })
 export class LogInPage {
 
-  constructor(public navCtrl: NavController,private emailComposer: EmailComposer ,public navParams: NavParams, private AUTHService:AUTHService , public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,private emailComposer: EmailComposer ,private PushNot:NotficationService ,
+    public navParams: NavParams, private AUTHService:AUTHService , public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() { 
@@ -58,8 +60,11 @@ export class LogInPage {
         let check=this.AUTHService.store_user(data[0],true);
         if(check)
          {
-          this.navCtrl.push(HomePage);
-         
+           data[0]['FCMToken'] == this.PushNot.getToken;
+           this.AUTHService.updateUser(data[0]['id'],data[0]).subscribe(data=>
+            { 
+              this.navCtrl.push(HomePage);
+            });
          } 
         else
          {

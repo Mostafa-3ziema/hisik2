@@ -19,9 +19,18 @@ const NotHeaders = {
 
 @Injectable()
 export class NotficationService{
+     token:string='';
     constructor( private http:HttpClient,private Header:HttpHeaders)
     {
 
+    }
+    setToken(token)
+    {
+      this.token=token;
+    }
+    getToken()
+    {
+      return this.token;
     }
     PushGeneralNotfiation(title:string,Body:string)
     {

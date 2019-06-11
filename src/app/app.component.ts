@@ -14,6 +14,7 @@ import { LogInPage } from '../pages/log-in/log-in';
 import { CommonModule } from '@angular/common';
 import firebase from 'firebase';
 import { FCM } from '@ionic-native/fcm';
+import { NotficationService } from '../services/Notfcation/notfication.service';
 
 
 
@@ -35,7 +36,7 @@ export class MyApp {
   imagePath="";
 
   constructor(private platform: Platform, public menuCtrl:MenuController,private statusBar: StatusBar, 
-    private splashScreen: SplashScreen, private AUTHService:AUTHService,private fcm: FCM, public toastController: ToastController
+    private splashScreen: SplashScreen, private AUTHService:AUTHService,private fcm: FCM,private pushNot:NotficationService,public toastController: ToastController
     ) {
        this.user=this.AUTHService.getUser();
        this.isAuthinticated=this.AUTHService.IsAuthinticated();
@@ -103,6 +104,7 @@ export class MyApp {
       this.fcm.subscribeToTopic('all');
       this.fcm.getToken().then(token=>{
           console.log(token);
+          this.pushNot.setToken(token);
       })
       this.fcm.onNotification().subscribe(data=>{
         if(data.wasTapped){
