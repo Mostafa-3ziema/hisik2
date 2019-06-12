@@ -12,6 +12,11 @@ export class AppNotficationService{
     {
         let endpoint=this.ipadress+':8000/api/userNoitifaction/?owner__id='+userid;
         return this.http.get(endpoint,{headers : this.headers})
+    } 
+    getUserUnSeenNotification(userid:number)
+    {
+        let endpoint='http://127.0.0.1:8000/api/userNoitifaction/?owner__id='+userid+'&Status='+false;
+        return this.http.get(endpoint,{headers : this.headers})
     }
     AddUserNotification(type,ownerid,senderid,reviewid)
     {

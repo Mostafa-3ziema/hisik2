@@ -1,3 +1,5 @@
+import { SignUpPage } from './../sign-up/sign-up';
+import { LogInPage } from './../log-in/log-in';
 import { ScanPage } from './../scan/scan';
 import { ProductPage } from './../product/product';
 import { AUTHService } from './../../services/user/AUTH.service';
@@ -42,31 +44,44 @@ export class NotificationPage {
     {
       if(data.length>0)
       {
-        this.Notification=data;
+        data.forEach(notification=>
+          {
+            this.Notification.push(notification);
+          });
       }
     });
   }
-  openProduct(notificationId,Notifcation,product)
+  openProduct(index,notificationId,Notifcation,product)
   {  
      let notification = Notifcation;
      notification.Status=true;
      this.notififcatioService.updateUserNotification(notificationId,notification).subscribe(data=>
       {
+        this.Notification[index].Status=true;
         this.navCtrl.push(ProductPage,{'product':product});
       });
   }
-  openNotify(notificationId,Notifcation,review)
+  openNotify(index,notificationId,Notifcation,review)
   {
-    let notification = Notifcation;
+     let notification = Notifcation;
      notification.Status=true;
      this.notififcatioService.updateUserNotification(notificationId,notification).subscribe(data=>
       {
+        this.Notification[index].Status=true;
         //this.navCtrl.push(ProductPage,{'product':review});
       });
   }
   openScan()
   {
     this.navCtrl.push(ScanPage);
+  }
+  Login()
+  {
+    this.navCtrl.push(LogInPage);
+  }
+  SignUp()
+  {
+    this.navCtrl.push(SignUpPage);
   }
 
 }

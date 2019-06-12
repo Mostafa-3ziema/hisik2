@@ -45,14 +45,18 @@ export class ScanResultPage {
   }
 
   ionViewDidLoad() {
-    this.visionResponse = this.navParams.get('visionresult');
+    
     this.image=this.navParams.get('ScannedImage');
     if(this.auth.IsAuthinticated())
     {
       this.scan=this.navParams.get('scan');
       this.user=this.auth.getUser();
     }
+    this.visionResponse = this.navParams.get('visionresult');
     console.log(this.visionResponse.responses[0].labelAnnotations);
+    this.adults = this.visionResponse.responses[0].safeSearchAnnotation;
+    console.log(this.adults,'adults');
+    this.CheckNudity();
     this.labelAnotation = this.visionResponse.responses[0].labelAnnotations;
     //console.log(this.visionResponse.responses[0].labelAnnotations);
     this.logo   = this.visionResponse.responses[0].logoAnnotations;
@@ -63,7 +67,11 @@ export class ScanResultPage {
     console.log(this.adults,'adults');
     this.localizedObjectAnnotations = this.visionResponse.responses[0].localizedObjectAnnotations;
     console.log(this.localizedObjectAnnotations,'multible objects');
-    this.CheckNudity();
+  }
+  round(num)
+  {
+    let result = num*100;
+    return Math.round(result);
   }
   CheckNudity()
   {

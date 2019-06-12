@@ -1,3 +1,5 @@
+import { AppNotficationService } from './../../services/Notfcation/appnotification.service';
+import { AUTHService } from './../../services/user/AUTH.service';
 import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { FaqHelpPage } from './../faq-help/faq-help';
@@ -24,7 +26,7 @@ import { ContactSupportPage } from '../contact-support/contact-support';
 <ion-buttons right>
 <button ion-button icon-only large id="notification" (click)="OpenNotification()">
   <ion-icon color="primary" name="notifications"   isActive="true"></ion-icon>
-  <ion-badge color="accent" *ngIf="UnreadNotificationNumber>0 || UnreadNotificationNumber=='99+' " id="Notifcationbadge"><p>{{UnreadNotificationNumber}}</p></ion-badge>  
+  <ion-badge color="accent" *ngIf="UnSeenNotificationNumber>0" id="Notifcationbadge"><p>{{UnSeenNotificationNumber}}</p></ion-badge>  
 </button>
 <button ion-button icon-only large (click)="OpenMore($event)">
   <ion-icon name="more" ></ion-icon>
@@ -40,18 +42,27 @@ import { ContactSupportPage } from '../contact-support/contact-support';
   inputs:['Pagetitle','Noifictaion']
 })
 export class TopBarPage {
-  @Input('Pagetitle') title:string
-  @Input('Noifictaion') UnreadNotificationNumber:any
-  constructor(public navCtrl: NavController,public options:PopoverController, public navParams: NavParams) {
+  @Input('Pagetitle') title:string;
+   UnSeenNotificationNumber:number=0;
+   user:any;
+  constructor(public navCtrl: NavController,public authService:AUTHService,public notififcatioService:AppNotficationService,public options:PopoverController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    if(this.authService.IsAuthinticated)
+    {
+      this.user=this.authService.getUser();
+      this.notififcatioService.getUserUnSeenNotification(this.user.id).subscribe((data:any[])=>
+      {
+        this.UnSeenNotificationNumber=data.length;
+      });
+    }
     console.log('ionViewDidLoad TopBarPage');
   }
   OpenNotification()
   {
-   this.navCtrl.push("NotificationPage");
-   this.UnreadNotificationNumber=0;
+    this.navCtrl.push("NotificationPage");
+    this.UnSeenNotificationNumber=0;
   }
   OpenMore(myevent:MouseEvent)
   {

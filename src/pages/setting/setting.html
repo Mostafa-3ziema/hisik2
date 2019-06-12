@@ -1,11 +1,11 @@
 <ion-header mode="md" >
-    <page-top-bar  [Pagetitle]="Setting" Noifictaion="1"></page-top-bar>
+    <page-top-bar  [Pagetitle]="Setting"></page-top-bar>
 </ion-header>
 
 
 
 <ion-content padding>
-  <div id="Photo" *ngIf="isauth">     
+   <div id="Photo" *ngIf="isauth">     
     <ion-avatar id="avatar">
        <img *ngIf="imagePath" src="{{imagePath}}">
        <img *ngIf="imagePath==''" src="../assets/imgs/download.jpg">
@@ -16,7 +16,7 @@
       </button>
     </ion-fab>
   </div> 
-  <!--<ionic3-star-rating 
+ <!--<ionic3-star-rating 
   (click)="getrate()"
   activeIcon = "ios-star"
   defaultIcon = "ios-star-outline"
@@ -171,7 +171,6 @@
       </div>
     </div>
   </div>
-  
 
 </ion-content>
 <page-fab-camera></page-fab-camera>
