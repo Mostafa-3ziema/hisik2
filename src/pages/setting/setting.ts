@@ -48,7 +48,6 @@ export class SettingPage {
       this.imagePath='';
     }
   }
-  
  updatingUser(form:NgForm)
   {
       const loading = this.loadCtrl.create({
