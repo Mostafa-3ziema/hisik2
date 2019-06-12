@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 const pushEndPoint = 'https://fcm.googleapis.com/fcm/send';
-const NotEndPoint = 'http://localhost:8000/api/Noitifaction/';
+const NotEndPoint = '192.168.0.12:8000/api/Noitifaction/';
 const PushHeaders = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',

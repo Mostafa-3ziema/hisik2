@@ -1,16 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import {Ipadress} from '../IPaddress'
 @Injectable()
 export class AppNotficationService{
     headers = new HttpHeaders({'Content-Type':'application/json'});
-
+    ipadress = Ipadress;
     constructor(public http:HttpClient)
     {
     }
     getUserNotification(userid:number)
     {
-        let endpoint='http://127.0.0.1:8000/api/userNoitifaction/?owner__id='+userid;
+        let endpoint=this.ipadress+':8000/api/userNoitifaction/?owner__id='+userid;
         return this.http.get(endpoint,{headers : this.headers})
     }
     AddUserNotification(type,ownerid,senderid,reviewid)
@@ -24,12 +24,12 @@ export class AppNotficationService{
             Product:null,
             review:reviewid  
         }
-        let endpoint='http://127.0.0.1:8000/api/userNoitifaction/';
+        let endpoint=this.ipadress+':8000/api/userNoitifaction/';
         return this.http.post(endpoint,notification,{headers : this.headers})
     }  
     updateUserNotification(id,notification:any)
     {
-        let endpoint='http://127.0.0.1:8000/api/userNoitifaction/'+id+'/';
+        let endpoint=this.ipadress+':8000/api/userNoitifaction/'+id+'/';
         return this.http.put(endpoint,notification,{headers : this.headers})
     }
     adminNotification(type,ScanId,reviewid)
@@ -41,7 +41,7 @@ export class AppNotficationService{
             ProductReviewID:reviewid,
             ScanId:ScanId  
         }
-        let endpoint='http://127.0.0.1:8000/api/adminNoitifaction/';
+        let endpoint=this.ipadress+':8000/api/adminNoitifaction/';
         return this.http.post(endpoint,notification,{headers : this.headers})
     }  
 }

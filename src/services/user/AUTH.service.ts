@@ -10,11 +10,11 @@ import { AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { global } from '@angular/core/src/util';
 import { EmailComposer } from '@ionic-native/email-composer';
-const endpoint= 'http://127.0.0.1:8000/api/user/';
-const endpoint2= 'http://127.0.0.1:8000/api/user/?';
+import { Ipadress } from '../IPaddress';
+const endpoint= Ipadress+':8000/api/user/';
+const endpoint2= Ipadress+':8000/api/user/?';
 @Injectable()
 export class AUTHService{
-
     constructor(private http:HttpClient ,
        private emailComposer: EmailComposer,
        public alertCtrl: AlertController , 

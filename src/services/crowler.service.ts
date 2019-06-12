@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Ipadress } from './IPaddress';
 @Injectable()
 export class LinksService 
 {
+  
   headers = new HttpHeaders({'Content-Type':'application/json'});
   constructor(public http:HttpClient)
   {
@@ -11,7 +13,7 @@ export class LinksService
 
   getShoppingLinks(product:string)
   {
-    let endpoint = "http://127.0.0.1:8000/api/product/links/"+product+"/"  
+    let endpoint = Ipadress+":8000/api/product/links/"+product+"/"  
     return this.http.get(endpoint,{headers : this.headers})
   }
   getShoppingPlaces(latitude:number,Langitude:number,product:string)

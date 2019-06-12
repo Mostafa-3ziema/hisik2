@@ -3,8 +3,9 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable} from '@angular/core';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs';
+import { Ipadress } from './IPaddress';
 
-const endpoint = 'http://127.0.0.1:8000/api/report/';
+const endpoint = Ipadress+':8000/api/report/';
 @Injectable()
 export class ReportService {
     constructor(private http:HttpClient){
