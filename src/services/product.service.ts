@@ -2,6 +2,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import {ip} from './ip'
+import { Ipadress } from './IPaddress';
 @Injectable()
 export class ProductService
 {

@@ -1,6 +1,8 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { Ipadress } from '../../services/IPaddress';
+
 @Injectable()
 export class MyReviews{
     constructor(private http:Http)
@@ -41,21 +43,21 @@ export class MyReviews{
 
   get_reply(reviewid)
   {
-   const endpoint ='http://localhost:8000/api/replay/?review__id='
+   const endpoint ="http://mostafaaziema.pythonanywhere.com/api/replay/?review__id="
    return this.http.get(endpoint+reviewid,{headers:this.headers})
    .map((response)=> {return response.json();});
 
  
   }
   update_myreviews(review_id,info){
-    const endpoint='http://localhost:8000/api/review/'
+    const endpoint='http://mostafaaziema.pythonanywhere.com/api/review/'
   return this.http.put(endpoint+review_id+'/',info,{headers:this.headers})
   .map((response)=> {return response.json();});
 
 }
 
  delete_myreviews(review_id){
-  const endpoint='http://localhost:8000/api/review/'
+  const endpoint='http://mostafaaziema.pythonanywhere.com/api/review/'
   return this.http.delete(endpoint+review_id+'/',{headers:this.headers})
   .map((response)=> {return response.json();});
 

@@ -3,6 +3,7 @@ import { HttpClient,HttpHeaders , HttpClientModule  } from '@angular/common/http
 import { Injectable} from '@angular/core';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs';
+import { Ipadress } from './IPaddress';
 
 
 const endpoint = 'http://mostafaaziema.pythonanywhere.com/api/search/?search=';

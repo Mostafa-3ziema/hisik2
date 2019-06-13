@@ -14,7 +14,6 @@ const endpoint= 'http://mostafaaziema.pythonanywhere.com/api/user/';
 const endpoint2= 'http://mostafaaziema.pythonanywhere.com/api/user/?';
 @Injectable()
 export class AUTHService{
-
     constructor(private http:HttpClient ,
        private emailComposer: EmailComposer,
        public alertCtrl: AlertController , 

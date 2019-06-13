@@ -4,8 +4,10 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable} from '@angular/core';
 import 'rxjs/Rx';
 import { Observable} from 'rxjs';
+import { Ipadress } from '../IPaddress';
 
-const endpoint= 'http://127.0.0.1:8000/api/user/';
+const endpoint= 'http://mostafaaziema.pythonanywhere.com/api/user/';
+
 @Injectable()
 export class ProfileService{
     constructor(private http:HttpClient)

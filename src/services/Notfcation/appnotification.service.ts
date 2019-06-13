@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import {Ipadress} from '../IPaddress'
 @Injectable()
 export class AppNotficationService{
     headers = new HttpHeaders({'Content-Type':'application/json'});
-
+    ipadress = Ipadress;
     constructor(public http:HttpClient)
     {
     }

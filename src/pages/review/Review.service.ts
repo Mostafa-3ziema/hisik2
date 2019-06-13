@@ -3,6 +3,8 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 import { Injectable} from '@angular/core';
 import { Header } from 'ionic-angular';
+import { Ipadress } from '../../services/IPaddress';
+
 @Injectable()
 export class ReviewService{
     constructor(private http:HttpClient)

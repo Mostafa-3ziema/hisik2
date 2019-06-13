@@ -1,5 +1,6 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Ipadress } from './IPaddress';
 
 @Injectable()
 export class ScanService

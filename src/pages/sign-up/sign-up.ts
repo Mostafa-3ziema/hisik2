@@ -76,6 +76,14 @@ export class SignUpPage {
           buttons: ['OK']
         });
         alert.present();
+      }else
+      {
+        const alert = this.alertCtrl.create({
+          title: 'error!',
+          subTitle: err,
+          buttons: ['OK']
+        });
+        alert.present();
       }
     });
     console.log(form.value.text);

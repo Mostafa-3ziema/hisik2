@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Ipadress } from './IPaddress';
 @Injectable()
 export class LinksService 
 {
+  
   headers = new HttpHeaders({'Content-Type':'application/json'});
   constructor(public http:HttpClient)
   {
