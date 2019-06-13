@@ -10,8 +10,8 @@ import { AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { global } from '@angular/core/src/util';
 import { EmailComposer } from '@ionic-native/email-composer';
-const endpoint= 'http://127.0.0.1:8000/api/user/';
-const endpoint2= 'http://127.0.0.1:8000/api/user/?';
+const endpoint= 'http://mostafaaziema.pythonanywhere.com/api/user/';
+const endpoint2= 'http://mostafaaziema.pythonanywhere.com/api/user/?';
 @Injectable()
 export class AUTHService{
 

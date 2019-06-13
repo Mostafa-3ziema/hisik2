@@ -4,7 +4,7 @@ import { Injectable} from '@angular/core';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs';
 
-const endpoint = 'http://127.0.0.1:8000/api/report/';
+const endpoint = 'http://mostafaaziema.pythonanywhere.com/api/report/';
 @Injectable()
 export class ReportService {
     constructor(private http:HttpClient){

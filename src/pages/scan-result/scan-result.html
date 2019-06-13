@@ -12,7 +12,7 @@
 <ion-content padding>
     <div class="img" [ngStyle]="{'background-image': 'url('+image+')' ,'background-position':'center','background-repeat': 'no-repeat' , 'background-size': 'cover'}">
     </div>
-   <ion-item-group>
+   <ion-item-group *ngIf="labelAnotation?.length>0">
         <ion-item-divider color="light">
           <b>Possible categories</b>
         </ion-item-divider>
@@ -36,7 +36,7 @@
           </ion-item-sliding>
         </ion-list> 
    </ion-item-group>
-   <ion-item-group>    
+   <ion-item-group *ngIf="logo?.length>0">    
         <ion-item-divider color="light"><b>Possible brands</b></ion-item-divider>
         <ion-list>
           <ion-item-sliding *ngFor= "let result of logo;let i=index">
@@ -50,18 +50,23 @@
               </button>
             </ion-item-options>
           </ion-item-sliding>
-          <ion-item-sliding *ngFor= "let result of text">
-            <ion-item  style="color:#075682;
-            font-family: Arial, Helvetica, sans-serif" (click)="SimilarBrandsProduct(result?.description)">
-              {{result.description}}
-            </ion-item>
-            <ion-item-options side="right">
-              <button ion-button color="primary">
-                <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
-              </button>
-            </ion-item-options>
-          </ion-item-sliding>
-        </ion-list> 
+        </ion-list>  
+   </ion-item-group>
+   <ion-item-group *ngIf="text?.length>0">
+     <ion-item-divider color="light"><b>Possible Texts</b></ion-item-divider>
+     <ion-list>
+     <ion-item-sliding *ngFor= "let result of text">
+      <ion-item  style="color:#075682;
+      font-family: Arial, Helvetica, sans-serif">
+        {{result.description}}
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary">
+          <ion-icon name="md-volume-up" (click)="speak(result.description)"></ion-icon>  
+        </button>
+      </ion-item-options>
+      </ion-item-sliding>
+    </ion-list> 
    </ion-item-group>
 
 

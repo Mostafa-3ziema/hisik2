@@ -10,22 +10,22 @@ export class ScanService
     }
     getRecentScan(userid:number)
     {
-      let endpoint='http://127.0.0.1:8000/api/scan/?search='+userid;
+      let endpoint='http://mostafaaziema.pythonanywhere.com/api/scan/?search='+userid;
       return this.http.get(endpoint,{headers : this.headers})
     }
     AddScan(Scan:any)
     {
-      let endpoint='http://127.0.0.1:8000/api/scan/';
+      let endpoint='http://mostafaaziema.pythonanywhere.com/api/scan/';
       return this.http.post(endpoint,Scan,{headers : this.headers})
     }
     UpdateScan(scanid:number,Scan:any)
     {
-      let endpoint='http://127.0.0.1:8000/api/scan/'+scanid+'/';
+      let endpoint='http://mostafaaziema.pythonanywhere.com/api/scan/'+scanid+'/';
       return this.http.put(endpoint,Scan,{headers : this.headers})
     }
     DeleteUserScan(scanID:number)
     {
-       let endpoint='http://127.0.0.1:8000/api/scan/'+scanID+'/';
+       let endpoint='http://mostafaaziema.pythonanywhere.com/api/scan/'+scanID+'/';
       return this.http.delete(endpoint,{headers : this.headers})
     }
 }

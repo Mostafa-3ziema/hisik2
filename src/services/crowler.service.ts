@@ -11,7 +11,7 @@ export class LinksService
 
   getShoppingLinks(product:string)
   {
-    let endpoint = "http://127.0.0.1:8000/api/product/links/"+product+"/"  
+    let endpoint = "http://mostafaaziema.pythonanywhere.com/api/product/links/"+product+"/"  
     return this.http.get(endpoint,{headers : this.headers})
   }
   getShoppingPlaces(latitude:number,Langitude:number,product:string)

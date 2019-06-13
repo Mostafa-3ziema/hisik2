@@ -12,7 +12,7 @@ export class MyReviews{
 
     GetLikes(reviewid:number)
     {
-      let endpoint='http://localhost:8000/api/like/?review__id='+reviewid;
+      let endpoint='http://mostafaaziema.pythonanywhere.com/api/like/?review__id='+reviewid;
       return this.http.get(endpoint,{headers : this.headers})
       .map((response)=> {return response.json();});
     }
@@ -20,19 +20,19 @@ export class MyReviews{
     Like(userID:number,reviewid:number)
     {
       const like_data={'review':reviewid,'user':userID} ; 
-      let endpoint='http://127.0.0.1:8000/api/like/';
+      let endpoint='http://mostafaaziema.pythonanywhere.com/api/like/';
       return this.http.post(endpoint,like_data,{headers : this.headers})
       .map((response)=>{return response.json();});
     }
     DeleteLike(likeID:number)
     {
-       let endpoint='http://127.0.0.1:8000/api/like/'+likeID+'/';
+       let endpoint='http://mostafaaziema.pythonanywhere.com/api/like/'+likeID+'/';
       return this.http.delete(endpoint,{headers : this.headers})
       .map((response)=>{return response.json();});
     }
     
  get_product_reviews(productid:number){
-      const endpoint='http://localhost:8000/api/review/?product__id='
+      const endpoint='http://mostafaaziema.pythonanywhere.com/api/review/?product__id='
     return this.http.get(endpoint+productid,{headers:this.headers})
     .map((response)=> {return response.json();});
 

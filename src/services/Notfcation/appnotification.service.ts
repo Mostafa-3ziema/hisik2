@@ -10,12 +10,12 @@ export class AppNotficationService{
     }
     getUserNotification(userid:number)
     {
-        let endpoint='http://127.0.0.1:8000/api/userNoitifaction/?owner__id='+userid;
+        let endpoint='http://mostafaaziema.pythonanywhere.com/api/userNoitifaction/?owner__id='+userid;
         return this.http.get(endpoint,{headers : this.headers})
     } 
     getUserUnSeenNotification(userid:number)
     {
-        let endpoint='http://127.0.0.1:8000/api/userNoitifaction/?owner__id='+userid+'&Status='+false;
+        let endpoint='http://mostafaaziema.pythonanywhere.com/api/userNoitifaction/?owner__id='+userid+'&Status='+false;
         return this.http.get(endpoint,{headers : this.headers})
     }
     AddUserNotification(type,ownerid,senderid,reviewid)
@@ -29,12 +29,12 @@ export class AppNotficationService{
             Product:null,
             review:reviewid  
         }
-        let endpoint='http://127.0.0.1:8000/api/userNoitifaction/';
+        let endpoint='http://mostafaaziema.pythonanywhere.com/api/userNoitifaction/';
         return this.http.post(endpoint,notification,{headers : this.headers})
     }  
     updateUserNotification(id,notification:any)
     {
-        let endpoint='http://127.0.0.1:8000/api/userNoitifaction/'+id+'/';
+        let endpoint='http://mostafaaziema.pythonanywhere.com/api/userNoitifaction/'+id+'/';
         return this.http.put(endpoint,notification,{headers : this.headers})
     }
     adminNotification(type,ScanId,reviewid)
@@ -46,7 +46,7 @@ export class AppNotficationService{
             ProductReviewID:reviewid,
             ScanId:ScanId  
         }
-        let endpoint='http://127.0.0.1:8000/api/adminNoitifaction/';
+        let endpoint='http://mostafaaziema.pythonanywhere.com/api/adminNoitifaction/';
         return this.http.post(endpoint,notification,{headers : this.headers})
     }  
 }

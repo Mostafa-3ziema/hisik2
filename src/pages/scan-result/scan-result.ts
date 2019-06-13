@@ -177,7 +177,7 @@ export class ScanResultPage {
    .catch((reason: any) => console.log(reason));
   }
 
-  SimilarCategoryProduct(Category:string)
+   /*SimilarCategoryProduct(Category:string)
   {
     const loading = this.loadCtrl.create({
     content:"Searching ...",
@@ -253,6 +253,6 @@ export class ScanResultPage {
       }).present();
      }
    );
-  }
+  }*/
 
 }

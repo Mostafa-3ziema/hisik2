@@ -1,3 +1,4 @@
+import { ProductService } from './../../services/product.service';
 import { ScanService } from './../../services/scan.Service';
 import { LinksService } from './../../services/crowler.service';
 import { AUTHService } from './../../services/user/AUTH.service';
@@ -28,6 +29,7 @@ export class SettingPage {
     public toastCtrl:ToastController,
     public alertCtrl :AlertController ,
     public navParams: NavParams,
+    public productService:ProductService,
     public camera :Camera , 
     public actionSheetCtrl :ActionSheetController
     ,public loadCtrl:LoadingController,public events: Events) {
@@ -47,6 +49,46 @@ export class SettingPage {
     {
       this.imagePath='';
     }
+    this.SimilarBrandsProduct("rolex");
+  }
+  SimilarBrandsProduct(brand:string)
+  {
+    const loading = this.loadCtrl.create({
+    content:"Searching ...",
+     });
+    loading.present();
+    this.productService.getSimilarProducts(brand,null).subscribe(
+     (data:any[])=>
+     { 
+       loading.dismiss();
+     
+       if(data.length>0)
+       {
+        if(this.auth.IsAuthinticated())
+        {
+          //this.navCtrl.push(SimilarProductsPage,{'products':data,'scan':this.scan});
+          console.log(data);
+        }else
+        {
+          console.log(data);
+        }
+       }else
+       {
+        loading.dismiss();
+        this.toastCtrl.create({
+          message:'there is no products for this brand',
+          duration:3000
+        }).present();
+       }
+     },err=>
+     {
+      loading.dismiss();
+      this.toastCtrl.create({
+        message:'there is a problem :'+err,
+        duration:3000
+      }).present();
+     }
+   );
   }
  updatingUser(form:NgForm)
   {

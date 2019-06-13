@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs';
 
 
-const endpoint = 'http://127.0.0.1:8000/api/search/?search=';
+const endpoint = 'http://mostafaaziema.pythonanywhere.com/api/search/?search=';
 @Injectable()
 export class SearchService {
     private search:any;
@@ -24,62 +24,62 @@ export class SearchService {
     }
 
     SearchProduct(text:string){
-        let endpoint="http://127.0.0.1:8000/api/product/?name__icontains="+text;
+        let endpoint="http://mostafaaziema.pythonanywhere.com/api/product/?name__icontains="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     SearchBrand(text:string){
-        let endpoint="http://127.0.0.1:8000/api/brand/?search="+text;
+        let endpoint="http://mostafaaziema.pythonanywhere.com/api/brand/?search="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     SearchCategory(text:string){
-        let endpoint="http://127.0.0.1:8000/api/category/?search="+text;
+        let endpoint="http://mostafaaziema.pythonanywhere.com/api/category/?search="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     Categoryproduct(text:string){
-        let endpoint="http://127.0.0.1:8000/api/product/?Category__Name__icontains="+text;
+        let endpoint="http://mostafaaziema.pythonanywhere.com/api/product/?Category__Name__icontains="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     BrandProduct(text:string){
-        let endpoint="http://127.0.0.1:8000/api/product/?brand__Name__icontains="+text;
+        let endpoint="http://mostafaaziema.pythonanywhere.com/api/product/?brand__Name__icontains="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     
     ShowPopualerSearch(){
-        let endpoint4 = 'http://127.0.0.1:8000/api/search/popular/';
+        let endpoint4 = 'http://mostafaaziema.pythonanywhere.com/api/search/popular/';
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint4,{headers:headers});
     }
 
     ShowRecommandedSearch(id:number){
-        let endpoint4 = 'http://127.0.0.1:8000/api/search/recommanded/'+id+'/';
+        let endpoint4 = 'http://mostafaaziema.pythonanywhere.com/api/search/recommanded/'+id+'/';
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint4,{headers:headers});
     }
 
     DeleteSearch(id:number){
-        let endpoint="http://127.0.0.1:8000/api/search/"+id+"/";
+        let endpoint="http://mostafaaziema.pythonanywhere.com/api/search/"+id+"/";
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.delete(endpoint,{headers:headers});
     }
 
     PostSearch(info){
-        let endpoint="http://127.0.0.1:8000/api/search/";
+        let endpoint="http://mostafaaziema.pythonanywhere.com/api/search/";
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.post(endpoint,info,{headers:headers});
     }
 
     UpdatSearch(info,id){
-        let endpoint="http://127.0.0.1:8000/api/search/"+id+"/";
+        let endpoint="http://mostafaaziema.pythonanywhere.com/api/search/"+id+"/";
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.put(endpoint,info,{headers:headers});
     }

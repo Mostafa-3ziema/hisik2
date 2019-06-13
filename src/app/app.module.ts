@@ -1,3 +1,4 @@
+import { HTTP } from '@ionic-native/http/ngx';
 import { NotficationService } from './../services/Notfcation/notfication.service';
 import { AppNotficationService } from './../services/Notfcation/appnotification.service';
 import { LikesPage } from './../pages/likes/likes';
@@ -204,7 +205,7 @@ import { FCM } from '@ionic-native/fcm';
     ScanService,
     ProductService,
     FavouriteService,
-    
+    HTTP,
     Firebase,
     MassageService,
     SearchService,
