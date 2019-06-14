@@ -60,11 +60,12 @@ export class LogInPage {
         let check=this.AUTHService.store_user(data[0],true);
         if(check)
          {
-           data[0]['FCMToken'] == this.PushNot.getToken;
-           this.AUTHService.updateUser(data[0]['id'],data[0]).subscribe(data=>
+           //data[0]['FCMToken'] == this.PushNot.getToken;
+           /*this.AUTHService.updateUser(data[0]['id'],data[0]).subscribe(data=>
             { 
               this.navCtrl.push(HomePage);
-            });
+            });*/
+            this.navCtrl.push(HomePage);
          } 
         else
          {
@@ -75,7 +76,7 @@ export class LogInPage {
           });
           alert.present();
          }
-
+         
       }
     });
     console.log(form.value.text);

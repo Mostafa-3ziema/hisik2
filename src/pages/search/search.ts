@@ -21,7 +21,7 @@ export class SearchPage {
   recentsearch:any;
   popualeritem:any[];
   recommandeditem:any[];
-  user;
+  user:any;
   isauthinticated:boolean;
 
 
@@ -34,8 +34,8 @@ export class SearchPage {
        if(this.isauthinticated)
        {
         this.user=this.auth.getUser();
-        this.RecentSearch(this.user.id);
-        this.ShowRecommanded(this.user.id);
+        /*this.RecentSearch(this.user.id);
+        this.ShowRecommanded(this.user.id);*/
         this.PopualerSearch();
        }
        

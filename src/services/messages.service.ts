@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs';
 import { Ipadress } from './IPaddress';
 
-const endpoint = Ipadress+':8000/api/message/';
+const endpoint = Ipadress+'/api/message/';
 @Injectable()
 export class MassageService {
     constructor(private http:HttpClient){

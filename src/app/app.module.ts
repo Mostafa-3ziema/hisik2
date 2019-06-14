@@ -147,6 +147,7 @@ import { FCM } from '@ionic-native/fcm';
     IonicStorageModule.forRoot(),
     NotificationPageModule,
     StarRatingModule,
+    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebase), 
     AngularFirestoreModule,
   ],

@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs';
 import { Ipadress } from './IPaddress';
 
-const endpoint = Ipadress+':8000/api/report/';
+const endpoint = Ipadress+'/api/report/';
 @Injectable()
 export class ReportService {
     constructor(private http:HttpClient){

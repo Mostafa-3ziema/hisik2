@@ -6,4 +6,4 @@
       this.Ipadress='192.168.43.34';
   }
 }*/
-export const Ipadress ='192.168.0.6';
+export const Ipadress ='http://mostafaaziema.pythonanywhere.com';

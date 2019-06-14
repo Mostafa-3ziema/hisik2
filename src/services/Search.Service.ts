@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Ipadress } from './IPaddress';
 
 
-const endpoint = Ipadress+':8000/api/search/?search=';
+const endpoint = Ipadress+'/api/search/?search=';
 @Injectable()
 export class SearchService {
     private search:any;
@@ -25,62 +25,62 @@ export class SearchService {
     }
 
     SearchProduct(text:string){
-        let endpoint="192.168.0.12:8000/api/product/?name__icontains="+text;
+        let endpoint="http://mostafaaziema.pythonanywhere.com/api/product/?name__icontains="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     SearchBrand(text:string){
-        let endpoint=Ipadress+":8000/api/brand/?search="+text;
+        let endpoint=Ipadress+"/api/brand/?search="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     SearchCategory(text:string){
-        let endpoint=Ipadress+":8000/api/category/?search="+text;
+        let endpoint=Ipadress+"api/category/?search="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     Categoryproduct(text:string){
-        let endpoint=Ipadress+":8000/api/product/?Category__Name__icontains="+text;
+        let endpoint=Ipadress+"/api/product/?Category__Name__icontains="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     BrandProduct(text:string){
-        let endpoint=Ipadress+":8000/api/product/?brand__Name__icontains="+text;
+        let endpoint=Ipadress+"/api/product/?brand__Name__icontains="+text;
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint,{headers:headers});
     }
 
     
     ShowPopualerSearch(){
-        let endpoint4 = Ipadress+':8000/api/search/popular/';
+        let endpoint4 = Ipadress+':/api/search/popular/';
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint4,{headers:headers});
     }
 
     ShowRecommandedSearch(id:number){
-        let endpoint4 = Ipadress+':8000/api/search/recommanded/'+id+'/';
+        let endpoint4 = Ipadress+'/api/search/recommanded/'+id+'/';
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.get(endpoint4,{headers:headers});
     }
 
     DeleteSearch(id:number){
-        let endpoint=Ipadress+":8000/api/search/"+id+"/";
+        let endpoint=Ipadress+"/api/search/"+id+"/";
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.delete(endpoint,{headers:headers});
     }
 
     PostSearch(info){
-        let endpoint=Ipadress+":8000/api/search/";
+        let endpoint=Ipadress+"/api/search/";
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.post(endpoint,info,{headers:headers});
     }
 
     UpdatSearch(info,id){
-        let endpoint=Ipadress+":8000/api/search/"+id+"/";
+        let endpoint=Ipadress+"/api/search/"+id+"/";
         const headers = new HttpHeaders({'Content-Type':'application/json'});
         return this.http.put(endpoint,info,{headers:headers});
     }

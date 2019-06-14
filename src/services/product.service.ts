@@ -8,7 +8,7 @@ export class ProductService
     productRate:number;
     productVotes:number;
     procuctStars:number;
-    headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded','Access-Control-Allow-Origin': 'anonymous'});
+    headers = new HttpHeaders({'Content-Type': 'application/json'});
     constructor(public http:HttpClient)
     {
      
@@ -18,25 +18,25 @@ export class ProductService
       let  endpoint='';
       if(brand != null)
       {
-       endpoint=Ipadress+':8000/api/product/?brand__Name__icontains='+brand;
+       endpoint='http://mostafaaziema.pythonanywhere.com/api/product/?brand__Name__icontains='+brand;
 
       }else
       {
         if(category != null)
         {
-          endpoint=Ipadress+':8000/api/product/?Category__Name__icontains='+category;
+          endpoint='http://mostafaaziema.pythonanywhere.com/api/product/?Category__Name__icontains='+category;
         }
       }
       return this.http.get(endpoint,{headers : this.headers})
     }
     getProduct(productID:number)
     {
-      let endpoint=Ipadress+':8000/api/product/'+productID+'/';
+      let endpoint=Ipadress+'/api/product/'+productID+'/';
       return this.http.get(endpoint,{headers : this.headers})
     }
     CalculateRate(ProID:number)
     {
-       let endpoint=Ipadress+':8000/api/review/?product__id='+ProID;
+       let endpoint=Ipadress+'/api/review/?product__id='+ProID;
        return this.http.get(endpoint,{headers : this.headers})
     }
 }

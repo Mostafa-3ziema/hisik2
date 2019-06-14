@@ -14,7 +14,7 @@
         <h1 style="text-align: left; font-family: AxiForma semiBold;font-weight: bold;" *ngIf="recommandeditem?.length>0" >Recommended</h1>
 
         <div style="display: block" *ngIf="recommandeditem?.length>0" >
-            <div style="display: inline-block" *ngFor="let m of recommandeditem;"> 
+            <div style="display: inline-block" *ngFor="let m of recommandeditem;" > 
                 <ion-item>
                     <ion-thumbnail slot="start">
                      <img [src]="m?.ImageURL">

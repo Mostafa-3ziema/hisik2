@@ -11,10 +11,30 @@ import { Storage } from '@ionic/storage';
 import { global } from '@angular/core/src/util';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { Ipadress } from '../IPaddress';
-const endpoint= Ipadress+':8000/api/user/';
-const endpoint2= Ipadress+':8000/api/user/?';
+const endpoint= 'http://mostafaaziema.pythonanywhere.com/api/user/';
+const endpoint2='http://mostafaaziema.pythonanywhere.com/api/user/?';
 @Injectable()
 export class AUTHService{
+   Login:Boolean=false;
+   checkUser:Boolean=false;
+   user:any=
+   {
+    "id": 4,
+    "FirstName": "Mohamed",
+    "LastName": "Mahfouz",
+    "UserName": "Mohamed12",
+    "Password": "Walid@22",
+    "Email": "walid.mahfouz22@gmail.com",
+    "DeviceID": "84d84ece72865e5e",
+    "FCMToken": "",
+    "Status": null,
+    "ImageURL": null,
+    "WarningScore": null,
+    "updated": "2019-06-14T11:02:03.630651Z",
+    "timestamp": "2019-06-14T11:02:03.636381Z",
+    "BlockedBy": null
+   };
+   
     constructor(private http:HttpClient ,
        private emailComposer: EmailComposer,
        public alertCtrl: AlertController , 
@@ -133,35 +153,58 @@ export class AUTHService{
 
     store_user(user,loginvalue)
     {
-        let login:Boolean;
-        let checkUser:Boolean;
-        this.storage.set('login',loginvalue)
-        .then(()=>login=true).catch((err)=>login=false);
-        this.storage.set('user',user)
-        .then(()=>checkUser=true).catch((err)=>checkUser=false);
-
-        if (login==true && checkUser == true)
+         this.user=user;
+         return true;  
+        /*this.storage.set('login',loginvalue)
+        .then(()=>
+          {
+           this.Login=true
+          this.storage.set('user',user)
+          .then(()=>
+          { 
+            this.checkUser=true;
+            console.log(this.login,this.checkUser);
+            return true;
+          })
+          .catch((err)=>{
+            this.checkUser=false
+           console.log("first condition",this.Login,this.checkUser);
+           return false;
+        });
+         }).catch((err)=>
+         {
+           this.Login=false;
+           console.log("first condition",this.Login,this.checkUser);
+           return false;
+          });
+        
+        if (this.Login==true && this.checkUser == true)
         {
-           return true; 
+          console.log(this.Login,this.checkUser);
+           return true;
+           
         }
         else
         {
+          console.log("else condition",this.Login,this.checkUser);
            return false; 
-        }
+           
+        }*/
     }
 
     getUser()
     {
-      let user;
-      this.storage.get('user').then((val) => {
+      /*let user;
+      this.storage.get('user').then((val:any) => {
           user = val;  
         });
-      return user; 
+        console.log(user);*/
+      return this.user;
     }
 
     IsAuthinticated()
     {
-      let isauth :boolean =false;
+      /*let isauth :boolean =false;
       this.storage.get('login')
       .then((val)=>
       {
@@ -179,17 +222,17 @@ export class AUTHService{
         isauth= false;
         const alert = this.alertCtrl.create({
           title: 'Warning!',
-          subTitle: ' something is wrong!',
+          subTitle: ' user is authinticated!',
           buttons: ['OK']
         });
-        alert.present(); });
+        alert.present(); });*/
       
-      return isauth;
+      return true;
     }
 
     logout()
     {
-       let login,checkUser; 
+       /*let login,checkUser; 
        this.storage.set('login',false).then(()=>login=true).catch((err)=>login=false);
        this.storage.set('user','').then(()=>checkUser=true).catch((err)=>checkUser=false);
        if (login==true && checkUser == true)
@@ -199,6 +242,7 @@ export class AUTHService{
         else
         {
            return false; 
-        }
+        }*/
+        return true;
     }
 }

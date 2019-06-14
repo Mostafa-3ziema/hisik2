@@ -16,24 +16,24 @@ export class FavouriteService
     } 
     MyFavourites(userid:number)
     {
-      let endpoint=Ipadress+':8000/api/favourite/?user__id='+userid;
+      let endpoint=Ipadress+'/api/favourite/?user__id='+userid;
       return this.http.get(endpoint,{headers : this.headers})
     }
     ProductsFavourite(proid)
     {
-      let endpoint=Ipadress+':8000/api/favourite/?product__id='+proid;
+      let endpoint=Ipadress+':/api/favourite/?product__id='+proid;
       return this.http.get(endpoint,{headers : this.headers})
     }
     AddToFovourite(userID:number,ProID:number)
     {
       const favourite={'user':userID,'product':ProID} ; 
-      let endpoint=Ipadress+':8000/api/favourite/';
+      let endpoint=Ipadress+'/api/favourite/';
       return this.http.post(endpoint,favourite,{headers : this.headers})
      
     }
     DeleteFavourite(FavouriteID:number)
     {
-       let endpoint=Ipadress+':8000/api/favourite/'+FavouriteID+'/';
+       let endpoint=Ipadress+'/api/favourite/'+FavouriteID+'/';
       return this.http.delete(endpoint,{headers : this.headers})
     }
    

@@ -27,9 +27,11 @@ export class NotficationService{
     setToken(token)
     {
       this.token=token;
+      console.log(this.token,token);
     }
     getToken()
     {
+      console.log(this.token);
       return this.token;
     }
     PushGeneralNotfiation(title:string,Body:string)

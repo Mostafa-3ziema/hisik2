@@ -50,7 +50,7 @@ export class SignUpPage {
      'FCMToken' :this.pushNot.getToken,
       }
      this.AUTHService.register(body).subscribe((res)=>{
-      let check=this.AUTHService.store_user(res,true);
+      /*let check=this.AUTHService.store_user(res,true);
         if(check) 
          {
           this.navCtrl.push(HomePage);
@@ -64,7 +64,7 @@ export class SignUpPage {
             buttons: ['OK']
           });
           alert.present();
-         }
+         }*/
     },(err)=>
     {
       if(err.status == 400)

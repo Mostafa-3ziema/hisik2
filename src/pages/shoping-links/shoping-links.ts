@@ -15,7 +15,6 @@ export class ShopingLinksPage {
   product:string;
 
   constructor(public navCtrl: NavController, 
-    public settingPage:SettingPage,
     public navParams: NavParams,
     public LinksService:LinksService,
     private browserTab: BrowserTab,
