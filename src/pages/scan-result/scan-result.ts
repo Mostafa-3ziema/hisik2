@@ -1,3 +1,4 @@
+import { LinksPage } from './../links/links';
 import { AppNotficationService } from './../../services/Notfcation/appnotification.service';
 import { LogInPage } from './../log-in/log-in';
 import { AUTHService } from './../../services/user/AUTH.service';
@@ -47,11 +48,11 @@ export class ScanResultPage {
   ionViewDidLoad() {
     
     this.image=this.navParams.get('ScannedImage');
-    if(this.auth.IsAuthinticated())
-    {
-      this.scan=this.navParams.get('scan');
-      this.user=this.auth.getUser();
-    }
+      if(this.auth.IsAuthinticated())
+      {
+        this.scan=this.navParams.get('scan');
+        this.user=this.auth.getUser();
+      }
     this.visionResponse = this.navParams.get('visionresult');
     console.log(this.visionResponse.responses[0].labelAnnotations);
     this.adults = this.visionResponse.responses[0].safeSearchAnnotation;
@@ -204,6 +205,7 @@ export class ScanResultPage {
           message:'there is no products for this category',
           duration:3000
         }).present();
+        this.showSaerchAlert("category",Category);
        }
      },err=>
      {
@@ -243,6 +245,7 @@ export class ScanResultPage {
           message:'there is no products for this brand',
           duration:3000
         }).present();
+        this.showSaerchAlert("brand",brand);
        }
      },err=>
      {
@@ -254,5 +257,23 @@ export class ScanResultPage {
      }
    );
   }
+  showSaerchAlert(type,object) {
+    const alert = this.alertCtrl.create({
+      title: 'Recommend',
+      subTitle: 'if you want to know places or links for this'+type,
+      buttons: [
+        {
+          text: 'make an account!',
+          handler: () => {
+            this.navCtrl.push(LinksPage,{'product':object});
+          }
+        },
+        {
+          text: 'Cancel',
+        }
+      ]
+    });
+    alert.present();
 
+}
 }

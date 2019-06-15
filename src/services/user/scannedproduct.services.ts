@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 import { Observable} from 'rxjs';
 import { Ipadress } from '../IPaddress';
 
-const endpoint= Ipadress+':8000/api/scan/?search=';
+const endpoint= 'http://mostafaaziema.pythonanywhere.com/api/scan/?search=';
 @Injectable()
 export class scannedproductServices{
     constructor(private http:HttpClient)

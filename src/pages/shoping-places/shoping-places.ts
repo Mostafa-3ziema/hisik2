@@ -13,6 +13,8 @@ export class ShopingPlacesPage {
   places:any=[];
   product:string;
   marker : Location;
+  proceed:boolean;
+
   constructor(public navCtrl: NavController,private geolocation: Geolocation, public navParams: NavParams,public LinksService:LinksService) {
     this.product=this.navParams.get('product');
     this.geolocation.getCurrentPosition().then((location) => {
@@ -21,8 +23,12 @@ export class ShopingPlacesPage {
       {
         if(data)
         {
-          this.places=data.results;
-          console.log(this.places);
+           this.places=data.results;
+           console.log(this.places);
+           this.proceed=true;
+        }else
+        {
+           this.proceed=false;
         }
       }
       )

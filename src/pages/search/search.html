@@ -15,7 +15,7 @@
 
         <div style="display: block" *ngIf="recommandeditem?.length>0" >
             <div style="display: inline-block" *ngFor="let m of recommandeditem;" > 
-                <ion-item>
+                <ion-item  (click)="Detials(m)">
                     <ion-thumbnail slot="start">
                      <img [src]="m?.ImageURL">
                     </ion-thumbnail>
@@ -62,8 +62,8 @@
         
         
             <div style="width:80px;height:60px; display: block;" class="ion-text-center" *ngIf="popualeritem?.length>0">
-                <div style="display: inline-block" >
-                    <ion-item *ngFor="let r of popualeritem;" >
+                <div style="display: inline-block" *ngFor="let r of popualeritem;">
+                    <ion-item  (click)="Detials(r)">
                         <ion-avatar start>
                             <img [src]="r?.ImageURL">
                         </ion-avatar>

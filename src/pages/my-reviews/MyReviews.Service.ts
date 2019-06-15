@@ -14,20 +14,20 @@ export class My_Reviews{
 
     
  get_myreviews(user_id){
-      const endpoint=Ipadress+':8000/api/review/?user__id='
+      const endpoint='http://mostafaaziema.pythonanywhere.com/api/review/?user__id='
     const headers = new HttpHeaders({'Content-Type':'application/json'});
     return this.http.get(endpoint+user_id,{headers:headers})
   }
 
  
   update_myreviews(review_id,info){
-    const endpoint=Ipadress+':8000/api/review/'
+    const endpoint='http://mostafaaziema.pythonanywhere.com/api/review/'
   const headers = new HttpHeaders({'Content-Type':'application/json'});
   return this.http.put(endpoint+review_id+'/',info,{headers:headers})
 }
 
  delete_myreview(review_id){
-  const endpoint=Ipadress+':8000/api/review/'
+  const endpoint='http://mostafaaziema.pythonanywhere.com/api/review/'
   const headers = new HttpHeaders({'Content-Type':'application/json'});
   return this.http.delete(endpoint+review_id+'/',{headers:headers})
 

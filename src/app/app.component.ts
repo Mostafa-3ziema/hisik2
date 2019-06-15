@@ -28,6 +28,7 @@ export class MyApp {
   reviewsPage = MyReviewsPage;
   signUpPage = SignUpPage;
   logInPage=LogInPage;
+  homepage=HomePage;
   @ViewChild('nav') nav : NavController;
 
 
@@ -36,33 +37,42 @@ export class MyApp {
   imagePath="";
 
   constructor(private platform: Platform, public menuCtrl:MenuController,private statusBar: StatusBar, 
-    private splashScreen: SplashScreen, private AUTHService:AUTHService,private fcm: FCM,private pushNot:NotficationService,public toastController: ToastController
+    private splashScreen: SplashScreen, private authService:AUTHService,private fcm: FCM,private pushNot:NotficationService,public toastController: ToastController
     ) {
-       this.user=this.AUTHService.getUser();
-       this.isAuthinticated=this.AUTHService.IsAuthinticated();
-       if(this.user != null && this.isAuthinticated)
-       {
-        this.imagePath=this.user.ImageURL;
-       }
-       if (!firebase.apps.length) {   
-    firebase.initializeApp({
-      production: false,
-      apiKey: "AIzaSyBYThMrbjOwXLTksqVd2zWKmwH86nfbydg",
-      authDomain: "ionic-763e1.firebaseapp.com",
-      databaseURL: "https://ionic-763e1.firebaseio.com",
-      projectId: "ionic-763e1",
-      storageBucket: "ionic-763e1.appspot.com",
-      messagingSenderId: "543642243705"
-     });
-    }
-    
-  
-    this.initializeApp();
+          if(this.authService.IsAuthinticated())
+          {
+             this.user=this.authService.getUser();
+             console.log("mneu",this.user);
+             this.imagePath=this.user.ImageURL;  
+             this.isAuthinticated=true;   
+          }else
+          {
+            this.isAuthinticated=false;  
+          }
 
+         if(!firebase.apps.length)
+         {   
+           firebase.initializeApp({
+           production: false,
+           apiKey: "AIzaSyBYThMrbjOwXLTksqVd2zWKmwH86nfbydg",
+           authDomain: "ionic-763e1.firebaseapp.com",
+           databaseURL: "https://ionic-763e1.firebaseio.com",
+           projectId: "ionic-763e1",
+           storageBucket: "ionic-763e1.appspot.com",
+           messagingSenderId: "543642243705"
+           });
+         }
 
+         platform.ready().then(()=>
+         {
+           statusBar.styleDefault();
+           splashScreen.hide();
+         });
+         this.initializeApp();
   }
+  
   onLoad(page:any){
-    this.nav.push(page);
+    this.nav.setRoot(page);
     this.menuCtrl.close();
       
   }

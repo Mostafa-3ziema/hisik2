@@ -78,4 +78,10 @@
   </ion-card>
 
 </div>
- 
+ <div>
+  <div class="hero-image" *ngIf="Links?.length == 0 && proceed == true">
+    <div class="hero-text">
+      <h1 style="font-size:50px">there is no possible links for this: <span>{{product}}</span></h1>
+    </div>
+  </div>
+ </div>

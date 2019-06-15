@@ -15,7 +15,8 @@
           <ion-list>
              <ion-item>
                  <ion-avatar item-start>
-                   <img src="../assets/imgs/IMG_20190118_152815.jpg">
+                     <img *ngIf="review.userData?.ImageURL" src="{{user?.ImageURL}}">
+                     <img *ngIf="!review.userData?.ImageURL" src="../assets/imgs/download.jpg">
                  </ion-avatar>
                      <ionic3-star-rating 
                         (click)="getrate()"

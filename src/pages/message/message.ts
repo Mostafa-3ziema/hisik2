@@ -24,13 +24,14 @@ export class MessagePage {
  
   ionViewDidLoad() {
     console.log('ionViewDidLoad MessagePage');
-    if(this.auth.IsAuthinticated)
-      {
-        this.user=this.auth.getUser();
-      }else
-      {
-        this.showAlert();
-      }
+    if(this.auth.IsAuthinticated())
+    {
+      this.user=this.auth.getUser();
+    }else
+    {
+      this.showAlert();
+    } 
+
   }
   sendMessage(form:NgForm)
   {

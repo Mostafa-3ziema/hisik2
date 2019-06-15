@@ -22,9 +22,16 @@ export class RecentSearchPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public SearchService:SearchService, public loadingCtrl: LoadingController, public alertController:AlertController,
     public auth:AUTHService) {
-       this.user=this.auth.getUser();
-       this.RecentSearch(this.user.id);
-       this.isauthinticated=this.auth.IsAuthinticated();
+      if(this.auth.IsAuthinticated())
+      {
+        this.isauthinticated=true;
+        this.user=this.auth.getUser();
+        this.RecentSearch(this.user.id);
+      }else
+      {
+        this.isauthinticated=false;
+      }  
+      
        /*this.isauthinticated=true;
        this.user=1;*/
   }

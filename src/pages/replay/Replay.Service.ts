@@ -17,14 +17,14 @@ export class Reply{
 
     
  add_reply(info){
-  const endpoint=Ipadress+':8000/api/replay/'
+  const endpoint='http://mostafaaziema.pythonanywhere.com/api/replay/'
   const headers = new HttpHeaders({'Content-Type':'application/json'});
     return this.http.post(endpoint,info,{headers:headers})
   }
 
  edit_reply(replayid ,info)
  {
-   const endpoint =Ipadress+':8000/api/replay/'
+   const endpoint ='http://mostafaaziema.pythonanywhere.com/api/replay/'
    const headers = new HttpHeaders({'Content-Type':'application/json'});
    return this.http.put(endpoint+replayid+'/',info,{headers:headers})
    
@@ -32,7 +32,7 @@ export class Reply{
 
  get_reply(reviewid)
  {
-  const endpoint =Ipadress+':8000/api/replay/?review__id='
+  const endpoint ='http://mostafaaziema.pythonanywhere.com/api/replay/?review__id='
   const headers = new HttpHeaders({'Content-Type':'application/json'});
   return this.http.get(endpoint+reviewid,{headers:headers})
 
@@ -41,7 +41,7 @@ export class Reply{
  delete_reply(replayid)
  {
    
-  const endpoint =Ipadress+':8000/api/replay/'
+  const endpoint ='http://mostafaaziema.pythonanywhere.com/api/replay/'
   const headers = new HttpHeaders({'Content-Type':'application/json'});
   return this.http.delete(endpoint+replayid+'/',{headers:headers})
 

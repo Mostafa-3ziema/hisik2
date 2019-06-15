@@ -38,22 +38,30 @@
 
   <div class="holder" *ngIf="!picture">
 
-    <ion-fab bottom center>
-      <button ion-fab (click)="takePicture()">
-        <ion-icon name="camera"></ion-icon>
-      </button>
-    </ion-fab>
-    <ion-fab bottom right>
-      <button ion-fab (click)="switchCamera()">
-        <ion-icon name="reverse-camera"></ion-icon>
-      </button>
-    </ion-fab>
-    <ion-fab bottom left>
-      <button ion-fab (click)="gohome()">
-        <ion-icon name="ios-close-circle-outline"></ion-icon>
-      </button>
-    </ion-fab>
+<div class="holder" *ngIf="!picture">
+     <ion-fab top right id="topRight">
+          <button ion-fab (click)="switchCamera()">
+            <ion-icon name="ios-reverse-camera-outline"></ion-icon>
+          </button>
+      </ion-fab>
+    <div class="trans2">
+      <ion-fab id="fabs3">
+        <button ion-fab (click)="gohome()">
+          <ion-icon name="ios-close-circle-outline"></ion-icon>
+        </button>
+       </ion-fab>
+       <ion-fab  id="fabs1">
+        <button ion-fab (click)="takePicture()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-fab>
+      <ion-fab id="fabs2">
+        <button ion-fab (click)="UploadImage()">
+          <ion-icon name="ios-images-outline"></ion-icon>
+        </button>
+      </ion-fab>
+    </div>   
     
-  </div>
+</div>
  
 </ion-content>

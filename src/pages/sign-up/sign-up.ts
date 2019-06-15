@@ -50,11 +50,15 @@ export class SignUpPage {
      'FCMToken' :this.pushNot.getToken,
       }
      this.AUTHService.register(body).subscribe((res)=>{
-      /*let check=this.AUTHService.store_user(res,true);
+      let check=this.AUTHService.store_user(res);
         if(check) 
          {
-          this.navCtrl.push(HomePage);
-         
+           res['FCMToken'] == this.pushNot.getToken;
+           console.log(res['FCMToken']);
+           this.AUTHService.updateUser(res['id'],res).subscribe(data=>
+            { 
+              this.navCtrl.setRoot(HomePage);
+            },err=>console.log(err));
          } 
         else
          {
@@ -64,7 +68,7 @@ export class SignUpPage {
             buttons: ['OK']
           });
           alert.present();
-         }*/
+         }
     },(err)=>
     {
       if(err.status == 400)

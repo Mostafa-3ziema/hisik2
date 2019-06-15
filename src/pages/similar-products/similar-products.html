@@ -12,10 +12,10 @@
               <div *ngIf='FavResult[i].isfav;then dislike else liked'>
                 </div>
                 <ng-template #dislike>
-                    <ion-icon name="bookmark" style="margin-left: 220px"></ion-icon>
+                    <ion-icon name="bookmark" color="danger" style="margin-left: 220px"></ion-icon>
                 </ng-template>
                 <ng-template #liked>
-                    <ion-icon name="bookmark-outline" style="margin-left: 220px"></ion-icon>
+                    <ion-icon name="ios-bookmark-outline" color="dark" style="margin-left: 220px"></ion-icon>
                 </ng-template>
           </ng-template>
           <ng-template #hide>

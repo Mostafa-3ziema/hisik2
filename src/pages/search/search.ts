@@ -1,3 +1,6 @@
+import { LogInPage } from './../log-in/log-in';
+import { SignUpPage } from './../sign-up/sign-up';
+import { ProductPage } from './../product/product';
 import { RecommandedResualtPage } from './../recommanded-resualt/recommanded-resualt';
 import { Component } from '@angular/core';
 import { NavController, NavPush, NavParams, LoadingController , AlertController, List ,IonicPage } from 'ionic-angular';
@@ -26,18 +29,22 @@ export class SearchPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-     public loadingCtrl: LoadingController, public alertController:AlertController,
+     public loadingCtrl: LoadingController, public alertController:AlertController,public alertCtrl:AlertController,
      public auth:AUTHService,
      public SearchService:SearchService) 
      {
-       this.isauthinticated=this.auth.IsAuthinticated()
-       if(this.isauthinticated)
-       {
+      if(this.auth.IsAuthinticated())
+      {
         this.user=this.auth.getUser();
-        /*this.RecentSearch(this.user.id);
-        this.ShowRecommanded(this.user.id);*/
+        console.log(this.user);
+        this.isauthinticated=true;
+        this.RecentSearch(this.user.id);
+        this.ShowRecommanded(this.user.id);
         this.PopualerSearch();
-       }
+      }else
+      {
+        this.isauthinticated=true;
+      }   
        
        /*this.isauthinticated=true;
        this.user=1;
@@ -45,6 +52,9 @@ export class SearchPage {
        this.ShowRecommanded(this.user);
        this.PopualerSearch();*/
        
+     }
+     ionViewDidLoad(){
+      
      }
 
   searchbar(){
@@ -127,6 +137,41 @@ RemoveSearch(index){
         alert.present();
     }
     );
+}
+Detials(item){
+  let isauthinticated=this.auth.IsAuthinticated();
+  if(isauthinticated)
+  {
+    this.navCtrl.push(ProductPage,{'product':item});
+
+  }else
+  {
+    this.showAlert()
+  }
+}
+showAlert() {
+  const alert = this.alertCtrl.create({
+    title: 'Warning',
+    subTitle: 'you must be logged in',
+    buttons: [
+      {
+        text: 'make an account!',
+        handler: () => {
+          this.navCtrl.push(SignUpPage)
+        }
+      },
+      {
+        text: 'LogIin!',
+        handler: () => {
+          this.navCtrl.push(LogInPage)
+        }
+      },
+      {
+        text: 'Cancel',
+      }
+    ]
+  });
+  alert.present();
 }
 
 private loadingItemSearch(){

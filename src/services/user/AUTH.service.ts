@@ -17,24 +17,8 @@ const endpoint2='http://mostafaaziema.pythonanywhere.com/api/user/?';
 export class AUTHService{
    Login:Boolean=false;
    checkUser:Boolean=false;
-   user:any=
-   {
-    "id": 4,
-    "FirstName": "Mohamed",
-    "LastName": "Mahfouz",
-    "UserName": "Mohamed12",
-    "Password": "Walid@22",
-    "Email": "walid.mahfouz22@gmail.com",
-    "DeviceID": "84d84ece72865e5e",
-    "FCMToken": "",
-    "Status": null,
-    "ImageURL": null,
-    "WarningScore": null,
-    "updated": "2019-06-14T11:02:03.630651Z",
-    "timestamp": "2019-06-14T11:02:03.636381Z",
-    "BlockedBy": null
-   };
-   
+   user:any={};
+   isauth:boolean=false;
     constructor(private http:HttpClient ,
        private emailComposer: EmailComposer,
        public alertCtrl: AlertController , 
@@ -75,6 +59,7 @@ export class AUTHService{
               'ImageURL'      : "",
               'WarningScore'  : 0,
               'BlockedBy'     : "",
+              'FCMToken'      : "",
              }
             if(data[0]['Status'])
             {
@@ -106,6 +91,12 @@ export class AUTHService{
             }else
             {
               body.BlockedBy="";
+            }if(data[0]['FCMToken'])
+            {
+              body.Status=data[0]['FCMToken'];
+            }else
+            {
+              body.FCMToken="";
             }
             
              console.log(body);
@@ -125,7 +116,7 @@ export class AUTHService{
                     
                    }); 
                    console.log(data);
-              this.store_user(data,true);
+              this.store_user(data);
               const alert = this.alertCtrl.create({
                 title: 'hint!',
                 subTitle: 'password was updated and sent to this eamil:'+ email,
@@ -151,98 +142,66 @@ export class AUTHService{
         return this.http.get(endpoint2+"Email="+email+"&Password="+password,{headers:headers})
     }
 
-    store_user(user,loginvalue)
+    /*store_user(user,loginvalue)
     {
          this.user=user;
-         return true;  
-        /*this.storage.set('login',loginvalue)
-        .then(()=>
-          {
-           this.Login=true
-          this.storage.set('user',user)
-          .then(()=>
-          { 
-            this.checkUser=true;
-            console.log(this.login,this.checkUser);
-            return true;
-          })
-          .catch((err)=>{
-            this.checkUser=false
-           console.log("first condition",this.Login,this.checkUser);
-           return false;
-        });
-         }).catch((err)=>
-         {
-           this.Login=false;
-           console.log("first condition",this.Login,this.checkUser);
-           return false;
-          });
+         console.log(this.user);
+         this.storage.set('login',loginvalue)
+         this.Login=true
+         this.storage.set('user',user)
         
-        if (this.Login==true && this.checkUser == true)
-        {
-          console.log(this.Login,this.checkUser);
-           return true;
-           
-        }
-        else
-        {
-          console.log("else condition",this.Login,this.checkUser);
-           return false; 
-           
-        }*/
+         console.log(this.getUser());
+      return true;
+       
+       
     }
 
     getUser()
     {
-      /*let user;
       this.storage.get('user').then((val:any) => {
-          user = val;  
+           this.user = val;  
+          console.log(val);
         });
-        console.log(user);*/
+        console.log(this.user);
       return this.user;
     }
 
     IsAuthinticated()
     {
-      /*let isauth :boolean =false;
-      this.storage.get('login')
-      .then((val)=>
-      {
-        if (val==true )
-        {
-           isauth= true; 
-        }
-        else
-        {
-          isauth= false; 
-        }
-
-      }
-      ).catch(()=>{
-        isauth= false;
-        const alert = this.alertCtrl.create({
-          title: 'Warning!',
-          subTitle: ' user is authinticated!',
-          buttons: ['OK']
-        });
-        alert.present(); });*/
-      
-      return true;
+      this.storage.get('login').then(val=>console.log(val));
+      return this.storage.get('login');
     }
+    
 
     logout()
     {
-       /*let login,checkUser; 
-       this.storage.set('login',false).then(()=>login=true).catch((err)=>login=false);
-       this.storage.set('user','').then(()=>checkUser=true).catch((err)=>checkUser=false);
-       if (login==true && checkUser == true)
-        {
-           return true; 
-        }
-        else
-        {
-           return false; 
-        }*/
-        return true;
+      this.storage.remove("user");
+      this.storage.remove("login");
+      return true;
+    }*/
+    store_user(user)
+    {
+         this.user=user;
+         this.isauth=true;
+         console.log(this.user);
+         return true; 
+    }
+
+    getUser()
+    {
+      return this.user;
+    }
+
+    IsAuthinticated()
+    {
+      return this.isauth;
+    }
+    
+
+    logout()
+    {
+      this.user=null;
+      this.isauth=false;
+      return true;
     }
 }

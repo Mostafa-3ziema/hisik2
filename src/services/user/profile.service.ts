@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 import { Observable} from 'rxjs';
 import { Ipadress } from '../IPaddress';
 
-const endpoint= Ipadress+':8000/api/user/';
+const endpoint= 'http://mostafaaziema.pythonanywhere.com/api/user/';
 
 @Injectable()
 export class ProfileService{

@@ -87,7 +87,7 @@ export class ReviewsPage {
       { 
         console.log(review);
         this.MyReviews.GetLikes(review.id).subscribe(
-        (data)=>
+        (data:any[])=>
         {
          if(data)
          {
@@ -124,7 +124,7 @@ export class ReviewsPage {
     this.Reviews.forEach(review=>
       {  
        this.MyReviews.get_reply(review.id).subscribe(
-      (data)=>
+      (data:any[])=>
        {
         if(data)
         {
@@ -144,7 +144,7 @@ export class ReviewsPage {
     this.ReviewsLikeResult[reviewindex].islike=true;
     this.ReviewsLikeResult[reviewindex].likecount+=1;
     let review = this.ReviewsLikeResult[reviewindex].review;
-    this.MyReviews.Like(this.user.id,reivewID).subscribe((data)=>{
+    this.MyReviews.Like(this.user.id,reivewID).subscribe((data:any)=>{
 
       if(data){
         this.ReviewsLikeResult[reviewindex].likeid=data.id;

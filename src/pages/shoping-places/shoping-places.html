@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-
+<div *ngIf="places?.length>0">
 <ion-card class="adv-map" *ngFor="let place of places">
  
     <div style="position: relative">
@@ -67,14 +67,23 @@
                 </ion-col>
         </ion-row>
     </ion-grid>
-    <ion-item actions>
+    <!--<ion-item actions>
       <span ion-text item-start color="secondary" class="item-bold">18 min</span>
       <span ion-text item-start color="subtle">(2.6 mi)</span>
       <button ion-button color="primary" clear item-end icon-start>
         <ion-icon name='navigate'></ion-icon>
         Start
       </button>
-    </ion-item>
+    </ion-item>-->
   
 </ion-card>
+</div>
+
+<div>
+  <div class="hero-image" *ngIf="places?.length == 0 && proceed == true">
+    <div class="hero-text">
+      <h1 style="font-size:50px">there is no possible places for this: <span>{{product}}</span></h1>
+    </div>
+  </div>
+ </div>
   

@@ -13,12 +13,12 @@ export class LinksService
 
   getShoppingLinks(product:string)
   {
-    let endpoint = Ipadress+":8000/api/product/links/"+product+"/"  
-    return this.http.get(endpoint,{headers : this.headers})
+    let endpoint = "http://mostafaaziema.pythonanywhere.com/api/product/links/"+product+"/" ; 
+    return this.http.get(endpoint,{headers : this.headers});
   }
   getShoppingPlaces(latitude:number,Langitude:number,product:string)
   {
-    let endpoint = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+Langitude+","+latitude+"&radius=5000&keyword="+product+"&key=AIzaSyCbhWzvIoqHmBSEC6RQtsG-xmLDuI19ViM"   
+    let endpoint = "http://mostafaaziema.pythonanywhere.com/api/product/places/"+latitude+"/"+Langitude+"/"+product+"/"   
     return this.http.get(endpoint,{headers : this.headers})
   }
 

@@ -12,14 +12,14 @@ export class ProductReviews{
 
     
  get_product_reviews(productid){
-      const endpoint='http://localhost:8000/api/review/?product__id='
+      const endpoint='http://mostafaaziema.pythonanywhere.com/api/review/?product__id='
     const headers = new HttpHeaders({'Content-Type':'application/json'});
     return this.http.get(endpoint+productid,{headers:headers})
   }
 
  Add_like(reviewid){
 
-  const endpoint='http://localhost:800/api/like'
+  const endpoint='http://mostafaaziema.pythonanywhere.com/api/like'
   const headers= new HttpHeaders({'Content-Type':'application/json'});
   return this.http.post(endpoint+reviewid,{headers:headers})
  

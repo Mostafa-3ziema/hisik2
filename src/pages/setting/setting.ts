@@ -37,17 +37,17 @@ export class SettingPage {
    
   ionViewDidLoad() 
   {
-    this.isauth=this.auth.IsAuthinticated();
-    console.log('ionViewDidLoad SettingPage');
-    if(this.isauth)
-    {
-      this.user=this.auth.getUser();
-      this.imagePath=this.user.ImageURL;
-      console.log(this.user);
-    }else
-    {
-      this.imagePath='';
-    }
+    console.log('ionViewDidLoad SettingPage')
+    if(this.auth.IsAuthinticated())
+      {
+        this.isauth=true;
+        this.user=this.auth.getUser();
+        console.log(this.user);
+      }else
+      {
+        this.isauth=false;
+      }      
+   ;
     this.SimilarBrandsProduct("rolex");
   }
   SimilarBrandsProduct(brand:string)
@@ -69,9 +69,7 @@ export class SettingPage {
           console.log(data);
         }else
         {
-          //this.navCtrl.push(SimilarProductsPage,{'products':data});
           console.log(data);
-
         }
        }else
        {
@@ -119,7 +117,7 @@ export class SettingPage {
        {
          if(data)
          {
-          if(this.auth.store_user(this.user,true))
+          if(this.auth.store_user(this.user))
           {
             loading.dismiss();
             this.toastCtrl.create({
@@ -172,9 +170,9 @@ export class SettingPage {
          this.user.Email=form.value.Email;
          this.auth.updateUser(this.user.id,this.check(this.user)).subscribe((data)=>
          {
-         if(data)
-         {
-          if(this.auth.store_user(this.user,true))
+          if(data)
+          {
+          if(this.auth.store_user(this.user))
           {
             loading.dismiss();
             this.toastCtrl.create({
@@ -183,8 +181,8 @@ export class SettingPage {
             }).present();
           } 
          }
-       },(err)=>
-       {
+        },(err)=>
+        {
         loading.dismiss();
         if(err.status == 400)
         {
@@ -335,7 +333,7 @@ export class SettingPage {
         message:'Loged out Succussfully',
         duration:3000
       }).present();
-      this.navCtrl.push(LogInPage);
+      this.navCtrl.setRoot(LogInPage);
     }else
     {
       this.toastCtrl.create({

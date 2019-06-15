@@ -21,22 +21,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NotificationPage {
   Notification:any[]=[];
-  isauthinticated:boolean=false;
+  isauthinticated:boolean;
   user :any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public authService:AUTHService,public notififcatioService:AppNotficationService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotificationPage');
-    if(this.authService.IsAuthinticated())
-    {
-      this.user=this.authService.getUser();
-      this.ShowNotification(this.user.id);
-      this.isauthinticated=true;
-    }else
-    { 
-      this.isauthinticated=false;
-    }
+      if(this.authService.IsAuthinticated())
+      {
+        this.user=this.authService.getUser();
+        this.ShowNotification(this.user.id);
+        console.log(this.user);
+        this.isauthinticated=true;
+      }else
+      {
+        this.isauthinticated=false;
+      } 
+
+      
   }
   ShowNotification(userid)
   {

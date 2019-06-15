@@ -19,6 +19,7 @@ import { NgForm } from '@angular/forms';
 })
 export class EditReviewsPage {
   review;
+  user:any;
   body={
     'text':null,
     'rate':null,
@@ -35,6 +36,7 @@ export class EditReviewsPage {
   ionViewDidLoad() {
     this.review=this.navParams.get('review');
     console.log(this.review);
+    this.user=this.auth.getUser();
     console.log('ionViewDidLoad EditReviewsPage');
   }
 

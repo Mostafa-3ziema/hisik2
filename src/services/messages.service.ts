@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs';
 import { Ipadress } from './IPaddress';
 
-const endpoint = Ipadress+'/api/message/';
+const endpoint = 'http://mostafaaziema.pythonanywhere.com/api/message/';
 @Injectable()
 export class MassageService {
     constructor(private http:HttpClient){

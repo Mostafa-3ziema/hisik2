@@ -1,3 +1,4 @@
+
 import { NotficationService } from './../services/Notfcation/notfication.service';
 import { AppNotficationService } from './../services/Notfcation/appnotification.service';
 import { LikesPage } from './../pages/likes/likes';
@@ -144,7 +145,7 @@ import { FCM } from '@ionic-native/fcm';
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyDoDSUnSuYfJCLY-PkdDBIa8ZN_2BE6ank'
     }),
-    IonicStorageModule.forRoot(),
+    //IonicStorageModule.forRoot(),
     NotificationPageModule,
     StarRatingModule,
     IonicStorageModule.forRoot(),
@@ -205,7 +206,7 @@ import { FCM } from '@ionic-native/fcm';
     ScanService,
     ProductService,
     FavouriteService,
-    
+   
     Firebase,
     MassageService,
     SearchService,

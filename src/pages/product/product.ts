@@ -97,7 +97,7 @@ export class ProductPage {
                       rate1=rate1+1;
                   }
               });
-           this.productRate=((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length;
+           this.productRate=Math.round(((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length);
            this.productVotes=data.length;
            this.productStars=Math.round(this.productRate);
            console.log(this.productStars+" "+this.productVotes+" "+this.productRate);
@@ -199,6 +199,7 @@ AddReview()
   AddReplay(reviewId)
   {
     this.navCtrl.push(ReplayPage,{'reviewid':reviewId});
+    console.log(reviewId)
   }
 
   product_Reviews()
@@ -224,7 +225,7 @@ AddReview()
       { 
         console.log(review);
         this.MyReviews.GetLikes(review.id).subscribe(
-        (data)=>
+        (data:any[])=>
         {
          if(data)
          {
@@ -260,7 +261,7 @@ AddReview()
     this.Reviews.forEach(review=>
       {  
        this.MyReviews.get_reply(review.id).subscribe(
-       (data)=>
+       (data:any[])=>
        {
         if(data)
         {
@@ -280,7 +281,7 @@ AddReview()
     this.ReviewsLikeResult[reviewindex].islike=true;
     this.ReviewsLikeResult[reviewindex].likecount+=1;
     let review = this.ReviewsLikeResult[reviewindex].review;
-    this.MyReviews.Like(this.user.id,reivewID).subscribe((data)=>{
+    this.MyReviews.Like(this.user.id,reivewID).subscribe((data:any)=>{
 
       if(data){
         this.ReviewsLikeResult[reviewindex].likeid=data.id;

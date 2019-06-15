@@ -13,6 +13,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 export class ShopingLinksPage {
   Links :any=[];
   product:string;
+  proceed:boolean;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -31,6 +32,10 @@ export class ShopingLinksPage {
         {
           this.Links=data.shopping_results;
           console.log(this.Links);
+          this.proceed=true;
+        }else
+        {
+          this.proceed=false;
         }
       },err=>console.log(err));
   }

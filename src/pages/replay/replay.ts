@@ -41,7 +41,7 @@ export class ReplayPage {
   Get_Reply(){
 
     this.Reply.get_reply(this.review).subscribe((data:any[])=>{
-      console.log(data);
+      console.log(data,"replaies");
       data.forEach(replay=>{
        this.Replays.push(replay);
       })
@@ -68,7 +68,7 @@ export class ReplayPage {
         });
       })
     },(err)=>{
-      console.log(err);
+      console.log(err,"555555555555555555");
     });
   }
   delete(index,replayid)

@@ -57,15 +57,14 @@ export class LogInPage {
       }
       else 
       {
-        let check=this.AUTHService.store_user(data[0],true);
+        let check=this.AUTHService.store_user(data[0]);
         if(check)
          {
-           //data[0]['FCMToken'] == this.PushNot.getToken;
-           /*this.AUTHService.updateUser(data[0]['id'],data[0]).subscribe(data=>
+           data[0]['FCMToken'] == this.PushNot.getToken;
+           this.AUTHService.updateUser(data[0]['id'],data[0]).subscribe(data=>
             { 
-              this.navCtrl.push(HomePage);
-            });*/
-            this.navCtrl.push(HomePage);
+              this.navCtrl.setRoot(HomePage);
+            },err=>console.log(err));
          } 
         else
          {

@@ -32,7 +32,7 @@ export class SearchTextPage {
   result:any=[];
   count=0;
   user;
-  isauth=false;
+  isauth:boolean;
   constructor(public navCtrl: NavController
     ,public SearchService:SearchService
     ,public FavouriteService:FavouriteService
@@ -48,15 +48,14 @@ export class SearchTextPage {
 
   ionViewDidLoad() 
   {
-      if(this.auth.IsAuthinticated())
+    if(this.auth.IsAuthinticated())
       {
-          this.user=this.auth.getUser();
+        this.user=this.auth.getUser();
           this.isauth=true;
       }else
       {
-          this.isauth=false;
-  
-      }
+        this.isauth=false;
+      }      
       this.initializeItems();
   }
   showproduct(text){
@@ -210,7 +209,7 @@ export class SearchTextPage {
                       rate1=rate1+1;
                   }
               });
-           this.productRate=((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length;
+           this.productRate=Math.round(((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length);
            this.productVotes=data.length;
            this.procuctStars=Math.round(this.productRate);
            console.log(this.procuctStars+" "+this.productVotes+" "+this.productRate);

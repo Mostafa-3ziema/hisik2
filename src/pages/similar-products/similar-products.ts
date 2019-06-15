@@ -48,17 +48,16 @@ export class SimilarProductsPage {
       this.products.push(pro);
     });
     if(this.auth.IsAuthinticated())
-    {
-      this.scan=this.navParams.get('scan');
-      this.user=this.auth.getUser();
-      this.isauth=true;
-      this.CheckFavourits();
-    }else
-    {
-      this.isauth=false;
-
-    }
-    this.CalculateRate();
+      {
+        this.scan=this.navParams.get('scan');
+        this.user=this.auth.getUser();
+        this.isauth=true;
+        this.CheckFavourits();
+      }else
+      {
+        this.isauth=true;
+      }
+     this.CalculateRate();
   }
   CheckFavourits()
   {
@@ -113,7 +112,7 @@ export class SimilarProductsPage {
                       rate1=rate1+1;
                   }
               });
-           this.productRate=((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length;
+           this.productRate=Math.round(((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length);
            this.productVotes=data.length;
            this.procuctStars=Math.round(this.productRate);
            console.log(this.procuctStars+" "+this.productVotes+" "+this.productRate);

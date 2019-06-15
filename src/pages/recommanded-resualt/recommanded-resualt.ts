@@ -27,7 +27,7 @@ export class RecommandedResualtPage {
   products:any=[];
   result:any=[];
   user;
-  isauth=false;
+  isauth:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public SearchService:SearchService,public productService:ProductService,
     public FavouriteService:FavouriteService,public auth:AUTHService,
@@ -37,15 +37,16 @@ export class RecommandedResualtPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecommandedResualtPage');
-    if(this.auth.IsAuthinticated())
-    {
+      if(this.auth.IsAuthinticated())
+      {
+       
         this.user=this.auth.getUser();
         this.ShowRecommanded(this.user.id);
         this.isauth=true;
-    }else
-    {
+      }else
+      {
         this.isauth=false;
-    }
+      }  
     
   }
 
@@ -114,7 +115,7 @@ export class RecommandedResualtPage {
                       rate1=rate1+1;
                   }
               });
-           this.productRate=((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length;
+           this.productRate=Math.round(((1*rate1)+(2*rate2)+(3*rate3)+(4*rate4)+(5*rate5))/data.length);
            this.productVotes=data.length;
            this.procuctStars=Math.round(this.productRate);
            console.log(this.procuctStars+" "+this.productVotes+" "+this.productRate);
