@@ -9,6 +9,6 @@
 
 
 this project is built on using a Cross Platform **IONIC** for the Front-End, and for Back-End we use a Python Django REST-API **DRF**,
-and **Google Cloud Vision Api** for the object Detection, and **Firebase** to image storage. 
+and **Google Cloud Vision Api** for the object Detection, and **Firebase** for the image storage. 
 
 
