@@ -11,4 +11,4 @@
 this project is built on using a Cross Platform **IONIC** for the Front-End, and for Back-End we use a Python Django REST-API **DRF**,
 and **Google Cloud Vision Api** for the object Detection, and **Firebase** for the image storage. 
 
-- you see the Back-End REST-API [HISIK-API](https://github.com/mostafamahmoud8/Hisik-Aplication-Api)
+- you can see the Back-End REST-API [HISIK-API](https://github.com/mostafamahmoud8/Hisik-Aplication-Api)
